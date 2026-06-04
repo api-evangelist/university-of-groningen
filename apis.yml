@@ -1,0 +1,121 @@
+---
+aid: university-of-groningen
+name: University of Groningen
+description: >-
+  The University of Groningen (Rijksuniversiteit Groningen, RUG/UG) is a public
+  research university in Groningen, Netherlands, founded in 1614 and ranked #75
+  in the QS World University Rankings 2025. Its public, machine-readable
+  developer/API footprint is centered on research-output and research-data
+  infrastructure: an OAI-PMH metadata-harvesting endpoint over its Pure CRIS
+  research portal (OpenAIRE CERIF profile), the Elsevier Pure REST web-services
+  API (live but API-key gated), and the shared DataverseNL data repository
+  (Dataverse Native REST API) that serves as the UG default repository for
+  research data and software. The University does not operate a single unified,
+  self-service public developer portal; most institutional, SIS, timetable, and
+  identity APIs are internal or gated. The University also maintains an official
+  GitHub organization publishing open-source research-data and education tools.
+type: Index
+position: Consumer
+access: 3rd-Party
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/university-of-groningen/refs/heads/main/apis.yml
+tags:
+  - Education
+  - Higher Education
+  - University
+  - Research
+  - Open Data
+  - Research Data
+  - Library
+  - Metadata
+  - Netherlands
+  - Europe
+created: '2026-06-03'
+modified: '2026-06-03'
+specificationVersion: '0.19'
+apis:
+  - aid: university-of-groningen:pure-oai-pmh
+    name: UG Research Portal OAI-PMH (Pure)
+    description: >-
+      OAI-PMH metadata-harvesting endpoint over the University of Groningen
+      research portal, powered by Elsevier Pure (CRIS). Exposes research-output
+      and CRIS metadata using the OpenAIRE CERIF profile and standard OAI-PMH
+      verbs (Identify, ListMetadataFormats, ListRecords, GetRecord). Verified
+      live returning a valid OAI-PMH XML response.
+    humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+    baseURL: https://pure.rug.nl/ws/oai
+    tags: [ Research, Open Data, Metadata, OAI-PMH, CRIS, Pure, Library ]
+    properties:
+      - type: Documentation
+        url: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  - aid: university-of-groningen:pure-rest-api
+    name: UG Pure Web Services REST API
+    description: >-
+      The Elsevier Pure web-services REST API exposed at the University of
+      Groningen Pure instance, providing programmatic access to research
+      information (publications, persons, organisations, projects, datasets).
+      The endpoint is live but requires an institution-issued API key
+      (verified returning HTTP 401 Unauthorized without credentials), so access
+      is gated and not self-service.
+    humanURL: https://www.rug.nl/library/support/pure/?lang=en
+    baseURL: https://pure.rug.nl/ws/api
+    tags: [ Research, REST, CRIS, Pure, Gated, Authentication ]
+    properties:
+      - type: Documentation
+        url: https://www.rug.nl/library/support/pure/?lang=en
+      - type: Authentication
+        url: https://www.rug.nl/library/support/pure/?lang=en
+  - aid: university-of-groningen:dataversenl-native-api
+    name: DataverseNL Native REST API (UG Default Data Repository)
+    description: >-
+      DataverseNL is the shared, DANS-operated Dataverse data repository that
+      the University of Groningen designates as its default repository for
+      publishing research data and software. The Dataverse Native REST API
+      provides programmatic search, dataset, file, and metadata access across
+      the platform (verified live, Dataverse v6.9). UG datasets are also made
+      findable via the UG Research Portal.
+    humanURL: https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+    baseURL: https://dataverse.nl/api
+    tags: [ Research Data, Open Data, Repository, Dataverse, REST, Metadata ]
+    properties:
+      - type: Documentation
+        url: https://guides.dataverse.org/en/latest/api/native-api.html
+      - type: Documentation
+        url: https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+  - aid: university-of-groningen:irods-python-api
+    name: iBridges / Python API for iRODS
+    description: >-
+      Open-source Python client libraries and tooling for interacting with
+      iRODS research-data-management storage, published by the official
+      University of Groningen Centre for Information Technology GitHub
+      organization (iBridges, iBridges-GUI, and an Apache WebDAV interface to
+      iRODS). These are source-code SDKs/tools rather than a hosted public API.
+    humanURL: https://github.com/rijksuniversiteit-groningen
+    tags: [ Research Data, iRODS, Python, SDK, Open Source ]
+    properties:
+      - type: Documentation
+        url: https://github.com/rijksuniversiteit-groningen
+      - type: GitHub
+        url: https://github.com/rijksuniversiteit-groningen
+      - type: SourceCode
+        url: https://github.com/rijksuniversiteit-groningen
+common:
+  - type: Website
+    url: https://www.rug.nl/
+  - type: GitHub
+    url: https://github.com/rijksuniversiteit-groningen
+  - type: LinkedIn
+    url: https://www.linkedin.com/school/rijksuniversiteit-groningen/
+  - type: Twitter
+    url: https://twitter.com/univgroningen
+  - type: Plans
+    url: plans/university-of-groningen-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/university-of-groningen-rate-limits.yml
+  - type: FinOps
+    url: finops/university-of-groningen-finops.yml
+  - type: Review
+    url: review.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
