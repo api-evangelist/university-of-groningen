@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/university-of-groningen/main/json-schema/university-of-groningen-datafile-schema.json",
+  "title": "Dataverse DataFile",
+  "description": "A file belonging to a dataset in DataverseNL, derived from the Dataverse v6.9 OpenAPI DataFile object.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "contentType": {
+      "type": "string",
+      "description": "MIME content type of the file."
+    },
+    "storageIdentifier": {
+      "type": "string"
+    },
+    "protocol": {
+      "type": "string"
+    },
+    "authority": {
+      "type": "string"
+    },
+    "identifier": {
+      "type": "string"
+    },
+    "identifierRegistered": {
+      "type": "boolean"
+    },
+    "previewImageAvailable": {
+      "type": "boolean"
+    },
+    "createDate": {
+      "type": [
+        "string",
+        "object"
+      ]
+    }
+  },
+  "required": [
+    "contentType"
+  ]
+}

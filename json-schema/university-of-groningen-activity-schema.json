@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/university-of-groningen/main/json-schema/university-of-groningen-activity-schema.json",
+  "title": "Pure Activity",
+  "description": "A research activity from the UG Pure CRIS web-services API, derived from the Pure API 5.35.3 Activity object.",
+  "type": "object",
+  "properties": {
+    "pureId": {
+      "type": "integer",
+      "description": "Internal Pure numeric id."
+    },
+    "uuid": {
+      "type": "string",
+      "description": "Stable UUID of the content item."
+    },
+    "createdBy": {
+      "type": "string"
+    },
+    "createdDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "modifiedBy": {
+      "type": "string"
+    },
+    "modifiedDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "portalUrl": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL of the item on the UG research portal."
+    },
+    "version": {
+      "type": "string"
+    },
+    "type": {
+      "type": "object",
+      "description": "ClassificationRef giving the activity type."
+    },
+    "category": {
+      "type": "object",
+      "description": "ClassificationRef giving the activity category."
+    },
+    "managingOrganization": {
+      "type": "object",
+      "description": "OrganizationRef of the managing organization."
+    },
+    "visibility": {
+      "type": "object"
+    },
+    "workflow": {
+      "type": "object"
+    },
+    "organizations": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "persons": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    }
+  },
+  "required": [
+    "uuid"
+  ]
+}

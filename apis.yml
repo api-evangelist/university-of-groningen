@@ -65,6 +65,14 @@ apis:
         url: https://www.rug.nl/library/support/pure/?lang=en
       - type: Authentication
         url: https://www.rug.nl/library/support/pure/?lang=en
+      - type: OpenAPI
+        url: openapi/university-of-groningen-pure-rest-api.yaml
+      - type: x-vocabulary
+        url: vocabulary/university-of-groningen-vocabulary.yml
+      - type: x-rules
+        url: rules/university-of-groningen-rules.yml
+      - type: x-json-ld
+        url: json-ld/university-of-groningen-context.jsonld
   - aid: university-of-groningen:dataversenl-native-api
     name: DataverseNL Native REST API (UG Default Data Repository)
     description: >-
@@ -82,6 +90,8 @@ apis:
         url: https://guides.dataverse.org/en/latest/api/native-api.html
       - type: Documentation
         url: https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+      - type: OpenAPI
+        url: openapi/university-of-groningen-dataversenl-native-api.yaml
   - aid: university-of-groningen:irods-python-api
     name: iBridges / Python API for iRODS
     description: >-

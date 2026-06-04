@@ -1,0 +1,82 @@
+vocabulary:
+  name: University of Groningen Research API Vocabulary
+  description: 'Controlled terms observed across the University of Groningen machine-readable
+    research APIs: the Elsevier Pure CRIS web-services API and the DataverseNL Native
+    REST API.'
+  version: '2026-06-03'
+  terms:
+  - term: Pure
+    definition: Elsevier's Current Research Information System (CRIS) powering the
+      UG research portal and its web-services API.
+    tags:
+    - pure
+    - cris
+    - research
+  - term: CRIS
+    definition: Current Research Information System; aggregates publications, persons,
+      organisations, projects and datasets.
+    tags:
+    - cris
+    - research
+    - metadata
+  - term: Activity
+    definition: A Pure content item representing a research activity such as a talk,
+      visit, or editorial work.
+    tags:
+    - pure
+    - activity
+  - term: Application
+    definition: A Pure content item representing a funding/grant application with
+      budgets and statuses.
+    tags:
+    - pure
+    - funding
+  - term: uuid
+    definition: Stable universally unique identifier for a Pure content item.
+    tags:
+    - pure
+    - identifier
+  - term: portalUrl
+    definition: Public URL of a Pure content item on the UG research portal.
+    tags:
+    - pure
+    - url
+  - term: ClassificationRef
+    definition: A reference into a Pure classification scheme (uri plus localized
+      term).
+    tags:
+    - pure
+    - classification
+  - term: Dataverse
+    definition: Open-source research data repository software; DataverseNL is the
+      UG default data repository.
+    tags:
+    - dataverse
+    - repository
+    - data
+  - term: Dataset
+    definition: A published collection of research data and files with a persistent
+      identifier in DataverseNL.
+    tags:
+    - dataverse
+    - dataset
+  - term: DataFile
+    definition: An individual file belonging to a Dataverse dataset, with a content
+      type and storage identifier.
+    tags:
+    - dataverse
+    - file
+  - term: persistentId
+    definition: A DOI-based global identifier (protocol/authority/identifier) used
+      to address Dataverse objects.
+    tags:
+    - dataverse
+    - doi
+    - identifier
+  - term: OAI-PMH
+    definition: Open Archives Initiative Protocol for Metadata Harvesting; UG exposes
+      research-output metadata via the Pure OAI endpoint.
+    tags:
+    - oai-pmh
+    - metadata
+    - harvesting

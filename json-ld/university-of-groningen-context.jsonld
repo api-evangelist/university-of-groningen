@@ -1,0 +1,31 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "ug": "https://www.rug.nl/ns#",
+    "schema": "https://schema.org/",
+    "CollegeOrUniversity": "schema:CollegeOrUniversity",
+    "Dataset": "schema:Dataset",
+    "DataDownload": "schema:DataDownload",
+    "name": "schema:name",
+    "url": "schema:url",
+    "identifier": "schema:identifier",
+    "datePublished": "schema:datePublished",
+    "dateCreated": "schema:dateCreated",
+    "dateModified": "schema:dateModified",
+    "contentType": "schema:encodingFormat",
+    "persistentId": "schema:identifier",
+    "portalUrl": "schema:url",
+    "Activity": "ug:Activity",
+    "Application": "ug:Application",
+    "uuid": "ug:uuid",
+    "pureId": "ug:pureId",
+    "category": "ug:category",
+    "managingOrganization": {
+      "@id": "ug:managingOrganization",
+      "@type": "@id"
+    }
+  },
+  "@type": "CollegeOrUniversity",
+  "name": "University of Groningen",
+  "url": "https://www.rug.nl/"
+}

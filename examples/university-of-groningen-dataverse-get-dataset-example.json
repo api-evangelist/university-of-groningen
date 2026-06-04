@@ -1,0 +1,37 @@
+{
+  "status": "OK",
+  "data": {
+    "id": 12345,
+    "identifier": "FK2/ABCD12",
+    "protocol": "doi",
+    "authority": "10.34894",
+    "persistentUrl": "https://doi.org/10.34894/FK2/ABCD12",
+    "publicationDate": "2024-09-01",
+    "storageIdentifier": "file://12345",
+    "latestVersion": {
+      "id": 67890,
+      "versionNumber": 1,
+      "versionState": "RELEASED",
+      "metadataBlocks": {
+        "citation": {
+          "fields": [
+            {
+              "typeName": "title",
+              "value": "Example UG Research Dataset"
+            },
+            {
+              "typeName": "author",
+              "value": [
+                {
+                  "authorName": {
+                    "value": "Doe, Jane"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

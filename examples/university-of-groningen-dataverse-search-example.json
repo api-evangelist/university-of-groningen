@@ -1,0 +1,22 @@
+{
+  "status": "OK",
+  "data": {
+    "q": "climate",
+    "total_count": 2,
+    "start": 0,
+    "items": [
+      {
+        "name": "Climate dataset A",
+        "type": "dataset",
+        "global_id": "doi:10.34894/FK2/AAA111",
+        "url": "https://dataverse.nl/dataset.xhtml?persistentId=doi:10.34894/FK2/AAA111"
+      },
+      {
+        "name": "Climate dataset B",
+        "type": "dataset",
+        "global_id": "doi:10.34894/FK2/BBB222",
+        "url": "https://dataverse.nl/dataset.xhtml?persistentId=doi:10.34894/FK2/BBB222"
+      }
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "pureId": 901234,
+  "uuid": "d1e2f3a4-5678-90ab-cdef-1234567890ab",
+  "createdBy": "system",
+  "createdDate": "2025-01-15T09:30:00.000Z",
+  "modifiedDate": "2025-02-01T12:00:00.000Z",
+  "portalUrl": "https://research.rug.nl/en/activities/d1e2f3a4",
+  "version": "1",
+  "type": {
+    "uri": "/dk/atira/pure/activity/activitytypes/talk/invitedtalk",
+    "term": {
+      "en_GB": "Invited talk"
+    }
+  },
+  "category": {
+    "uri": "/dk/atira/pure/activity/categories/talk",
+    "term": {
+      "en_GB": "Talk or presentation"
+    }
+  }
+}

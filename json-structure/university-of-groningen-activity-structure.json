@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/university-of-groningen/main/json-structure/university-of-groningen-activity-structure.json",
+  "name": "Activity",
+  "type": "object",
+  "description": "JSON Structure for a UG Pure CRIS research activity (Pure API 5.35.3).",
+  "properties": {
+    "pureId": {
+      "type": "int64"
+    },
+    "uuid": {
+      "type": "string"
+    },
+    "createdBy": {
+      "type": "string"
+    },
+    "createdDate": {
+      "type": "datetime"
+    },
+    "modifiedDate": {
+      "type": "datetime"
+    },
+    "portalUrl": {
+      "type": "uri"
+    },
+    "version": {
+      "type": "string"
+    }
+  }
+}

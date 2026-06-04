@@ -1,0 +1,41 @@
+formats:
+- oas3
+rules:
+  ug-info-contact:
+    description: API info should declare a contact for the providing institution.
+    severity: warn
+    given: $.info
+    then:
+      field: contact
+      function: truthy
+  ug-servers-https:
+    description: Server URLs must use HTTPS (UG/DataverseNL endpoints are TLS-only).
+    severity: error
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: ^https://
+  ug-operation-tags:
+    description: Every operation should be tagged so research-information resources
+      stay grouped.
+    severity: warn
+    given: $.paths[*][get,put,post,delete]
+    then:
+      field: tags
+      function: truthy
+  ug-uuid-path-params:
+    description: Pure resource paths identify content items by uuid; uuid path params
+      should be string-typed.
+    severity: warn
+    given: $.paths[*][*].parameters[?(@.name=='uuid')].schema
+    then:
+      field: type
+      function: truthy
+  ug-error-problemdetails:
+    description: Error responses should reference a structured problem object (Pure
+      ProblemDetails) rather than free text.
+    severity: warn
+    given: $.paths[*][*].responses[?(@property >= '400')].content['application/json'].schema
+    then:
+      function: truthy

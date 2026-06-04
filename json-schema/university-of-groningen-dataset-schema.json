@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/university-of-groningen/main/json-schema/university-of-groningen-dataset-schema.json",
+  "title": "Dataverse Dataset",
+  "description": "A research dataset in the DataverseNL repository (UG default data repository), derived from the Dataverse v6.9 OpenAPI Dataset object.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Internal numeric dataset id."
+    },
+    "identifier": {
+      "type": "string",
+      "description": "The dataset identifier component of the persistent ID."
+    },
+    "protocol": {
+      "type": "string",
+      "description": "Persistent ID protocol (e.g. doi)."
+    },
+    "authority": {
+      "type": "string",
+      "description": "Persistent ID authority (prefix)."
+    },
+    "globalIdCreateTime": {
+      "type": "string",
+      "format": "date",
+      "example": "2022-03-10"
+    },
+    "identifierRegistered": {
+      "type": "boolean"
+    },
+    "storageIdentifier": {
+      "type": "string"
+    },
+    "publicationDate": {
+      "type": [
+        "string",
+        "object"
+      ],
+      "description": "Date the dataset was published."
+    },
+    "createDate": {
+      "type": [
+        "string",
+        "object"
+      ]
+    },
+    "modificationTime": {
+      "type": [
+        "string",
+        "object"
+      ]
+    },
+    "previewImageAvailable": {
+      "type": "boolean"
+    }
+  },
+  "required": []
+}

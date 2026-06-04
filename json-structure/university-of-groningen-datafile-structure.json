@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/university-of-groningen/main/json-structure/university-of-groningen-datafile-structure.json",
+  "name": "DataFile",
+  "type": "object",
+  "description": "JSON Structure for a file within a DataverseNL dataset (Dataverse v6.9).",
+  "properties": {
+    "id": {
+      "type": "int64"
+    },
+    "contentType": {
+      "type": "string"
+    },
+    "storageIdentifier": {
+      "type": "string"
+    },
+    "identifier": {
+      "type": "string"
+    },
+    "identifierRegistered": {
+      "type": "boolean"
+    }
+  }
+}

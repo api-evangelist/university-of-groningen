@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/university-of-groningen/main/json-structure/university-of-groningen-dataset-structure.json",
+  "name": "Dataset",
+  "type": "object",
+  "description": "JSON Structure for a DataverseNL research dataset (Dataverse v6.9).",
+  "properties": {
+    "id": {
+      "type": "int64"
+    },
+    "identifier": {
+      "type": "string"
+    },
+    "protocol": {
+      "type": "string"
+    },
+    "authority": {
+      "type": "string"
+    },
+    "globalIdCreateTime": {
+      "type": "date"
+    },
+    "identifierRegistered": {
+      "type": "boolean"
+    },
+    "storageIdentifier": {
+      "type": "string"
+    },
+    "previewImageAvailable": {
+      "type": "boolean"
+    }
+  }
+}
