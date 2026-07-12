@@ -110,6 +110,12 @@ apis:
       - type: SourceCode
         url: https://github.com/rijksuniversiteit-groningen
 common:
+  - type: VulnerabilityDisclosure
+    url: security/university-of-groningen-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/university-of-groningen-domain-security.yml
+  - type: Authentication
+    url: authentication/university-of-groningen-authentication.yml
   - type: Website
     url: https://www.rug.nl/
   - type: GitHub
@@ -126,6 +132,8 @@ common:
     url: finops/university-of-groningen-finops.yml
   - type: Review
     url: review.yml
+  - url: https://www.rug.nl/about-ug/latest-news/news/latest-rug-news!rss
+    type: Blog
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
