@@ -110,6 +110,8 @@ apis:
       - type: SourceCode
         url: https://github.com/rijksuniversiteit-groningen
 common:
+  - type: AgenticAccess
+    url: agentic-access/university-of-groningen-agentic-access.yml
   - type: VulnerabilityDisclosure
     url: security/university-of-groningen-vulnerability-disclosure.yml
   - type: DomainSecurity
