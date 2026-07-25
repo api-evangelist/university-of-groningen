@@ -1,0 +1,18 @@
+openapi: 3.0.3
+info:
+  title: Dataverse Access Logout API
+  description: Open source research data repository software.
+  version: '6.9'
+servers:
+- url: https://dataverse.nl
+tags:
+- name: Logout
+paths:
+  /logout:
+    post:
+      operationId: Logout_logout
+      responses:
+        '200':
+          description: OK
+      tags:
+      - Logout

@@ -1,0 +1,24 @@
+openapi: 3.0.3
+info:
+  title: Dataverse Access Workflows API
+  description: Open source research data repository software.
+  version: '6.9'
+servers:
+- url: https://dataverse.nl
+tags:
+- name: Workflows
+paths:
+  /workflows/{invocationId}:
+    post:
+      operationId: Workflows_resumeWorkflow
+      parameters:
+      - name: invocationId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+      tags:
+      - Workflows

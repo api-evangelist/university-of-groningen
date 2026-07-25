@@ -1,0 +1,18 @@
+openapi: 3.0.3
+info:
+  title: Dataverse Access Mail API
+  description: Open source research data repository software.
+  version: '6.9'
+servers:
+- url: https://dataverse.nl
+tags:
+- name: Mail
+paths:
+  /mail/notifications:
+    get:
+      operationId: Mail_sendMail
+      responses:
+        '200':
+          description: OK
+      tags:
+      - Mail
