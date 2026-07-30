@@ -15,9 +15,22 @@ description: >-
   identity APIs are internal or gated. The University also maintains an official
   GitHub organization publishing open-source research-data and education tools.
 type: Index
+accessModel:
+  pricing: free
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Free · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 position: Consumer
 access: 3rd-Party
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/university-of-groningen.png
 url: https://raw.githubusercontent.com/api-evangelist/university-of-groningen/refs/heads/main/apis.yml
 tags:
   - Education
@@ -34,81 +47,1883 @@ created: '2026-06-03'
 modified: '2026-06-03'
 specificationVersion: '0.19'
 apis:
-  - aid: university-of-groningen:pure-oai-pmh
-    name: UG Research Portal OAI-PMH (Pure)
-    description: >-
-      OAI-PMH metadata-harvesting endpoint over the University of Groningen
-      research portal, powered by Elsevier Pure (CRIS). Exposes research-output
-      and CRIS metadata using the OpenAIRE CERIF profile and standard OAI-PMH
-      verbs (Identify, ListMetadataFormats, ListRecords, GetRecord). Verified
-      live returning a valid OAI-PMH XML response.
-    humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
-    baseURL: https://pure.rug.nl/ws/oai
-    tags: [ Research, Open Data, Metadata, OAI-PMH, CRIS, Pure, Library ]
-    properties:
-      - type: Documentation
-        url: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
-  - aid: university-of-groningen:pure-rest-api
-    name: UG Pure Web Services REST API
-    description: >-
-      The Elsevier Pure web-services REST API exposed at the University of
-      Groningen Pure instance, providing programmatic access to research
-      information (publications, persons, organisations, projects, datasets).
-      The endpoint is live but requires an institution-issued API key
-      (verified returning HTTP 401 Unauthorized without credentials), so access
-      is gated and not self-service.
-    humanURL: https://www.rug.nl/library/support/pure/?lang=en
-    baseURL: https://pure.rug.nl/ws/api
-    tags: [ Research, REST, CRIS, Pure, Gated, Authentication ]
-    properties:
-      - type: Documentation
-        url: https://www.rug.nl/library/support/pure/?lang=en
-      - type: Authentication
-        url: https://www.rug.nl/library/support/pure/?lang=en
-      - type: OpenAPI
-        url: openapi/university-of-groningen-pure-rest-api.yaml
-      - type: x-vocabulary
-        url: vocabulary/university-of-groningen-vocabulary.yml
-      - type: x-rules
-        url: rules/university-of-groningen-rules.yml
-      - type: x-json-ld
-        url: json-ld/university-of-groningen-context.jsonld
-  - aid: university-of-groningen:dataversenl-native-api
-    name: DataverseNL Native REST API (UG Default Data Repository)
-    description: >-
-      DataverseNL is the shared, DANS-operated Dataverse data repository that
-      the University of Groningen designates as its default repository for
-      publishing research data and software. The Dataverse Native REST API
-      provides programmatic search, dataset, file, and metadata access across
-      the platform (verified live, Dataverse v6.9). UG datasets are also made
-      findable via the UG Research Portal.
-    humanURL: https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
-    baseURL: https://dataverse.nl/api
-    tags: [ Research Data, Open Data, Repository, Dataverse, REST, Metadata ]
-    properties:
-      - type: Documentation
-        url: https://guides.dataverse.org/en/latest/api/native-api.html
-      - type: Documentation
-        url: https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
-      - type: OpenAPI
-        url: openapi/university-of-groningen-dataversenl-native-api.yaml
-  - aid: university-of-groningen:irods-python-api
-    name: iBridges / Python API for iRODS
-    description: >-
-      Open-source Python client libraries and tooling for interacting with
-      iRODS research-data-management storage, published by the official
-      University of Groningen Centre for Information Technology GitHub
-      organization (iBridges, iBridges-GUI, and an Apache WebDAV interface to
-      iRODS). These are source-code SDKs/tools rather than a hosted public API.
-    humanURL: https://github.com/rijksuniversiteit-groningen
-    tags: [ Research Data, iRODS, Python, SDK, Open Source ]
-    properties:
-      - type: Documentation
-        url: https://github.com/rijksuniversiteit-groningen
-      - type: GitHub
-        url: https://github.com/rijksuniversiteit-groningen
-      - type: SourceCode
-        url: https://github.com/rijksuniversiteit-groningen
+- aid: university-of-groningen:pure-oai-pmh
+  name: UG Research Portal OAI-PMH (Pure)
+  description: >-
+    OAI-PMH metadata-harvesting endpoint over the University of Groningen research portal, powered by
+    Elsevier Pure (CRIS). Exposes research-output and CRIS metadata using the OpenAIRE CERIF profile and
+    standard OAI-PMH verbs (Identify, ListMetadataFormats, ListRecords, GetRecord). Verified live returning
+    a valid OAI-PMH XML response.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - Research
+  - Open Data
+  - Metadata
+  - OAI-PMH
+  - CRIS
+  - Pure
+  - Library
+  properties:
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+- aid: university-of-groningen:irods-python-api
+  name: iBridges / Python API for iRODS
+  description: >-
+    Open-source Python client libraries and tooling for interacting with iRODS research-data-management
+    storage, published by the official University of Groningen Centre for Information Technology GitHub
+    organization (iBridges, iBridges-GUI, and an Apache WebDAV interface to iRODS). These are source-code
+    SDKs/tools rather than a hosted public API.
+  humanURL: https://github.com/rijksuniversiteit-groningen
+  tags:
+  - Research Data
+  - iRODS
+  - Python
+  - SDK
+  - Open Source
+  properties:
+  - type: Documentation
+    url: https://github.com/rijksuniversiteit-groningen
+  - type: GitHub
+    url: https://github.com/rijksuniversiteit-groningen
+  - type: SourceCode
+    url: https://github.com/rijksuniversiteit-groningen
+- aid: university-of-groningen:university-of-groningen-access-api
+  name: University of Groningen Access API
+  description: The Access API from University of Groningen — 23 operation(s) for access.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - Access
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-access-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-activity-api
+  name: University of Groningen activity API
+  description: The activity API from University of Groningen — 39 operation(s) for activity.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - activity
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-activity-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-addfilestodataset-api
+  name: University of Groningen addFilesToDataset API
+  description: Uploads a set of files to a dataset
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - addFilesToDataset
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-addfilestodataset-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-addfiletodataset-api
+  name: University of Groningen addFileToDataset API
+  description: Uploads a file for a dataset
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - addFileToDataset
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-addfiletodataset-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-addglobusfilestodataset-api
+  name: University of Groningen addGlobusFilesToDataset API
+  description: Uploads a Globus file for a dataset
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - addGlobusFilesToDataset
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-addglobusfilestodataset-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-admin-api
+  name: University of Groningen Admin API
+  description: The Admin API from University of Groningen — 127 operation(s) for admin.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - Admin
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-admin-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-application-api
+  name: University of Groningen application API
+  description: The application API from University of Groningen — 36 operation(s) for application.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - application
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-application-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-authorcollaboration-api
+  name: University of Groningen authorCollaboration API
+  description: >-
+    The authorCollaboration API from University of Groningen — 9 operation(s) for authorcollaboration.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - authorCollaboration
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-authorcollaboration-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-award-api
+  name: University of Groningen award API
+  description: The award API from University of Groningen — 37 operation(s) for award.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - award
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-award-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-batch-api
+  name: University of Groningen Batch API
+  description: The Batch API from University of Groningen — 3 operation(s) for batch.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - Batch
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-batch-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-builtin-users-api
+  name: University of Groningen Builtin Users API
+  description: The Builtin Users API from University of Groningen — 4 operation(s) for builtin users.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - Builtin Users
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-builtin-users-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-classificationscheme-api
+  name: University of Groningen classificationScheme API
+  description: >-
+    The classificationScheme API from University of Groningen — 7 operation(s) for classificationscheme.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - classificationScheme
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-classificationscheme-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-concept-api
+  name: University of Groningen concept API
+  description: The concept API from University of Groningen — 4 operation(s) for concept.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - concept
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-concept-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-conferenceseries-api
+  name: University of Groningen conferenceSeries API
+  description: >-
+    The conferenceSeries API from University of Groningen — 14 operation(s) for conferenceseries.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - conferenceSeries
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-conferenceseries-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-contract-api
+  name: University of Groningen contract API
+  description: The contract API from University of Groningen — 26 operation(s) for contract.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - contract
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-contract-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-course-api
+  name: University of Groningen course API
+  description: The course API from University of Groningen — 27 operation(s) for course.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - course
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-course-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-dataset-api
+  name: University of Groningen dataSet API
+  description: The dataSet API from University of Groningen — 30 operation(s) for dataset.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - dataSet
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-dataset-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-datasetfields-api
+  name: University of Groningen Datasetfields API
+  description: The Datasetfields API from University of Groningen — 1 operation(s) for datasetfields.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - Datasetfields
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-datasetfields-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-datasets-api
+  name: University of Groningen Datasets API
+  description: The Datasets API from University of Groningen — 101 operation(s) for datasets.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - Datasets
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-datasets-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-datatags-api
+  name: University of Groningen Datatags API
+  description: The Datatags API from University of Groningen — 1 operation(s) for datatags.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - Datatags
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-datatags-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-dataversefeatureditems-api
+  name: University of Groningen DataverseFeaturedItems API
+  description: >-
+    The DataverseFeaturedItems API from University of Groningen — 1 operation(s) for dataversefeatureditems.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - DataverseFeaturedItems
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-dataversefeatureditems-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-dataverses-api
+  name: University of Groningen Dataverses API
+  description: The Dataverses API from University of Groningen — 43 operation(s) for dataverses.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - Dataverses
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-dataverses-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-edit-api
+  name: University of Groningen Edit API
+  description: The Edit API from University of Groningen — 1 operation(s) for edit.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - Edit
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-edit-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-education-api
+  name: University of Groningen education API
+  description: The education API from University of Groningen — 14 operation(s) for education.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - education
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-education-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-equipment-api
+  name: University of Groningen equipment API
+  description: The equipment API from University of Groningen — 28 operation(s) for equipment.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - equipment
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-equipment-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-ethicalreview-api
+  name: University of Groningen ethicalReview API
+  description: The ethicalReview API from University of Groningen — 22 operation(s) for ethicalreview.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - ethicalReview
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-ethicalreview-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-event-api
+  name: University of Groningen event API
+  description: The event API from University of Groningen — 22 operation(s) for event.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - event
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-event-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-externalorganization-api
+  name: University of Groningen externalOrganization API
+  description: >-
+    The externalOrganization API from University of Groningen — 29 operation(s) for externalorganization.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - externalOrganization
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-externalorganization-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-externalperson-api
+  name: University of Groningen externalPerson API
+  description: >-
+    The externalPerson API from University of Groningen — 22 operation(s) for externalperson.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - externalPerson
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-externalperson-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-externaltools-api
+  name: University of Groningen ExternalTools API
+  description: The ExternalTools API from University of Groningen — 2 operation(s) for externaltools.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - ExternalTools
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-externaltools-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-files-api
+  name: University of Groningen Files API
+  description: The Files API from University of Groningen — 21 operation(s) for files.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - Files
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-files-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-fingerprint-api
+  name: University of Groningen fingerprint API
+  description: The fingerprint API from University of Groningen — 3 operation(s) for fingerprint.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - fingerprint
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-fingerprint-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-fundingopportunity-api
+  name: University of Groningen fundingOpportunity API
+  description: >-
+    The fundingOpportunity API from University of Groningen — 21 operation(s) for fundingopportunity.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - fundingOpportunity
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-fundingopportunity-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-harvest-api
+  name: University of Groningen Harvest API
+  description: The Harvest API from University of Groningen — 7 operation(s) for harvest.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - Harvest
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-harvest-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-impact-api
+  name: University of Groningen impact API
+  description: The impact API from University of Groningen — 31 operation(s) for impact.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - impact
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-impact-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-inbox-api
+  name: University of Groningen Inbox API
+  description: The Inbox API from University of Groningen — 1 operation(s) for inbox.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - Inbox
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-inbox-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-info-api
+  name: University of Groningen Info API
+  description: The Info API from University of Groningen — 50 operation(s) for info.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - Info
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-info-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-ingest-api
+  name: University of Groningen Ingest API
+  description: The Ingest API from University of Groningen — 1 operation(s) for ingest.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - Ingest
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-ingest-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-journal-api
+  name: University of Groningen journal API
+  description: The journal API from University of Groningen — 22 operation(s) for journal.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - journal
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-journal-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-keywordgroupconfiguration-api
+  name: University of Groningen keywordGroupConfiguration API
+  description: >-
+    The keywordGroupConfiguration API from University of Groningen — 7 operation(s) for keywordgroupconfiguration.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - keywordGroupConfiguration
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-keywordgroupconfiguration-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-licenses-api
+  name: University of Groningen Licenses API
+  description: The Licenses API from University of Groningen — 6 operation(s) for licenses.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - Licenses
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-licenses-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-localcontexts-api
+  name: University of Groningen Localcontexts API
+  description: The Localcontexts API from University of Groningen — 2 operation(s) for localcontexts.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - Localcontexts
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-localcontexts-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-logout-api
+  name: University of Groningen Logout API
+  description: The Logout API from University of Groningen — 1 operation(s) for logout.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - Logout
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-logout-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-mail-api
+  name: University of Groningen Mail API
+  description: The Mail API from University of Groningen — 1 operation(s) for mail.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - Mail
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-mail-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-meta-api
+  name: University of Groningen Meta API
+  description: The Meta API from University of Groningen — 2 operation(s) for meta.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - Meta
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-meta-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-metadatablocks-api
+  name: University of Groningen Metadatablocks API
+  description: The Metadatablocks API from University of Groningen — 2 operation(s) for metadatablocks.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - Metadatablocks
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-metadatablocks-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-milestone-api
+  name: University of Groningen milestone API
+  description: The milestone API from University of Groningen — 24 operation(s) for milestone.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - milestone
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-milestone-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-mydata-api
+  name: University of Groningen Mydata API
+  description: The Mydata API from University of Groningen — 2 operation(s) for mydata.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - Mydata
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-mydata-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-notifications-api
+  name: University of Groningen Notifications API
+  description: The Notifications API from University of Groningen — 8 operation(s) for notifications.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - Notifications
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-notifications-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-organization-api
+  name: University of Groningen organization API
+  description: The organization API from University of Groningen — 34 operation(s) for organization.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - organization
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-organization-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-person-api
+  name: University of Groningen person API
+  description: The person API from University of Groningen — 58 operation(s) for person.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - person
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-person-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-personexpertise-api
+  name: University of Groningen personExpertise API
+  description: >-
+    The personExpertise API from University of Groningen — 7 operation(s) for personexpertise.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - personExpertise
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-personexpertise-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-pids-api
+  name: University of Groningen Pids API
+  description: The Pids API from University of Groningen — 6 operation(s) for pids.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - Pids
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-pids-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-pressmedia-api
+  name: University of Groningen pressMedia API
+  description: The pressMedia API from University of Groningen — 24 operation(s) for pressmedia.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - pressMedia
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-pressmedia-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-prize-api
+  name: University of Groningen prize API
+  description: The prize API from University of Groningen — 29 operation(s) for prize.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - prize
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-prize-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-project-api
+  name: University of Groningen project API
+  description: The project API from University of Groningen — 33 operation(s) for project.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - project
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-project-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-publisher-api
+  name: University of Groningen publisher API
+  description: The publisher API from University of Groningen — 18 operation(s) for publisher.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - publisher
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-publisher-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-replacefilesindataset-api
+  name: University of Groningen replaceFilesInDataset API
+  description: Replace a file to a dataset
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - replaceFilesInDataset
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-replacefilesindataset-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-researchoutput-api
+  name: University of Groningen researchOutput API
+  description: >-
+    The researchOutput API from University of Groningen — 67 operation(s) for researchoutput.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - researchOutput
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-researchoutput-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-role-api
+  name: University of Groningen role API
+  description: The role API from University of Groningen — 2 operation(s) for role.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - role
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-role-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-roles-api
+  name: University of Groningen Roles API
+  description: The Roles API from University of Groningen — 3 operation(s) for roles.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - Roles
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-roles-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-saveauxiliaryfilewithversion-api
+  name: University of Groningen saveAuxiliaryFileWithVersion API
+  description: Save Auxiliary File With Version
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - saveAuxiliaryFileWithVersion
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-saveauxiliaryfilewithversion-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-search-api
+  name: University of Groningen Search API
+  description: The Search API from University of Groningen — 2 operation(s) for search.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - Search
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-search-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-semester-api
+  name: University of Groningen semester API
+  description: The semester API from University of Groningen — 8 operation(s) for semester.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - semester
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-semester-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-sendfeedback-api
+  name: University of Groningen Sendfeedback API
+  description: The Sendfeedback API from University of Groningen — 1 operation(s) for sendfeedback.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - Sendfeedback
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-sendfeedback-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-specialization-api
+  name: University of Groningen specialization API
+  description: The specialization API from University of Groningen — 8 operation(s) for specialization.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - specialization
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-specialization-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-studentproject-api
+  name: University of Groningen studentProject API
+  description: >-
+    The studentProject API from University of Groningen — 26 operation(s) for studentproject.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - studentProject
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-studentproject-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-studentthesis-api
+  name: University of Groningen studentThesis API
+  description: The studentThesis API from University of Groningen — 26 operation(s) for studentthesis.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - studentThesis
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-studentthesis-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-thesaurus-api
+  name: University of Groningen thesaurus API
+  description: The thesaurus API from University of Groningen — 5 operation(s) for thesaurus.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - thesaurus
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-thesaurus-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-uploaddatasetlogo-api
+  name: University of Groningen uploadDatasetLogo API
+  description: Uploads a logo for a dataset
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - uploadDatasetLogo
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-uploaddatasetlogo-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-user-api
+  name: University of Groningen user API
+  description: The user API from University of Groningen — 7 operation(s) for user.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - user
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-user-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-users-api
+  name: University of Groningen Users API
+  description: The Users API from University of Groningen — 10 operation(s) for users.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-users-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
+- aid: university-of-groningen:university-of-groningen-workflows-api
+  name: University of Groningen Workflows API
+  description: The Workflows API from University of Groningen — 1 operation(s) for workflows.
+  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  baseURL: https://pure.rug.nl/ws/oai
+  tags:
+  - Workflows
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-workflows-api-openapi.yml
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Authentication
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: x-vocabulary
+    url: vocabulary/university-of-groningen-vocabulary.yml
+  - type: x-rules
+    url: rules/university-of-groningen-rules.yml
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-context.jsonld
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
 common:
   - type: AgenticAccess
     url: agentic-access/university-of-groningen-agentic-access.yml
