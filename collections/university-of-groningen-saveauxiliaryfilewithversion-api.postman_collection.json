@@ -1,0 +1,543 @@
+{
+  "item": [
+    {
+      "id": "e4e41550-db7b-44b2-8448-2faae9219c40",
+      "name": "saveAuxiliaryFileWithVersion",
+      "description": {
+        "content": "Save Auxiliary File With Version",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "56e95204-781f-4ecd-8379-20bf08b0d657",
+          "name": "Save auxiliary file with version",
+          "request": {
+            "name": "Save auxiliary file with version",
+            "description": {
+              "content": "Saves an auxiliary file",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "access",
+                "datafile",
+                ":fileId",
+                "auxiliary",
+                ":formatTag",
+                ":formatVersion"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "fileId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "formatTag",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "formatVersion",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "0",
+                  "value": "<",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "1",
+                  "value": "s",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "2",
+                  "value": "t",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "3",
+                  "value": "r",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "4",
+                  "value": "i",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "5",
+                  "value": "n",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "6",
+                  "value": "g",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "7",
+                  "value": ">",
+                  "type": "text",
+                  "description": "undefined"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8dcc3333-22ab-4074-85fa-5badfc7d30bb",
+              "name": "File saved response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access",
+                    "datafile",
+                    ":fileId",
+                    "auxiliary",
+                    ":formatTag",
+                    ":formatVersion"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "fileId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "formatTag",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "formatVersion",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "0",
+                      "value": "<",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "1",
+                      "value": "s",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "2",
+                      "value": "t",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "3",
+                      "value": "r",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "4",
+                      "value": "i",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "5",
+                      "value": "n",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "6",
+                      "value": "g",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "7",
+                      "value": ">",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "432c10b9-c266-4c69-b9b3-03b9109f9985",
+              "name": "File not found based on id.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access",
+                    "datafile",
+                    ":fileId",
+                    "auxiliary",
+                    ":formatTag",
+                    ":formatVersion"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "fileId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "formatTag",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "formatVersion",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "0",
+                      "value": "<",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "1",
+                      "value": "s",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "2",
+                      "value": "t",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "3",
+                      "value": "r",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "4",
+                      "value": "i",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "5",
+                      "value": "n",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "6",
+                      "value": "g",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "7",
+                      "value": ">",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "905609f5-bd30-46df-afca-6c8cad2d1df6",
+              "name": "User not authorized to edit the dataset.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access",
+                    "datafile",
+                    ":fileId",
+                    "auxiliary",
+                    ":formatTag",
+                    ":formatVersion"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "fileId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "formatTag",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "formatVersion",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "0",
+                      "value": "<",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "1",
+                      "value": "s",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "2",
+                      "value": "t",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "3",
+                      "value": "r",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "4",
+                      "value": "i",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "5",
+                      "value": "n",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "6",
+                      "value": "g",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "7",
+                      "value": ">",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://dataverse.nl",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "38206c96-9090-4482-92ac-7a89c486ca31",
+    "name": "Dataverse Access saveAuxiliaryFileWithVersion API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Open source research data repository software.",
+      "type": "text/plain"
+    }
+  }
+}

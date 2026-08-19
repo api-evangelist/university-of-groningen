@@ -1,0 +1,1298 @@
+{
+  "item": [
+    {
+      "id": "a379aa2c-a02e-4c62-926f-b07884c76a2d",
+      "name": "personExpertise",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9208b58f-e830-47de-ad90-e9bd5ee83c1a",
+          "name": "Lists all person expertises",
+          "request": {
+            "name": "Lists all person expertises",
+            "description": {
+              "content": "Lists all person expertises in the Pure instance. If you need to filter the person expertises returned, see the POST version which supports additional filtering.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "person-expertises"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "10",
+                  "description": "Number of returned person expertises per request."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "The offset for the returned list. 0 or null value is from the start"
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "<string>",
+                  "description": "The order of the list, must be a value from /person-expertises/orderings"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "efdbc841-2a62-47a7-92df-951831187bf2",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "person-expertises"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 4315,\n  \"pageInformation\": {\n    \"offset\": 5117,\n    \"size\": 7281\n  },\n  \"items\": [\n    {\n      \"type\": {\n        \"uri\": \"string\",\n        \"term\": {\n          \"en_GB\": \"Some text\"\n        }\n      },\n      \"pureId\": 4937,\n      \"uuid\": \"b05987fb-dd47-64cd-4eec-ad90aa5b6381\",\n      \"createdBy\": \"string\",\n      \"createdDate\": \"2003-07-17T02:45:14.564Z\",\n      \"modifiedBy\": \"string\",\n      \"modifiedDate\": \"2009-04-10T06:35:00.571Z\",\n      \"portalUrl\": \"string\",\n      \"prettyUrlIdentifiers\": [\n        \"string\",\n        \"string\"\n      ],\n      \"previousUuids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"version\": \"string\",\n      \"workflow\": {\n        \"step\": \"string\",\n        \"description\": {\n          \"en_GB\": \"Some text\"\n        }\n      },\n      \"areaOfExpertise\": [\n        \"string\",\n        \"string\"\n      ],\n      \"areaOfExpertiseClassifications\": [\n        {\n          \"uri\": \"string\",\n          \"term\": {\n            \"en_GB\": \"Some text\"\n          }\n        },\n        {\n          \"uri\": \"string\",\n          \"term\": {\n            \"en_GB\": \"Some text\"\n          }\n        }\n      ],\n      \"willingnessToMedia\": true,\n      \"moderatedWillingnessToMedia\": false,\n      \"person\": {\n        \"systemName\": \"string\",\n        \"uuid\": \"ada8ccaa-f26c-e156-36c0-e2c1fa8ef00a\"\n      },\n      \"systemName\": \"string\"\n    },\n    {\n      \"type\": {\n        \"uri\": \"string\",\n        \"term\": {\n          \"en_GB\": \"Some text\"\n        }\n      },\n      \"pureId\": 4810,\n      \"uuid\": \"40a6bbbb-439e-81ca-fb83-a2ec0bda2075\",\n      \"createdBy\": \"string\",\n      \"createdDate\": \"1989-09-29T12:02:19.610Z\",\n      \"modifiedBy\": \"string\",\n      \"modifiedDate\": \"1950-12-18T00:11:09.367Z\",\n      \"portalUrl\": \"string\",\n      \"prettyUrlIdentifiers\": [\n        \"string\",\n        \"string\"\n      ],\n      \"previousUuids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"version\": \"string\",\n      \"workflow\": {\n        \"step\": \"string\",\n        \"description\": {\n          \"en_GB\": \"Some text\"\n        }\n      },\n      \"areaOfExpertise\": [\n        \"string\",\n        \"string\"\n      ],\n      \"areaOfExpertiseClassifications\": [\n        {\n          \"uri\": \"string\",\n          \"term\": {\n            \"en_GB\": \"Some text\"\n          }\n        },\n        {\n          \"uri\": \"string\",\n          \"term\": {\n            \"en_GB\": \"Some text\"\n          }\n        }\n      ],\n      \"willingnessToMedia\": false,\n      \"moderatedWillingnessToMedia\": true,\n      \"person\": {\n        \"systemName\": \"string\",\n        \"uuid\": \"9f9a015d-ce87-509b-d1c4-ef838f4820b8\"\n      },\n      \"systemName\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9e328631-2924-440f-84cb-18b1e6cbbec6",
+          "name": "Create person expertise",
+          "request": {
+            "name": "Create person expertise",
+            "description": {
+              "content": "Create person expertise",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "person-expertises"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": {\n    \"uri\": \"<string>\",\n    \"term\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\",\n      \"key_2\": \"<string>\"\n    }\n  },\n  \"version\": \"<string>\",\n  \"workflow\": {\n    \"step\": \"<string>\",\n    \"description\": {\n      \"key_0\": \"<string>\"\n    }\n  },\n  \"areaOfExpertiseClassifications\": [\n    {\n      \"uri\": \"<string>\",\n      \"term\": {\n        \"key_0\": \"<string>\"\n      }\n    },\n    {\n      \"uri\": \"<string>\",\n      \"term\": {\n        \"key_0\": \"<string>\"\n      }\n    }\n  ],\n  \"moderatedWillingnessToMedia\": \"<boolean>\",\n  \"person\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "94e96127-43e7-431f-a32a-f446493b9175",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "person-expertises"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": {\n    \"uri\": \"<string>\",\n    \"term\": {\n      \"en_GB\": \"Some text\"\n    }\n  },\n  \"version\": \"<string>\",\n  \"workflow\": {\n    \"step\": \"<string>\",\n    \"description\": {\n      \"en_GB\": \"Some text\"\n    }\n  },\n  \"areaOfExpertiseClassifications\": [\n    {\n      \"uri\": \"<string>\",\n      \"term\": {\n        \"en_GB\": \"Some text\"\n      }\n    },\n    {\n      \"uri\": \"<string>\",\n      \"term\": {\n        \"en_GB\": \"Some text\"\n      }\n    }\n  ],\n  \"moderatedWillingnessToMedia\": \"<boolean>\",\n  \"person\": {\n    \"systemName\": \"<string>\",\n    \"uuid\": \"<uuid>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": {\n    \"uri\": \"<string>\",\n    \"term\": {\n      \"en_GB\": \"Some text\"\n    }\n  },\n  \"pureId\": 6236,\n  \"uuid\": \"a5dae916-d637-6b0a-e590-c8b61f61ebb8\",\n  \"createdBy\": \"string\",\n  \"createdDate\": \"1974-03-01T17:50:31.942Z\",\n  \"modifiedBy\": \"string\",\n  \"modifiedDate\": \"1964-08-26T14:23:02.495Z\",\n  \"portalUrl\": \"string\",\n  \"prettyUrlIdentifiers\": [\n    \"string\",\n    \"string\"\n  ],\n  \"previousUuids\": [\n    \"string\",\n    \"string\"\n  ],\n  \"version\": \"<string>\",\n  \"workflow\": {\n    \"step\": \"<string>\",\n    \"description\": {\n      \"en_GB\": \"Some text\"\n    }\n  },\n  \"areaOfExpertise\": [\n    \"string\",\n    \"string\"\n  ],\n  \"areaOfExpertiseClassifications\": [\n    {\n      \"uri\": \"<string>\",\n      \"term\": {\n        \"en_GB\": \"Some text\"\n      }\n    },\n    {\n      \"uri\": \"<string>\",\n      \"term\": {\n        \"en_GB\": \"Some text\"\n      }\n    }\n  ],\n  \"willingnessToMedia\": true,\n  \"moderatedWillingnessToMedia\": \"<boolean>\",\n  \"person\": {\n    \"systemName\": \"<string>\",\n    \"uuid\": \"<uuid>\"\n  },\n  \"systemName\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "39b02d3c-fecc-432f-8df2-0fd29d004fad",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "person-expertises"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": {\n    \"uri\": \"<string>\",\n    \"term\": {\n      \"en_GB\": \"Some text\"\n    }\n  },\n  \"version\": \"<string>\",\n  \"workflow\": {\n    \"step\": \"<string>\",\n    \"description\": {\n      \"en_GB\": \"Some text\"\n    }\n  },\n  \"areaOfExpertiseClassifications\": [\n    {\n      \"uri\": \"<string>\",\n      \"term\": {\n        \"en_GB\": \"Some text\"\n      }\n    },\n    {\n      \"uri\": \"<string>\",\n      \"term\": {\n        \"en_GB\": \"Some text\"\n      }\n    }\n  ],\n  \"moderatedWillingnessToMedia\": \"<boolean>\",\n  \"person\": {\n    \"systemName\": \"<string>\",\n    \"uuid\": \"<uuid>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 7691,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "75f83905-162f-4e2f-9246-99050170e1df",
+          "name": "A list of allowed area of expertise classifications",
+          "request": {
+            "name": "A list of allowed area of expertise classifications",
+            "description": {
+              "content": "Get a list of allowed area of expertise classifications that can be used for the 'allowedAreaOfExpertiseClassifications' attribute of person expertises",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "person-expertises",
+                "allowed-area-of-expertise-classifications"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cde2226a-0218-45e5-8123-5505186dbd4d",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "person-expertises",
+                    "allowed-area-of-expertise-classifications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"classifications\": [\n    {\n      \"uri\": \"<string>\",\n      \"term\": {\n        \"en_GB\": \"Some text\"\n      }\n    },\n    {\n      \"uri\": \"<string>\",\n      \"term\": {\n        \"en_GB\": \"Some text\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2fce11a4-a8db-4376-a439-a64f5240ceb1",
+          "name": "A list of allowed classifications for the type property",
+          "request": {
+            "name": "A list of allowed classifications for the type property",
+            "description": {
+              "content": "Get a list of classifications that can be used when submitting a type.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "person-expertises",
+                "allowed-types"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2a934ba7-d26f-48bc-a0aa-b0f91c172761",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "person-expertises",
+                    "allowed-types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"classifications\": [\n    {\n      \"uri\": \"<string>\",\n      \"term\": {\n        \"en_GB\": \"Some text\"\n      }\n    },\n    {\n      \"uri\": \"<string>\",\n      \"term\": {\n        \"en_GB\": \"Some text\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "036fb166-3b9a-4bb1-b146-31a96c71ee2e",
+          "name": "A list of allowed workflow steps",
+          "request": {
+            "name": "A list of allowed workflow steps",
+            "description": {
+              "content": "Get a list of allowed workflow steps that can be used for the 'workflow' attribute of person expertises",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "person-expertises",
+                "allowed-workflow-steps"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0749a0b8-dc21-4e5e-a117-b4f254239f91",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "person-expertises",
+                    "allowed-workflow-steps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"workflows\": [\n    {\n      \"step\": \"<string>\",\n      \"description\": {\n        \"en_GB\": \"Some text\"\n      }\n    },\n    {\n      \"step\": \"<string>\",\n      \"description\": {\n        \"en_GB\": \"Some text\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "981797d9-5550-446b-8e60-d56c3fd1c254",
+          "name": "Lists available orderings",
+          "request": {
+            "name": "Lists available orderings",
+            "description": {
+              "content": "Lists all orderings available to the person expertises endpoint. These values can be used by the order parameter when listing person expertises.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "person-expertises",
+                "orderings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b35778d9-ddfa-4aac-8e30-51fd781f2c16",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "person-expertises",
+                    "orderings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"orderings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8c23d60b-92db-4b62-8b09-dc6399bdf025",
+          "name": "Query operation for person expertises",
+          "request": {
+            "name": "Query operation for person expertises",
+            "description": {
+              "content": "Lists person expertises in the Pure instance that matches the provided query, similar to the GET version, instead of using parameters to alter the response, an JSON document is posted with the request. The JSON document contains fields for all the parameters available for the GET version, but also additional filtering options.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "person-expertises",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"uuids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"size\": \"<integer>\",\n  \"offset\": \"<integer>\",\n  \"orderings\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"searchString\": \"<string>\",\n  \"orderBy\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "48b6d37a-6fca-44cc-8c99-f96bb059526b",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "person-expertises",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"uuids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"size\": \"<integer>\",\n  \"offset\": \"<integer>\",\n  \"orderings\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"searchString\": \"<string>\",\n  \"orderBy\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 8808,\n  \"pageInformation\": {\n    \"offset\": 8610,\n    \"size\": 6634\n  },\n  \"items\": [\n    {\n      \"type\": {\n        \"uri\": \"<string>\",\n        \"term\": {\n          \"en_GB\": \"Some text\"\n        }\n      },\n      \"pureId\": 2469,\n      \"uuid\": \"23ee1c6c-84de-e551-cdd4-33f06735cf05\",\n      \"createdBy\": \"string\",\n      \"createdDate\": \"1969-01-19T04:16:05.457Z\",\n      \"modifiedBy\": \"string\",\n      \"modifiedDate\": \"1963-10-17T11:02:29.893Z\",\n      \"portalUrl\": \"string\",\n      \"prettyUrlIdentifiers\": [\n        \"string\",\n        \"string\"\n      ],\n      \"previousUuids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"version\": \"<string>\",\n      \"workflow\": {\n        \"step\": \"<string>\",\n        \"description\": {\n          \"en_GB\": \"Some text\"\n        }\n      },\n      \"areaOfExpertise\": [\n        \"string\",\n        \"string\"\n      ],\n      \"areaOfExpertiseClassifications\": [\n        {\n          \"uri\": \"<string>\",\n          \"term\": {\n            \"en_GB\": \"Some text\"\n          }\n        },\n        {\n          \"uri\": \"<string>\",\n          \"term\": {\n            \"en_GB\": \"Some text\"\n          }\n        }\n      ],\n      \"willingnessToMedia\": true,\n      \"moderatedWillingnessToMedia\": \"<boolean>\",\n      \"person\": {\n        \"systemName\": \"<string>\",\n        \"uuid\": \"<uuid>\"\n      },\n      \"systemName\": \"string\"\n    },\n    {\n      \"type\": {\n        \"uri\": \"<string>\",\n        \"term\": {\n          \"en_GB\": \"Some text\"\n        }\n      },\n      \"pureId\": 5754,\n      \"uuid\": \"4dcad3f2-46df-3753-2188-1ad0ab56b5d5\",\n      \"createdBy\": \"string\",\n      \"createdDate\": \"1969-06-15T11:19:35.719Z\",\n      \"modifiedBy\": \"string\",\n      \"modifiedDate\": \"1996-10-05T02:25:33.128Z\",\n      \"portalUrl\": \"string\",\n      \"prettyUrlIdentifiers\": [\n        \"string\",\n        \"string\"\n      ],\n      \"previousUuids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"version\": \"<string>\",\n      \"workflow\": {\n        \"step\": \"<string>\",\n        \"description\": {\n          \"en_GB\": \"Some text\"\n        }\n      },\n      \"areaOfExpertise\": [\n        \"string\",\n        \"string\"\n      ],\n      \"areaOfExpertiseClassifications\": [\n        {\n          \"uri\": \"<string>\",\n          \"term\": {\n            \"en_GB\": \"Some text\"\n          }\n        },\n        {\n          \"uri\": \"<string>\",\n          \"term\": {\n            \"en_GB\": \"Some text\"\n          }\n        }\n      ],\n      \"willingnessToMedia\": false,\n      \"moderatedWillingnessToMedia\": \"<boolean>\",\n      \"person\": {\n        \"systemName\": \"<string>\",\n        \"uuid\": \"<uuid>\"\n      },\n      \"systemName\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1fee7847-f5d8-4740-8658-aea698a35e78",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "person-expertises",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"uuids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"size\": \"<integer>\",\n  \"offset\": \"<integer>\",\n  \"orderings\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"searchString\": \"<string>\",\n  \"orderBy\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 7691,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1b768dde-9019-4387-996e-6f3f383f5023",
+          "name": "Get person expertise",
+          "request": {
+            "name": "Get person expertise",
+            "description": {
+              "content": "Get person expertise with specific UUID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "person-expertises",
+                ":uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "uuid",
+                  "description": "(Required) UUID of the desired person expertise"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "336e6040-612d-4d71-9e82-af8fdf5fcef3",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "person-expertises",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) UUID of the desired person expertise"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": {\n    \"uri\": \"<string>\",\n    \"term\": {\n      \"en_GB\": \"Some text\"\n    }\n  },\n  \"pureId\": 6236,\n  \"uuid\": \"a5dae916-d637-6b0a-e590-c8b61f61ebb8\",\n  \"createdBy\": \"string\",\n  \"createdDate\": \"1974-03-01T17:50:31.942Z\",\n  \"modifiedBy\": \"string\",\n  \"modifiedDate\": \"1964-08-26T14:23:02.495Z\",\n  \"portalUrl\": \"string\",\n  \"prettyUrlIdentifiers\": [\n    \"string\",\n    \"string\"\n  ],\n  \"previousUuids\": [\n    \"string\",\n    \"string\"\n  ],\n  \"version\": \"<string>\",\n  \"workflow\": {\n    \"step\": \"<string>\",\n    \"description\": {\n      \"en_GB\": \"Some text\"\n    }\n  },\n  \"areaOfExpertise\": [\n    \"string\",\n    \"string\"\n  ],\n  \"areaOfExpertiseClassifications\": [\n    {\n      \"uri\": \"<string>\",\n      \"term\": {\n        \"en_GB\": \"Some text\"\n      }\n    },\n    {\n      \"uri\": \"<string>\",\n      \"term\": {\n        \"en_GB\": \"Some text\"\n      }\n    }\n  ],\n  \"willingnessToMedia\": true,\n  \"moderatedWillingnessToMedia\": \"<boolean>\",\n  \"person\": {\n    \"systemName\": \"<string>\",\n    \"uuid\": \"<uuid>\"\n  },\n  \"systemName\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c7049675-3c02-4cd4-b498-439c72eb5059",
+              "name": "The requested content have changed UUID",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "person-expertises",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) UUID of the desired person expertise"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Moved Permanently",
+              "code": 301,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "520d5add-3efc-4f01-81a5-491129c88fce",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "person-expertises",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) UUID of the desired person expertise"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 7691,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "64da452d-fd82-46bf-a54e-a5a5ac7bf5f9",
+          "name": "Update person expertise",
+          "request": {
+            "name": "Update person expertise",
+            "description": {
+              "content": "Update person expertise with specific UUID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "person-expertises",
+                ":uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "uuid",
+                  "description": "(Required) UUID of the person expertise to update"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": {\n    \"uri\": \"<string>\",\n    \"term\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\",\n      \"key_2\": \"<string>\"\n    }\n  },\n  \"version\": \"<string>\",\n  \"workflow\": {\n    \"step\": \"<string>\",\n    \"description\": {\n      \"key_0\": \"<string>\"\n    }\n  },\n  \"areaOfExpertiseClassifications\": [\n    {\n      \"uri\": \"<string>\",\n      \"term\": {\n        \"key_0\": \"<string>\"\n      }\n    },\n    {\n      \"uri\": \"<string>\",\n      \"term\": {\n        \"key_0\": \"<string>\"\n      }\n    }\n  ],\n  \"moderatedWillingnessToMedia\": \"<boolean>\",\n  \"person\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b74e7071-c87b-4ef3-9f36-2cf62b789fe8",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "person-expertises",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) UUID of the person expertise to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": {\n    \"uri\": \"<string>\",\n    \"term\": {\n      \"en_GB\": \"Some text\"\n    }\n  },\n  \"version\": \"<string>\",\n  \"workflow\": {\n    \"step\": \"<string>\",\n    \"description\": {\n      \"en_GB\": \"Some text\"\n    }\n  },\n  \"areaOfExpertiseClassifications\": [\n    {\n      \"uri\": \"<string>\",\n      \"term\": {\n        \"en_GB\": \"Some text\"\n      }\n    },\n    {\n      \"uri\": \"<string>\",\n      \"term\": {\n        \"en_GB\": \"Some text\"\n      }\n    }\n  ],\n  \"moderatedWillingnessToMedia\": \"<boolean>\",\n  \"person\": {\n    \"systemName\": \"<string>\",\n    \"uuid\": \"<uuid>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": {\n    \"uri\": \"<string>\",\n    \"term\": {\n      \"en_GB\": \"Some text\"\n    }\n  },\n  \"pureId\": 6236,\n  \"uuid\": \"a5dae916-d637-6b0a-e590-c8b61f61ebb8\",\n  \"createdBy\": \"string\",\n  \"createdDate\": \"1974-03-01T17:50:31.942Z\",\n  \"modifiedBy\": \"string\",\n  \"modifiedDate\": \"1964-08-26T14:23:02.495Z\",\n  \"portalUrl\": \"string\",\n  \"prettyUrlIdentifiers\": [\n    \"string\",\n    \"string\"\n  ],\n  \"previousUuids\": [\n    \"string\",\n    \"string\"\n  ],\n  \"version\": \"<string>\",\n  \"workflow\": {\n    \"step\": \"<string>\",\n    \"description\": {\n      \"en_GB\": \"Some text\"\n    }\n  },\n  \"areaOfExpertise\": [\n    \"string\",\n    \"string\"\n  ],\n  \"areaOfExpertiseClassifications\": [\n    {\n      \"uri\": \"<string>\",\n      \"term\": {\n        \"en_GB\": \"Some text\"\n      }\n    },\n    {\n      \"uri\": \"<string>\",\n      \"term\": {\n        \"en_GB\": \"Some text\"\n      }\n    }\n  ],\n  \"willingnessToMedia\": true,\n  \"moderatedWillingnessToMedia\": \"<boolean>\",\n  \"person\": {\n    \"systemName\": \"<string>\",\n    \"uuid\": \"<uuid>\"\n  },\n  \"systemName\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e8e9cd8e-0f7c-4f61-b274-349f66197d82",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "person-expertises",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) UUID of the person expertise to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": {\n    \"uri\": \"<string>\",\n    \"term\": {\n      \"en_GB\": \"Some text\"\n    }\n  },\n  \"version\": \"<string>\",\n  \"workflow\": {\n    \"step\": \"<string>\",\n    \"description\": {\n      \"en_GB\": \"Some text\"\n    }\n  },\n  \"areaOfExpertiseClassifications\": [\n    {\n      \"uri\": \"<string>\",\n      \"term\": {\n        \"en_GB\": \"Some text\"\n      }\n    },\n    {\n      \"uri\": \"<string>\",\n      \"term\": {\n        \"en_GB\": \"Some text\"\n      }\n    }\n  ],\n  \"moderatedWillingnessToMedia\": \"<boolean>\",\n  \"person\": {\n    \"systemName\": \"<string>\",\n    \"uuid\": \"<uuid>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 7691,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c8d8abf7-5329-493e-9ca6-602a91c19bcd",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "person-expertises",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) UUID of the person expertise to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": {\n    \"uri\": \"<string>\",\n    \"term\": {\n      \"en_GB\": \"Some text\"\n    }\n  },\n  \"version\": \"<string>\",\n  \"workflow\": {\n    \"step\": \"<string>\",\n    \"description\": {\n      \"en_GB\": \"Some text\"\n    }\n  },\n  \"areaOfExpertiseClassifications\": [\n    {\n      \"uri\": \"<string>\",\n      \"term\": {\n        \"en_GB\": \"Some text\"\n      }\n    },\n    {\n      \"uri\": \"<string>\",\n      \"term\": {\n        \"en_GB\": \"Some text\"\n      }\n    }\n  ],\n  \"moderatedWillingnessToMedia\": \"<boolean>\",\n  \"person\": {\n    \"systemName\": \"<string>\",\n    \"uuid\": \"<uuid>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 7691,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b8c2e4f5-ed53-4fe0-9256-44f0a029e568",
+              "name": "Version conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "person-expertises",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) UUID of the person expertise to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": {\n    \"uri\": \"<string>\",\n    \"term\": {\n      \"en_GB\": \"Some text\"\n    }\n  },\n  \"version\": \"<string>\",\n  \"workflow\": {\n    \"step\": \"<string>\",\n    \"description\": {\n      \"en_GB\": \"Some text\"\n    }\n  },\n  \"areaOfExpertiseClassifications\": [\n    {\n      \"uri\": \"<string>\",\n      \"term\": {\n        \"en_GB\": \"Some text\"\n      }\n    },\n    {\n      \"uri\": \"<string>\",\n      \"term\": {\n        \"en_GB\": \"Some text\"\n      }\n    }\n  ],\n  \"moderatedWillingnessToMedia\": \"<boolean>\",\n  \"person\": {\n    \"systemName\": \"<string>\",\n    \"uuid\": \"<uuid>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 748,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"modified\": \"2013-06-26T21:29:35.942Z\",\n  \"modifiedBy\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "01beda93-3c23-47b0-9d98-e4692bb453d5",
+          "name": "Delete person expertise",
+          "request": {
+            "name": "Delete person expertise",
+            "description": {
+              "content": "Delete person expertise with specific UUID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "person-expertises",
+                ":uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "uuid",
+                  "description": "(Required) UUID of the person expertise"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/problem+json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3526127a-29d2-4a0e-818c-5cc6d6d3b1d2",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "person-expertises",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) UUID of the person expertise"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "36a1250d-b6d9-4f7a-9f3e-98e94a58c774",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "person-expertises",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) UUID of the person expertise"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 7691,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3959b45c-6e59-431c-9ed3-a6b311f7a9ab",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "person-expertises",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) UUID of the person expertise"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 748,\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"modified\": \"2013-06-26T21:29:35.942Z\",\n  \"modifiedBy\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://dataverse.nl",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d378c75b-7721-4eb8-be67-d35e5cf5780f",
+    "name": "Dataverse Access personExpertise API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Open source research data repository software.",
+      "type": "text/plain"
+    }
+  }
+}

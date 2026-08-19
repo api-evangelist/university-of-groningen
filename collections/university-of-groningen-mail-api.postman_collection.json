@@ -1,0 +1,89 @@
+{
+  "item": [
+    {
+      "id": "7a0b84f9-ee69-403b-8972-17f0c6762739",
+      "name": "Mail",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "959872e7-a179-4632-a0e5-3fe6483ef3d5",
+          "name": "Mail send Mail",
+          "request": {
+            "name": "Mail send Mail",
+            "description": {},
+            "url": {
+              "path": [
+                "mail",
+                "notifications"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f66c25db-66a1-4a60-afae-bb620d7c78f2",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mail",
+                    "notifications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://dataverse.nl",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "bac1f2f3-4b70-4899-b28c-c5fc0f325d4b",
+    "name": "Dataverse Access Mail API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Open source research data repository software.",
+      "type": "text/plain"
+    }
+  }
+}

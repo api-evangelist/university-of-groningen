@@ -1,0 +1,123 @@
+{
+  "item": [
+    {
+      "id": "8f2b1deb-5bea-43bc-98a7-f05cc57916fa",
+      "name": "Ingest",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b0c8e09f-3ac4-4dce-ba52-6db604133787",
+          "name": "Test Ingest datafile",
+          "request": {
+            "name": "Test Ingest datafile",
+            "description": {},
+            "url": {
+              "path": [
+                "ingest",
+                "test",
+                "file"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fileName",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "fileType",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2b4fbdf8-b194-43e7-b2c2-3fdffb6e8afe",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingest",
+                    "test",
+                    "file"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fileName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fileType",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://dataverse.nl",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "7715fc43-93b8-4145-ad11-6e4e4319a904",
+    "name": "Dataverse Access Ingest API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Open source research data repository software.",
+      "type": "text/plain"
+    }
+  }
+}
