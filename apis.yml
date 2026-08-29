@@ -15,6 +15,18 @@ description: >-
   identity APIs are internal or gated. The University also maintains an official
   GitHub organization publishing open-source research-data and education tools.
 type: Index
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: free
   onboarding: self-serve
@@ -1980,6 +1992,9 @@ apis:
     url: >-
       https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/open-data?lang=en
 common:
+  - type: CapabilityMap
+    url: capabilities/university-of-groningen-capability-edges.yml
+    name: University of Groningen Business Capability Map
   - type: AgenticAccess
     url: agentic-access/university-of-groningen-agentic-access.yml
   - type: VulnerabilityDisclosure
