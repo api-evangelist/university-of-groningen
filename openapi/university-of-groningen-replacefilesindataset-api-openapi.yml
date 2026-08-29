@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Dataverse Access replaceFilesInDataset API
+  title: Dataverse Replace Files In Dataset API
   description: Open source research data repository software.
   version: '6.9'
 servers:

@@ -1,10 +1,20 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Dataverse Access fingerprint API
-  description: Open source research data repository software.
-  version: '6.9'
+  title: Pure Fingerprint API
+  description: The Pure API provides a secure and complete web services API for using and managing research information data in Pure. The API enables a broad range of use-cases for interacting with research information, from anonymous Open Data scenarios to enabling the next generation Pure admin.
+  termsOfService: ''
+  contact:
+    name: ''
+    url: ''
+    email: pure-support@elsevier.com
+  license:
+    name: ''
+    url: ''
+  version: 5.35.3-4
 servers:
-- url: https://dataverse.nl
+- url: https://pure.rug.nl/ws/api
+security:
+- api-key: []
 tags:
 - name: fingerprint
 paths:
@@ -98,6 +108,178 @@ paths:
                 $ref: '#/components/schemas/ProblemDetails'
 components:
   schemas:
+    ContentRef:
+      required:
+      - systemName
+      - uuid
+      type:
+      - object
+      - 'null'
+      properties:
+        uuid:
+          type: string
+          description: UUID of the referred content
+          format: uuid
+        systemName:
+          type: string
+      discriminator:
+        propertyName: systemName
+        mapping:
+          AccessDefinition: '#/components/schemas/AccessDefinitionRef'
+          Activity: '#/components/schemas/ActivityRef'
+          Application: '#/components/schemas/ApplicationRef'
+          AuthorCollaboration: '#/components/schemas/AuthorCollaborationRef'
+          Award: '#/components/schemas/AwardRef'
+          ClassificationScheme: '#/components/schemas/ClassificationSchemeRef'
+          ConferenceSeries: '#/components/schemas/ConferenceSeriesRef'
+          DataSet: '#/components/schemas/DataSetRef'
+          Equipment: '#/components/schemas/EquipmentRef'
+          Event: '#/components/schemas/EventRef'
+          ExternalOrganization: '#/components/schemas/ExternalOrganizationRef'
+          ExternalPerson: '#/components/schemas/ExternalPersonRef'
+          Impact: '#/components/schemas/ImpactRef'
+          Journal: '#/components/schemas/JournalRef'
+          Organization: '#/components/schemas/OrganizationRef'
+          Person: '#/components/schemas/PersonRef'
+          Publisher: '#/components/schemas/PublisherRef'
+          PressMedia: '#/components/schemas/PressMediaRef'
+          Prize: '#/components/schemas/PrizeRef'
+          Project: '#/components/schemas/ProjectRef'
+          ResearchOutput: '#/components/schemas/ResearchOutputRef'
+          StudentThesis: '#/components/schemas/StudentThesisRef'
+          FundingOpportunity: '#/components/schemas/FundingOpportunityRef'
+          EthicalReview: '#/components/schemas/EthicalReviewRef'
+          ApplicationCluster: '#/components/schemas/ApplicationClusterRef'
+          AwardCluster: '#/components/schemas/AwardClusterRef'
+          User: '#/components/schemas/UserRef'
+          ERA2018FieldOfResearch: '#/components/schemas/Anzsrc2008FieldOfResearchRef'
+          UnitOfAssessmentREF2014: '#/components/schemas/Ref2014UnitOfAssessmentRef'
+          UnitOfAssessmentREF2020: '#/components/schemas/Ref2020UnitOfAssessmentRef'
+          ANZSRCTypeOfActivity: '#/components/schemas/Anzsrc2020TypeOfActivityRef'
+          ANZSRCFieldOfResearch: '#/components/schemas/Anzsrc2020FieldOfResearchRef'
+          ANZSRCSocioEconomicObjective: '#/components/schemas/Anzsrc2020SocioEconomicObjectiveRef'
+          Semester: '#/components/schemas/SemesterRef'
+          Education: '#/components/schemas/EducationRef'
+          Course: '#/components/schemas/CourseRef'
+          CurriculumVitae: '#/components/schemas/CurriculumVitaeRef'
+          CustomDefinedFieldConfiguration: '#/components/schemas/CustomDefinedFieldConfigurationRef'
+          KeywordGroupConfiguration: '#/components/schemas/KeywordGroupConfigurationRef'
+          Review: '#/components/schemas/ReviewRef'
+          GenericContentRef: '#/components/schemas/GenericContentRef'
+          UserProfile: '#/components/schemas/UserProfileRef'
+          Thesaurus: '#/components/schemas/ThesaurusRef'
+          Concept: '#/components/schemas/ConceptRef'
+          PersonExpertise: '#/components/schemas/PersonExpertiseRef'
+          Contract: '#/components/schemas/ContractRef'
+          Milestone: '#/components/schemas/MilestoneRef'
+          Fingerprint: '#/components/schemas/FingerprintRef'
+          Specialization: '#/components/schemas/SpecializationRef'
+          StudentProject: '#/components/schemas/StudentProjectRef'
+    RankedConcept:
+      required:
+      - concept
+      - rank
+      type: object
+      properties:
+        concept:
+          $ref: '#/components/schemas/ConceptRef'
+        rank:
+          type: number
+          description: The rank of the ranked concept. If this is not set on creation, the ranked concept will have a default rank value of 0
+          format: double
+        weightedRank:
+          type:
+          - number
+          - 'null'
+          description: WeightedRank
+          format: double
+        frequency:
+          type:
+          - integer
+          - 'null'
+          description: Frequency
+          format: int32
+      description: A ranked concept
+    FingerprintListResult:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: The full count, ignoring paging
+          format: int32
+        pageInformation:
+          $ref: '#/components/schemas/PageInformation'
+        items:
+          type: array
+          description: Fingerprints
+          items:
+            $ref: '#/components/schemas/Fingerprint'
+      description: List of fingerprints. Can contain a subset of all items along with the full count
+    ConceptRef:
+      required:
+      - uuid
+      type:
+      - object
+      - 'null'
+      description: A reference to a concept
+      allOf:
+      - $ref: '#/components/schemas/ContentRef'
+      - type: object
+        properties:
+          conceptId:
+            type: string
+            description: The concept ID
+            readOnly: true
+    FingerprintQuery:
+      type: object
+      properties:
+        uuids:
+          type: array
+          items:
+            type: string
+            format: uuid
+        size:
+          type: integer
+          format: int32
+        offset:
+          type: integer
+          format: int32
+        searchString:
+          type: string
+          description: String used to perform search
+        relatedContentUuid:
+          type: string
+          description: UUID of the related content
+        relatedContentSystemName:
+          type: string
+          description: System name of the related content
+      description: Create a query for fingerprint
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type: string
+          description: A URI reference [RFC3986] that identifies the problem type.
+        title:
+          type: string
+          description: A short, human-readable summary of the problem type. It SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization (e.g., using proactive content negotiation; see [RFC7231], Section 3.4).
+        status:
+          type: integer
+          description: The HTTP status code ([RFC7231], Section 6) generated by the origin server for this occurrence of the problem.
+          format: int32
+        detail:
+          type: string
+          description: A human-readable explanation specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: A URI reference that identifies the specific occurrence of the problem.  It may or may not yield further information if dereferenced.
+      description: RFC7807 Error details
+      discriminator:
+        propertyName: type
+        mapping:
+          /error: '#/components/schemas/GenericProblemDetails'
+          /validation-error: '#/components/schemas/ValidationProblemDetails'
+          /dependency-violation-error: '#/components/schemas/DependencyViolationProblemDetails'
     Fingerprint:
       required:
       - relatedContent
@@ -152,15 +334,17 @@ components:
             description: UUIDs of other content items which have been merged into this content item (or similar)
             readOnly: true
         version:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Used to guard against conflicting updates. For new content this is null, and for existing content the current value. The property should never be modified by a client, except in the rare case where the client wants to perform an update irrespective of if other clients have made updates in the meantime, also known as a "dirty write". A dirty write is performed by not including the property value or setting the property to null
-          nullable: true
         relatedContent:
           $ref: '#/components/schemas/ContentRef'
         concepts:
-          type: array
+          type:
+          - array
+          - 'null'
           description: The ranked concepts that makes up this fingerprint
-          nullable: true
           items:
             $ref: '#/components/schemas/RankedConcept'
         systemName:
@@ -168,72 +352,6 @@ components:
           description: The content system name
           readOnly: true
       description: A fingerprint
-    ContentRef:
-      required:
-      - systemName
-      - uuid
-      type: object
-      properties:
-        uuid:
-          type: string
-          description: UUID of the referred content
-          format: uuid
-        systemName:
-          type: string
-      nullable: true
-      discriminator:
-        propertyName: systemName
-        mapping:
-          AccessDefinition: '#/components/schemas/AccessDefinitionRef'
-          Activity: '#/components/schemas/ActivityRef'
-          Application: '#/components/schemas/ApplicationRef'
-          AuthorCollaboration: '#/components/schemas/AuthorCollaborationRef'
-          Award: '#/components/schemas/AwardRef'
-          ClassificationScheme: '#/components/schemas/ClassificationSchemeRef'
-          ConferenceSeries: '#/components/schemas/ConferenceSeriesRef'
-          DataSet: '#/components/schemas/DataSetRef'
-          Equipment: '#/components/schemas/EquipmentRef'
-          Event: '#/components/schemas/EventRef'
-          ExternalOrganization: '#/components/schemas/ExternalOrganizationRef'
-          ExternalPerson: '#/components/schemas/ExternalPersonRef'
-          Impact: '#/components/schemas/ImpactRef'
-          Journal: '#/components/schemas/JournalRef'
-          Organization: '#/components/schemas/OrganizationRef'
-          Person: '#/components/schemas/PersonRef'
-          Publisher: '#/components/schemas/PublisherRef'
-          PressMedia: '#/components/schemas/PressMediaRef'
-          Prize: '#/components/schemas/PrizeRef'
-          Project: '#/components/schemas/ProjectRef'
-          ResearchOutput: '#/components/schemas/ResearchOutputRef'
-          StudentThesis: '#/components/schemas/StudentThesisRef'
-          FundingOpportunity: '#/components/schemas/FundingOpportunityRef'
-          EthicalReview: '#/components/schemas/EthicalReviewRef'
-          ApplicationCluster: '#/components/schemas/ApplicationClusterRef'
-          AwardCluster: '#/components/schemas/AwardClusterRef'
-          User: '#/components/schemas/UserRef'
-          ERA2018FieldOfResearch: '#/components/schemas/Anzsrc2008FieldOfResearchRef'
-          UnitOfAssessmentREF2014: '#/components/schemas/Ref2014UnitOfAssessmentRef'
-          UnitOfAssessmentREF2020: '#/components/schemas/Ref2020UnitOfAssessmentRef'
-          ANZSRCTypeOfActivity: '#/components/schemas/Anzsrc2020TypeOfActivityRef'
-          ANZSRCFieldOfResearch: '#/components/schemas/Anzsrc2020FieldOfResearchRef'
-          ANZSRCSocioEconomicObjective: '#/components/schemas/Anzsrc2020SocioEconomicObjectiveRef'
-          Semester: '#/components/schemas/SemesterRef'
-          Education: '#/components/schemas/EducationRef'
-          Course: '#/components/schemas/CourseRef'
-          CurriculumVitae: '#/components/schemas/CurriculumVitaeRef'
-          CustomDefinedFieldConfiguration: '#/components/schemas/CustomDefinedFieldConfigurationRef'
-          KeywordGroupConfiguration: '#/components/schemas/KeywordGroupConfigurationRef'
-          Review: '#/components/schemas/ReviewRef'
-          GenericContentRef: '#/components/schemas/GenericContentRef'
-          UserProfile: '#/components/schemas/UserProfileRef'
-          Thesaurus: '#/components/schemas/ThesaurusRef'
-          Concept: '#/components/schemas/ConceptRef'
-          PersonExpertise: '#/components/schemas/PersonExpertiseRef'
-          Contract: '#/components/schemas/ContractRef'
-          Milestone: '#/components/schemas/MilestoneRef'
-          Fingerprint: '#/components/schemas/FingerprintRef'
-          Specialization: '#/components/schemas/SpecializationRef'
-          StudentProject: '#/components/schemas/StudentProjectRef'
     PageInformation:
       type: object
       properties:
@@ -246,105 +364,9 @@ components:
           description: The requested number of items. May be higher than the actual number of items in the result if there are fewer items in the store than requested
           format: int32
       description: Information about pages
-    ProblemDetails:
-      type: object
-      properties:
-        type:
-          type: string
-          description: A URI reference [RFC3986] that identifies the problem type.
-        title:
-          type: string
-          description: A short, human-readable summary of the problem type. It SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization (e.g., using proactive content negotiation; see [RFC7231], Section 3.4).
-        status:
-          type: integer
-          description: The HTTP status code ([RFC7231], Section 6) generated by the origin server for this occurrence of the problem.
-          format: int32
-        detail:
-          type: string
-          description: A human-readable explanation specific to this occurrence of the problem.
-        instance:
-          type: string
-          description: A URI reference that identifies the specific occurrence of the problem.  It may or may not yield further information if dereferenced.
-      description: RFC7807 Error details
-      discriminator:
-        propertyName: type
-        mapping:
-          /error: '#/components/schemas/GenericProblemDetails'
-          /validation-error: '#/components/schemas/ValidationProblemDetails'
-          /dependency-violation-error: '#/components/schemas/DependencyViolationProblemDetails'
-    ConceptRef:
-      required:
-      - uuid
-      type: object
-      description: A reference to a concept
-      nullable: true
-      allOf:
-      - $ref: '#/components/schemas/ContentRef'
-      - type: object
-        properties:
-          conceptId:
-            type: string
-            description: The concept ID
-            readOnly: true
-    FingerprintListResult:
-      type: object
-      properties:
-        count:
-          type: integer
-          description: The full count, ignoring paging
-          format: int32
-        pageInformation:
-          $ref: '#/components/schemas/PageInformation'
-        items:
-          type: array
-          description: Fingerprints
-          items:
-            $ref: '#/components/schemas/Fingerprint'
-      description: List of fingerprints. Can contain a subset of all items along with the full count
-    FingerprintQuery:
-      type: object
-      properties:
-        uuids:
-          type: array
-          items:
-            type: string
-            format: uuid
-        size:
-          type: integer
-          format: int32
-        offset:
-          type: integer
-          format: int32
-        searchString:
-          type: string
-          description: String used to perform search
-        relatedContentUuid:
-          type: string
-          description: UUID of the related content
-        relatedContentSystemName:
-          type: string
-          description: System name of the related content
-      description: Create a query for fingerprint
-    RankedConcept:
-      required:
-      - concept
-      - rank
-      type: object
-      properties:
-        concept:
-          $ref: '#/components/schemas/ConceptRef'
-        rank:
-          type: number
-          description: The rank of the ranked concept. If this is not set on creation, the ranked concept will have a default rank value of 0
-          format: double
-        weightedRank:
-          type: number
-          description: WeightedRank
-          format: double
-          nullable: true
-        frequency:
-          type: integer
-          description: Frequency
-          format: int32
-          nullable: true
-      description: A ranked concept
+  securitySchemes:
+    api-key:
+      type: apiKey
+      description: Security mechanism for the API
+      name: api-key
+      in: header

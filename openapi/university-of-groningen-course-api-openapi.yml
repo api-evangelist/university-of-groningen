@@ -1,10 +1,20 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Dataverse Access course API
-  description: Open source research data repository software.
-  version: '6.9'
+  title: Pure Course API
+  description: The Pure API provides a secure and complete web services API for using and managing research information data in Pure. The API enables a broad range of use-cases for interacting with research information, from anonymous Open Data scenarios to enabling the next generation Pure admin.
+  termsOfService: ''
+  contact:
+    name: ''
+    url: ''
+    email: pure-support@elsevier.com
+  license:
+    name: ''
+    url: ''
+  version: 5.35.3-4
 servers:
-- url: https://dataverse.nl
+- url: https://pure.rug.nl/ws/api
+security:
+- api-key: []
 tags:
 - name: course
 paths:
@@ -701,23 +711,13 @@ paths:
                 $ref: '#/components/schemas/ProblemDetails'
 components:
   schemas:
-    PageInformation:
-      type: object
-      properties:
-        offset:
-          type: integer
-          description: Offset that returned items start at
-          format: int32
-        size:
-          type: integer
-          description: The requested number of items. May be higher than the actual number of items in the result if there are fewer items in the store than requested
-          format: int32
-      description: Information about pages
     ContentRef:
       required:
       - systemName
       - uuid
-      type: object
+      type:
+      - object
+      - 'null'
       properties:
         uuid:
           type: string
@@ -725,7 +725,6 @@ components:
           format: uuid
         systemName:
           type: string
-      nullable: true
       discriminator:
         propertyName: systemName
         mapping:
@@ -779,6 +778,52 @@ components:
           Fingerprint: '#/components/schemas/FingerprintRef'
           Specialization: '#/components/schemas/SpecializationRef'
           StudentProject: '#/components/schemas/StudentProjectRef'
+    Name:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+      description: A name describing a person, made up of given- and family name
+    RemoteFile:
+      required:
+      - fileId
+      - fileState
+      - sourceId
+      - storeName
+      type: object
+      properties:
+        sourceId:
+          type: string
+          description: The remote source ID
+        storeName:
+          type: string
+          description: The name of the remote store
+        timeStamp:
+          type: string
+          description: The timestamp at which the file was stored
+          format: date-time
+        fileId:
+          type: string
+          description: The remote file ID
+        fileState:
+          type: string
+          description: The remote file state
+          enum:
+          - AWAITING_CREATION
+          - CREATION_IN_PROGRESS
+          - CREATION_FAILED
+          - STORED
+          - AWAITING_DELETE
+          - DELETE_IN_PROGRESS
+          - DELETE_FAILED
+          - DELETED
+        metadataUpdateRequired:
+          type: boolean
+          description: Whether the file's metadata should be updated
+          default: false
+      description: Information about a remote file (Elsevier only)
     AllowedKeywordGroupConfiguration:
       required:
       - targetSystemName
@@ -810,40 +855,11 @@ components:
         logicalName:
           type: string
         relationType:
-          type: string
+          type:
+          - string
+          - 'null'
           description: The schema name of the type (with the ability to associate keywords) on which the keyword group configuration is related to, e.g. StaffOrganizationAssociation. It can also be set to null (default value), which means the keyword group configuration is related to the main type (the target system name) and not a relation of the main type.
-          nullable: true
       description: A specification of the allowed behavior of a specified keyword group
-    LocalizedString:
-      type: object
-      additionalProperties:
-        type: string
-        description: 'A set of string values, one for each submission locale. Note: invalid locale values will be ignored.'
-        nullable: true
-        example: '{"en_GB":"Some text"}'
-      description: 'A set of string values, one for each submission locale. Note: invalid locale values will be ignored.'
-      nullable: true
-      example:
-        en_GB: Some text
-    PersonRef:
-      required:
-      - uuid
-      type: object
-      description: A reference to a person internal to the institution
-      nullable: true
-      allOf:
-      - $ref: '#/components/schemas/ContentRef'
-    FormattedLocalizedString:
-      type: object
-      additionalProperties:
-        type: string
-        description: A set of localized strings that support formatting. Invalid locale values will be ignored.
-        nullable: true
-        example: '{"en_GB":"Some text"}'
-      description: A set of localized strings that support formatting. Invalid locale values will be ignored.
-      nullable: true
-      example:
-        en_GB: Some text
     CourseFile:
       required:
       - fileName
@@ -893,9 +909,10 @@ components:
         type:
           $ref: '#/components/schemas/ClassificationRef'
         title:
-          type: string
+          type:
+          - string
+          - 'null'
           description: A human readable name of the related file
-          nullable: true
         licenseType:
           $ref: '#/components/schemas/ClassificationRef'
         accessType:
@@ -903,107 +920,123 @@ components:
         embargoPeriod:
           $ref: '#/components/schemas/DateRange'
       description: A file related to a course
-    ClassifiedCourseDevelopedByAssociation:
-      required:
-      - organizations
+    CoursesQuery:
       type: object
       properties:
-        pureId:
-          type: integer
-          description: Pure database ID of the object, prefer using the UUID if it is present on the entity
-          format: int64
-          readOnly: true
-        person:
-          $ref: '#/components/schemas/PersonRef'
-        name:
-          $ref: '#/components/schemas/Name'
-        organizations:
+        uuids:
           type: array
-          description: A collection of organization associations
           items:
-            $ref: '#/components/schemas/OrganizationRef'
-      description: A person who developed a given course.
-    DateRange:
-      type: object
-      properties:
-        startDate:
+            type: string
+            format: uuid
+        size:
+          type: integer
+          format: int32
+        offset:
+          type: integer
+          format: int32
+        orderings:
+          type: array
+          items:
+            type: string
+        searchString:
           type: string
-          description: Start date
-          format: date
-          nullable: true
-        endDate:
+          description: String used to perform search
+        orderBy:
           type: string
-          description: End date
-          format: date
-          nullable: true
-      description: A date range
+          writeOnly: true
+      description: Create a query for courses
     OrganizationRef:
       required:
       - uuid
-      type: object
+      type:
+      - object
+      - 'null'
       description: A reference to an organization in the institution
-      nullable: true
       allOf:
       - $ref: '#/components/schemas/ContentRef'
-    ClassifiedFormattedLocalizedValue:
-      required:
-      - type
+    ProblemDetails:
       type: object
       properties:
-        pureId:
+        type:
+          type: string
+          description: A URI reference [RFC3986] that identifies the problem type.
+        title:
+          type: string
+          description: A short, human-readable summary of the problem type. It SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization (e.g., using proactive content negotiation; see [RFC7231], Section 3.4).
+        status:
           type: integer
-          description: Pure database ID of the object, prefer using the UUID if it is present on the entity
+          description: The HTTP status code ([RFC7231], Section 6) generated by the origin server for this occurrence of the problem.
+          format: int32
+        detail:
+          type: string
+          description: A human-readable explanation specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: A URI reference that identifies the specific occurrence of the problem.  It may or may not yield further information if dereferenced.
+      description: RFC7807 Error details
+      discriminator:
+        propertyName: type
+        mapping:
+          /error: '#/components/schemas/GenericProblemDetails'
+          /validation-error: '#/components/schemas/ValidationProblemDetails'
+          /dependency-violation-error: '#/components/schemas/DependencyViolationProblemDetails'
+    UploadedFile:
+      required:
+      - key
+      type: object
+      properties:
+        digest:
+          type: string
+          description: The calculated digest for the file in Pure
+          readOnly: true
+        digestType:
+          type: string
+          description: The digest type
+          readOnly: true
+        size:
+          type: integer
+          description: The file size of the file in Pure
           format: int64
           readOnly: true
-        value:
-          $ref: '#/components/schemas/FormattedLocalizedString'
-        type:
-          $ref: '#/components/schemas/ClassificationRef'
-      description: A classified formatted localized value
-    SystemLocalizedString:
-      type: object
-      additionalProperties:
-        type: string
-        description: A set of localized string values each for a specific UI locale.
-        nullable: true
-        example: '{"en_GB":"Some text"}'
-      description: A set of localized string values each for a specific UI locale.
-      nullable: true
-      example:
-        en_GB: Some text
-    Note:
-      required:
-      - text
-      type: object
-      properties:
-        date:
+        mimeType:
           type: string
-          description: Date and time of when the note was created, an event occurred or similar. Can be any point in time, but <now> is normally preferred
+          description: The mime type detected for the file
+          readOnly: true
+        timeStamp:
+          type: string
+          description: The timestamp Pure received the file
           format: date-time
-          nullable: true
-        username:
+          readOnly: true
+        expires:
           type: string
-          description: Username related to the note. Usually a username of the user creating the note. Does not have to be a username of a Pure user
-          nullable: true
-        text:
+          description: The timestamp where Pure deletes the uploaded file if it has not been attached to any content
+          format: date-time
+          readOnly: true
+        key:
           type: string
-          description: Note text
-      description: A note
-    NoteListResult:
-      type: object
+          description: Pure key identifer for the file upload
+          readOnly: true
+      description: Information about the uploaded file
+    CustomDefinedField:
+      required:
+      - typeDiscriminator
+      type:
+      - object
+      - 'null'
       properties:
-        count:
-          type: integer
-          description: The full count, ignoring paging
-          format: int32
-        pageInformation:
-          $ref: '#/components/schemas/PageInformation'
-        items:
-          type: array
-          description: Notes
-          items:
-            $ref: '#/components/schemas/Note'
-      description: List of notes
+        typeDiscriminator:
+          type: string
+      description: Map of CustomDefinedField values, where the key is the field identifier
+      example: '{ "fieldName1": "typeDiscriminator": "Integer", "value" : 1}'
+      discriminator:
+        propertyName: typeDiscriminator
+        mapping:
+          Integer: '#/components/schemas/CustomDefinedFieldInteger'
+          String: '#/components/schemas/CustomDefinedFieldString'
+          Date: '#/components/schemas/CustomDefinedFieldDate'
+          Classification: '#/components/schemas/CustomDefinedFieldClassification'
+          Boolean: '#/components/schemas/CustomDefinedFieldBoolean'
+          Decimal: '#/components/schemas/CustomDefinedFieldDecimal'
     Visibility:
       required:
       - key
@@ -1069,9 +1102,10 @@ components:
         type:
           $ref: '#/components/schemas/ClassificationRef'
         copyrightConfirmation:
-          type: boolean
+          type:
+          - boolean
+          - 'null'
           description: Indicates whether this file has been confirmed to adhere to the appropriate copyrights
-          nullable: true
         caption:
           $ref: '#/components/schemas/LocalizedString'
         altText:
@@ -1079,44 +1113,19 @@ components:
         copyrightStatement:
           $ref: '#/components/schemas/LocalizedString'
       description: An image file
-    RemoteFile:
+    Identifier:
       required:
-      - fileId
-      - fileState
-      - sourceId
-      - storeName
+      - typeDiscriminator
       type: object
       properties:
-        sourceId:
+        typeDiscriminator:
           type: string
-          description: The remote source ID
-        storeName:
-          type: string
-          description: The name of the remote store
-        timeStamp:
-          type: string
-          description: The timestamp at which the file was stored
-          format: date-time
-        fileId:
-          type: string
-          description: The remote file ID
-        fileState:
-          type: string
-          description: The remote file state
-          enum:
-          - AWAITING_CREATION
-          - CREATION_IN_PROGRESS
-          - CREATION_FAILED
-          - STORED
-          - AWAITING_DELETE
-          - DELETE_IN_PROGRESS
-          - DELETE_FAILED
-          - DELETED
-        metadataUpdateRequired:
-          type: boolean
-          description: Whether the file's metadata should be updated
-          default: false
-      description: Information about a remote file (Elsevier only)
+      discriminator:
+        propertyName: typeDiscriminator
+        mapping:
+          ClassifiedId: '#/components/schemas/ClassifiedId'
+          PrimaryId: '#/components/schemas/PrimaryId'
+          Id: '#/components/schemas/Id'
     Link:
       required:
       - url
@@ -1131,9 +1140,10 @@ components:
           type: string
           description: The URL (Uniform Resource Locator) of the link
         alias:
-          type: string
+          type:
+          - string
+          - 'null'
           description: A user-friendly text to show instead of the URL
-          nullable: true
         description:
           $ref: '#/components/schemas/LocalizedString'
         linkType:
@@ -1150,31 +1160,161 @@ components:
         description:
           $ref: '#/components/schemas/SystemLocalizedString'
       description: Information about workflow
-    CoursesQuery:
+    DateRange:
       type: object
       properties:
-        uuids:
+        startDate:
+          type:
+          - string
+          - 'null'
+          description: Start date
+          format: date
+        endDate:
+          type:
+          - string
+          - 'null'
+          description: End date
+          format: date
+      description: A date range
+    ClassificationRef:
+      required:
+      - uri
+      type:
+      - object
+      - 'null'
+      properties:
+        uri:
+          type: string
+          description: Classification URI of the referred classification
+        term:
+          $ref: '#/components/schemas/SystemLocalizedString'
+      description: A reference to a classification value
+    ClassificationSchemeRef:
+      required:
+      - uuid
+      type:
+      - object
+      - 'null'
+      description: A reference to a classification scheme
+      allOf:
+      - $ref: '#/components/schemas/ContentRef'
+    AllowedKeywordGroupConfigurationList:
+      type: object
+      properties:
+        configurations:
           type: array
           items:
-            type: string
-            format: uuid
-        size:
-          type: integer
-          format: int32
-        offset:
-          type: integer
-          format: int32
-        orderings:
+            $ref: '#/components/schemas/AllowedKeywordGroupConfiguration'
+      description: List of allowed keyword group configurations
+    SystemLocalizedString:
+      type:
+      - object
+      - 'null'
+      additionalProperties:
+        type:
+        - string
+        - 'null'
+        description: A set of localized string values each for a specific UI locale.
+        example: '{"en_GB":"Some text"}'
+      description: A set of localized string values each for a specific UI locale.
+      example:
+        en_GB: Some text
+    PersonRef:
+      required:
+      - uuid
+      type:
+      - object
+      - 'null'
+      description: A reference to a person internal to the institution
+      allOf:
+      - $ref: '#/components/schemas/ContentRef'
+    Note:
+      required:
+      - text
+      type: object
+      properties:
+        date:
+          type:
+          - string
+          - 'null'
+          description: Date and time of when the note was created, an event occurred or similar. Can be any point in time, but <now> is normally preferred
+          format: date-time
+        username:
+          type:
+          - string
+          - 'null'
+          description: Username related to the note. Usually a username of the user creating the note. Does not have to be a username of a Pure user
+        text:
+          type: string
+          description: Note text
+      description: A note
+    LocalizedString:
+      type:
+      - object
+      - 'null'
+      additionalProperties:
+        type:
+        - string
+        - 'null'
+        description: 'A set of string values, one for each submission locale. Note: invalid locale values will be ignored.'
+        example: '{"en_GB":"Some text"}'
+      description: 'A set of string values, one for each submission locale. Note: invalid locale values will be ignored.'
+      example:
+        en_GB: Some text
+    WorkflowListResult:
+      type: object
+      properties:
+        workflows:
           type: array
+          description: Allowed workflow steps.
           items:
-            type: string
-        searchString:
-          type: string
-          description: String used to perform search
-        orderBy:
-          type: string
-          writeOnly: true
-      description: Create a query for courses
+            $ref: '#/components/schemas/Workflow'
+      description: List of workflow steps.
+    CourseListResult:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: The full count, ignoring paging
+          format: int32
+        pageInformation:
+          $ref: '#/components/schemas/PageInformation'
+        items:
+          type: array
+          description: Courses
+          items:
+            $ref: '#/components/schemas/Course'
+      description: List of courses. Can contain a subset of all items along with the full count
+    CustomDefinedFields:
+      type:
+      - object
+      - 'null'
+      additionalProperties:
+        $ref: '#/components/schemas/CustomDefinedField'
+      description: Map of CustomDefinedField values, where the key is the field identifier
+      example: '{ "fieldName1": "typeDiscriminator": "Integer", "value" : 1}'
+    ExternalOrganizationRef:
+      required:
+      - uuid
+      type:
+      - object
+      - 'null'
+      description: A reference to an organization external to the institution
+      allOf:
+      - $ref: '#/components/schemas/ContentRef'
+    FormattedLocalizedString:
+      type:
+      - object
+      - 'null'
+      additionalProperties:
+        type:
+        - string
+        - 'null'
+        description: A set of localized strings that support formatting. Invalid locale values will be ignored.
+        example: '{"en_GB":"Some text"}'
+      description: A set of localized strings that support formatting. Invalid locale values will be ignored.
+      example:
+        en_GB: Some text
     LocalesList:
       type: object
       properties:
@@ -1187,75 +1327,6 @@ components:
             type: string
             description: Allowed locale values for use in localized string entities. The locale format consists of lower-case ISO 639 alpha-2 language code and upper-cased ISO 3166 alpha-2 country code.
       description: List of available locales
-    UploadedFile:
-      required:
-      - key
-      type: object
-      properties:
-        digest:
-          type: string
-          description: The calculated digest for the file in Pure
-          readOnly: true
-        digestType:
-          type: string
-          description: The digest type
-          readOnly: true
-        size:
-          type: integer
-          description: The file size of the file in Pure
-          format: int64
-          readOnly: true
-        mimeType:
-          type: string
-          description: The mime type detected for the file
-          readOnly: true
-        timeStamp:
-          type: string
-          description: The timestamp Pure received the file
-          format: date-time
-          readOnly: true
-        expires:
-          type: string
-          description: The timestamp where Pure deletes the uploaded file if it has not been attached to any content
-          format: date-time
-          readOnly: true
-        key:
-          type: string
-          description: Pure key identifer for the file upload
-          readOnly: true
-      description: Information about the uploaded file
-    CustomDefinedField:
-      required:
-      - typeDiscriminator
-      type: object
-      properties:
-        typeDiscriminator:
-          type: string
-      description: Map of CustomDefinedField values, where the key is the field identifier
-      nullable: true
-      example: '{ "fieldName1": "typeDiscriminator": "Integer", "value" : 1}'
-      discriminator:
-        propertyName: typeDiscriminator
-        mapping:
-          Integer: '#/components/schemas/CustomDefinedFieldInteger'
-          String: '#/components/schemas/CustomDefinedFieldString'
-          Date: '#/components/schemas/CustomDefinedFieldDate'
-          Classification: '#/components/schemas/CustomDefinedFieldClassification'
-          Boolean: '#/components/schemas/CustomDefinedFieldBoolean'
-          Decimal: '#/components/schemas/CustomDefinedFieldDecimal'
-    Identifier:
-      required:
-      - typeDiscriminator
-      type: object
-      properties:
-        typeDiscriminator:
-          type: string
-      discriminator:
-        propertyName: typeDiscriminator
-        mapping:
-          ClassifiedId: '#/components/schemas/ClassifiedId'
-          PrimaryId: '#/components/schemas/PrimaryId'
-          Id: '#/components/schemas/Id'
     ConflictProblemDetails:
       type: object
       properties:
@@ -1281,47 +1352,6 @@ components:
         modifiedBy:
           type: string
       description: Problem details for state conflict failures
-    KeywordGroup:
-      required:
-      - logicalName
-      - typeDiscriminator
-      type: object
-      properties:
-        pureId:
-          type: integer
-          description: Pure database ID of the object, prefer using the UUID if it is present on the entity
-          format: int64
-          readOnly: true
-        logicalName:
-          type: string
-          description: Unique name of the configuration that specifies this keyword group
-        name:
-          $ref: '#/components/schemas/LocalizedString'
-        typeDiscriminator:
-          type: string
-      discriminator:
-        propertyName: typeDiscriminator
-        mapping:
-          ClassificationsKeywordGroup: '#/components/schemas/ClassificationsKeywordGroup'
-          FreeKeywordsKeywordGroup: '#/components/schemas/FreeKeywordsKeywordGroup'
-          FullKeywordGroup: '#/components/schemas/FullKeywordGroup'
-    WorkflowListResult:
-      type: object
-      properties:
-        workflows:
-          type: array
-          description: Allowed workflow steps.
-          items:
-            $ref: '#/components/schemas/Workflow'
-      description: List of workflow steps.
-    ExternalOrganizationRef:
-      required:
-      - uuid
-      type: object
-      description: A reference to an organization external to the institution
-      nullable: true
-      allOf:
-      - $ref: '#/components/schemas/ContentRef'
     AbstractClassifiedCourseLecturerAssociation:
       required:
       - role
@@ -1334,9 +1364,10 @@ components:
           format: int64
           readOnly: true
         externalOrganizations:
-          type: array
+          type:
+          - array
+          - 'null'
           description: A collection of external organization affiliations.
-          nullable: true
           items:
             $ref: '#/components/schemas/ExternalOrganizationRef'
         role:
@@ -1351,90 +1382,18 @@ components:
         mapping:
           InternalClassifiedCourseLecturerAssociation: '#/components/schemas/InternalClassifiedCourseLecturerAssociation'
           ExternalClassifiedCourseLecturerAssociation: '#/components/schemas/ExternalClassifiedCourseLecturerAssociation'
-    Name:
+    PageInformation:
       type: object
       properties:
-        firstName:
-          type: string
-        lastName:
-          type: string
-      description: A name describing a person, made up of given- and family name
-    ProblemDetails:
-      type: object
-      properties:
-        type:
-          type: string
-          description: A URI reference [RFC3986] that identifies the problem type.
-        title:
-          type: string
-          description: A short, human-readable summary of the problem type. It SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization (e.g., using proactive content negotiation; see [RFC7231], Section 3.4).
-        status:
+        offset:
           type: integer
-          description: The HTTP status code ([RFC7231], Section 6) generated by the origin server for this occurrence of the problem.
+          description: Offset that returned items start at
           format: int32
-        detail:
-          type: string
-          description: A human-readable explanation specific to this occurrence of the problem.
-        instance:
-          type: string
-          description: A URI reference that identifies the specific occurrence of the problem.  It may or may not yield further information if dereferenced.
-      description: RFC7807 Error details
-      discriminator:
-        propertyName: type
-        mapping:
-          /error: '#/components/schemas/GenericProblemDetails'
-          /validation-error: '#/components/schemas/ValidationProblemDetails'
-          /dependency-violation-error: '#/components/schemas/DependencyViolationProblemDetails'
-    ClassificationRef:
-      required:
-      - uri
-      type: object
-      properties:
-        uri:
-          type: string
-          description: Classification URI of the referred classification
-        term:
-          $ref: '#/components/schemas/SystemLocalizedString'
-      description: A reference to a classification value
-      nullable: true
-    AllowedKeywordGroupConfigurationList:
-      type: object
-      properties:
-        configurations:
-          type: array
-          items:
-            $ref: '#/components/schemas/AllowedKeywordGroupConfiguration'
-      description: List of allowed keyword group configurations
-    CourseListResult:
-      type: object
-      properties:
-        count:
+        size:
           type: integer
-          description: The full count, ignoring paging
+          description: The requested number of items. May be higher than the actual number of items in the result if there are fewer items in the store than requested
           format: int32
-        pageInformation:
-          $ref: '#/components/schemas/PageInformation'
-        items:
-          type: array
-          description: Courses
-          items:
-            $ref: '#/components/schemas/Course'
-      description: List of courses. Can contain a subset of all items along with the full count
-    CustomDefinedFields:
-      type: object
-      additionalProperties:
-        $ref: '#/components/schemas/CustomDefinedField'
-      description: Map of CustomDefinedField values, where the key is the field identifier
-      nullable: true
-      example: '{ "fieldName1": "typeDiscriminator": "Integer", "value" : 1}'
-    ClassificationSchemeRef:
-      required:
-      - uuid
-      type: object
-      description: A reference to a classification scheme
-      nullable: true
-      allOf:
-      - $ref: '#/components/schemas/ContentRef'
+      description: Information about pages
     Course:
       required:
       - implementedStartEndDate
@@ -1494,29 +1453,34 @@ components:
             description: UUIDs of other content items which have been merged into this content item (or similar)
             readOnly: true
         version:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Used to guard against conflicting updates. For new content this is null, and for existing content the current value. The property should never be modified by a client, except in the rare case where the client wants to perform an update irrespective of if other clients have made updates in the meantime, also known as a "dirty write". A dirty write is performed by not including the property value or setting the property to null
-          nullable: true
         title:
           $ref: '#/components/schemas/LocalizedString'
         prefix:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Course prefix (e.g., 'CS' in 'CS 101 A')
-          nullable: true
         number:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Course number (e.g., '101' in 'CS 101 A')
-          nullable: true
         designation:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Course designation (e.g., 'A' in 'CS 101 A')
-          nullable: true
         managingOrganization:
           $ref: '#/components/schemas/OrganizationRef'
         organizations:
-          type: array
+          type:
+          - array
+          - 'null'
           description: A collection of organization associations.
-          nullable: true
           items:
             $ref: '#/components/schemas/OrganizationRef'
         level:
@@ -1531,23 +1495,26 @@ components:
         implementedStartEndDate:
           $ref: '#/components/schemas/DateRange'
         courseOccurrences:
-          type: array
+          type:
+          - array
+          - 'null'
           description: A collection of occurrences for the course
-          nullable: true
           items:
             $ref: '#/components/schemas/CourseOccurrence'
         language:
           $ref: '#/components/schemas/ClassificationRef'
         creditCount:
-          type: number
+          type:
+          - number
+          - 'null'
           description: The actual amount of credit given by the course
-          nullable: true
         creditType:
           $ref: '#/components/schemas/ClassificationRef'
         courseFiles:
-          type: array
+          type:
+          - array
+          - 'null'
           description: A collection of files associated with the course
-          nullable: true
           items:
             $ref: '#/components/schemas/CourseFile'
         workflow:
@@ -1555,21 +1522,24 @@ components:
         type:
           $ref: '#/components/schemas/ClassificationRef'
         keywordGroups:
-          type: array
+          type:
+          - array
+          - 'null'
           description: Groups of keywords associated with the course
-          nullable: true
           items:
             $ref: '#/components/schemas/KeywordGroup'
         images:
-          type: array
+          type:
+          - array
+          - 'null'
           description: Image files with a maximum file size of 1MB
-          nullable: true
           items:
             $ref: '#/components/schemas/ImageFile'
         links:
-          type: array
+          type:
+          - array
+          - 'null'
           description: Additional links associated with this course
-          nullable: true
           items:
             $ref: '#/components/schemas/Link'
         visibility:
@@ -1577,15 +1547,17 @@ components:
         customDefinedFields:
           $ref: '#/components/schemas/CustomDefinedFields'
         identifiers:
-          type: array
+          type:
+          - array
+          - 'null'
           description: Identifiers related to the course
-          nullable: true
           items:
             $ref: '#/components/schemas/Identifier'
         descriptions:
-          type: array
+          type:
+          - array
+          - 'null'
           description: A collection of descriptions.
-          nullable: true
           items:
             $ref: '#/components/schemas/ClassifiedFormattedLocalizedValue'
         systemName:
@@ -1593,14 +1565,26 @@ components:
           description: The content system name
           readOnly: true
       description: A course.
-    ClassificationRefList:
+    ClassifiedCourseDevelopedByAssociation:
+      required:
+      - organizations
       type: object
       properties:
-        classifications:
+        pureId:
+          type: integer
+          description: Pure database ID of the object, prefer using the UUID if it is present on the entity
+          format: int64
+          readOnly: true
+        person:
+          $ref: '#/components/schemas/PersonRef'
+        name:
+          $ref: '#/components/schemas/Name'
+        organizations:
           type: array
+          description: A collection of organization associations
           items:
-            $ref: '#/components/schemas/ClassificationRef'
-      description: List of classification references
+            $ref: '#/components/schemas/OrganizationRef'
+      description: A person who developed a given course.
     CourseOccurrence:
       required:
       - courseLecturers
@@ -1626,29 +1610,101 @@ components:
           items:
             $ref: '#/components/schemas/AbstractClassifiedCourseLecturerAssociation'
         studentLearnersCount:
-          type: integer
+          type:
+          - integer
+          - 'null'
           description: A count of student learners attending the course
           format: int32
-          nullable: true
         grade:
-          type: string
+          type:
+          - string
+          - 'null'
           description: The specific grade awarded by the course, such as a 'Master of Science' degree
-          nullable: true
         organizations:
           type: array
           description: A collection of organization associations
           items:
             $ref: '#/components/schemas/OrganizationRef'
         externalOrganizations:
-          type: array
+          type:
+          - array
+          - 'null'
           description: A collection of external organization affiliations
-          nullable: true
           items:
             $ref: '#/components/schemas/ExternalOrganizationRef'
         identifiers:
-          type: array
+          type:
+          - array
+          - 'null'
           description: Identifiers related to the course occurrence
-          nullable: true
           items:
             $ref: '#/components/schemas/Identifier'
       description: An occurrence of a given course.
+    ClassifiedFormattedLocalizedValue:
+      required:
+      - type
+      type: object
+      properties:
+        pureId:
+          type: integer
+          description: Pure database ID of the object, prefer using the UUID if it is present on the entity
+          format: int64
+          readOnly: true
+        value:
+          $ref: '#/components/schemas/FormattedLocalizedString'
+        type:
+          $ref: '#/components/schemas/ClassificationRef'
+      description: A classified formatted localized value
+    NoteListResult:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: The full count, ignoring paging
+          format: int32
+        pageInformation:
+          $ref: '#/components/schemas/PageInformation'
+        items:
+          type: array
+          description: Notes
+          items:
+            $ref: '#/components/schemas/Note'
+      description: List of notes
+    KeywordGroup:
+      required:
+      - logicalName
+      - typeDiscriminator
+      type: object
+      properties:
+        pureId:
+          type: integer
+          description: Pure database ID of the object, prefer using the UUID if it is present on the entity
+          format: int64
+          readOnly: true
+        logicalName:
+          type: string
+          description: Unique name of the configuration that specifies this keyword group
+        name:
+          $ref: '#/components/schemas/LocalizedString'
+        typeDiscriminator:
+          type: string
+      discriminator:
+        propertyName: typeDiscriminator
+        mapping:
+          ClassificationsKeywordGroup: '#/components/schemas/ClassificationsKeywordGroup'
+          FreeKeywordsKeywordGroup: '#/components/schemas/FreeKeywordsKeywordGroup'
+          FullKeywordGroup: '#/components/schemas/FullKeywordGroup'
+    ClassificationRefList:
+      type: object
+      properties:
+        classifications:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClassificationRef'
+      description: List of classification references
+  securitySchemes:
+    api-key:
+      type: apiKey
+      description: Security mechanism for the API
+      name: api-key
+      in: header

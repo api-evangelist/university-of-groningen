@@ -1,10 +1,20 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Dataverse Access dataSet API
-  description: Open source research data repository software.
-  version: '6.9'
+  title: Pure Data Set API
+  description: The Pure API provides a secure and complete web services API for using and managing research information data in Pure. The API enables a broad range of use-cases for interacting with research information, from anonymous Open Data scenarios to enabling the next generation Pure admin.
+  termsOfService: ''
+  contact:
+    name: ''
+    url: ''
+    email: pure-support@elsevier.com
+  license:
+    name: ''
+    url: ''
+  version: 5.35.3-4
 servers:
-- url: https://dataverse.nl
+- url: https://pure.rug.nl/ws/api
+security:
+- api-key: []
 tags:
 - name: dataSet
 paths:
@@ -758,23 +768,13 @@ paths:
                 $ref: '#/components/schemas/ProblemDetails'
 components:
   schemas:
-    PageInformation:
-      type: object
-      properties:
-        offset:
-          type: integer
-          description: Offset that returned items start at
-          format: int32
-        size:
-          type: integer
-          description: The requested number of items. May be higher than the actual number of items in the result if there are fewer items in the store than requested
-          format: int32
-      description: Information about pages
     ContentRef:
       required:
       - systemName
       - uuid
-      type: object
+      type:
+      - object
+      - 'null'
       properties:
         uuid:
           type: string
@@ -782,7 +782,6 @@ components:
           format: uuid
         systemName:
           type: string
-      nullable: true
       discriminator:
         propertyName: systemName
         mapping:
@@ -836,6 +835,52 @@ components:
           Fingerprint: '#/components/schemas/FingerprintRef'
           Specialization: '#/components/schemas/SpecializationRef'
           StudentProject: '#/components/schemas/StudentProjectRef'
+    Name:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+      description: A name describing a person, made up of given- and family name
+    RemoteFile:
+      required:
+      - fileId
+      - fileState
+      - sourceId
+      - storeName
+      type: object
+      properties:
+        sourceId:
+          type: string
+          description: The remote source ID
+        storeName:
+          type: string
+          description: The name of the remote store
+        timeStamp:
+          type: string
+          description: The timestamp at which the file was stored
+          format: date-time
+        fileId:
+          type: string
+          description: The remote file ID
+        fileState:
+          type: string
+          description: The remote file state
+          enum:
+          - AWAITING_CREATION
+          - CREATION_IN_PROGRESS
+          - CREATION_FAILED
+          - STORED
+          - AWAITING_DELETE
+          - DELETE_IN_PROGRESS
+          - DELETE_FAILED
+          - DELETED
+        metadataUpdateRequired:
+          type: boolean
+          description: Whether the file's metadata should be updated
+          default: false
+      description: Information about a remote file (Elsevier only)
     AllowedKeywordGroupConfiguration:
       required:
       - targetSystemName
@@ -867,272 +912,12 @@ components:
         logicalName:
           type: string
         relationType:
-          type: string
+          type:
+          - string
+          - 'null'
           description: The schema name of the type (with the ability to associate keywords) on which the keyword group configuration is related to, e.g. StaffOrganizationAssociation. It can also be set to null (default value), which means the keyword group configuration is related to the main type (the target system name) and not a relation of the main type.
-          nullable: true
       description: A specification of the allowed behavior of a specified keyword group
-    ResearchOutputRef:
-      required:
-      - uuid
-      type: object
-      description: A reference to a research output
-      nullable: true
-      allOf:
-      - $ref: '#/components/schemas/ContentRef'
-    FundingDetails:
-      type: object
-      properties:
-        pureId:
-          type: integer
-          description: Pure database ID of the object, prefer using the UUID if it is present on the entity
-          format: int64
-          readOnly: true
-        fundingOrganizations:
-          maxItems: 1
-          type: array
-          description: The internal or external funding organizations
-          nullable: true
-          items:
-            $ref: '#/components/schemas/OrganizationOrExternalOrganizationRef'
-        fundingOrganizationAcronym:
-          type: string
-          description: The acronym of the funding organization
-          nullable: true
-        fundingNumbers:
-          type: array
-          description: Funding numbers/IDs
-          nullable: true
-          items:
-            type: string
-      description: Details about funding.
-    LocalizedString:
-      type: object
-      additionalProperties:
-        type: string
-        description: 'A set of string values, one for each submission locale. Note: invalid locale values will be ignored.'
-        nullable: true
-        example: '{"en_GB":"Some text"}'
-      description: 'A set of string values, one for each submission locale. Note: invalid locale values will be ignored.'
-      nullable: true
-      example:
-        en_GB: Some text
-    PressMediaRef:
-      required:
-      - uuid
-      type: object
-      description: A reference to a press/media
-      nullable: true
-      allOf:
-      - $ref: '#/components/schemas/ContentRef'
-    StudentThesisRef:
-      required:
-      - uuid
-      type: object
-      description: A reference to student thesis
-      nullable: true
-      allOf:
-      - $ref: '#/components/schemas/ContentRef'
-    DataSetLegalCondition:
-      type: object
-      properties:
-        pureId:
-          type: integer
-          description: Pure database ID of the object, prefer using the UUID if it is present on the entity
-          format: int64
-          readOnly: true
-        description:
-          type: string
-          description: Description.
-          nullable: true
-        type:
-          $ref: '#/components/schemas/ClassificationRef'
-      description: A description of a legal condition.
-    PersonRef:
-      required:
-      - uuid
-      type: object
-      description: A reference to a person internal to the institution
-      nullable: true
-      allOf:
-      - $ref: '#/components/schemas/ContentRef'
-    ProjectRef:
-      required:
-      - uuid
-      type: object
-      description: A reference to project
-      nullable: true
-      allOf:
-      - $ref: '#/components/schemas/ContentRef'
-    DataSetAssociation:
-      required:
-      - dataSet
-      type: object
-      properties:
-        dataSet:
-          $ref: '#/components/schemas/DataSetRef'
-      description: An association to a dataset.
-    FormattedLocalizedString:
-      type: object
-      additionalProperties:
-        type: string
-        description: A set of localized strings that support formatting. Invalid locale values will be ignored.
-        nullable: true
-        example: '{"en_GB":"Some text"}'
-      description: A set of localized strings that support formatting. Invalid locale values will be ignored.
-      nullable: true
-      example:
-        en_GB: Some text
-    PrizeRef:
-      required:
-      - uuid
-      type: object
-      description: A reference to a prize
-      nullable: true
-      allOf:
-      - $ref: '#/components/schemas/ContentRef'
-    DataSetPhysicalData:
-      required:
-      - media
-      - storageLocation
-      - title
-      type: object
-      properties:
-        pureId:
-          type: integer
-          description: Pure database ID of the object, prefer using the UUID if it is present on the entity
-          format: int64
-          readOnly: true
-        title:
-          type: string
-          description: Title.
-        storageLocation:
-          type: string
-          description: Storage location.
-        accessDescription:
-          type: string
-          description: Access description.
-          nullable: true
-        media:
-          type: string
-          description: Media.
-        type:
-          $ref: '#/components/schemas/ClassificationRef'
-      description: A description of physical data.
-    DateRange:
-      type: object
-      properties:
-        startDate:
-          type: string
-          description: Start date
-          format: date
-          nullable: true
-        endDate:
-          type: string
-          description: End date
-          format: date
-          nullable: true
-      description: A date range
-    SystemLocalizedString:
-      type: object
-      additionalProperties:
-        type: string
-        description: A set of localized string values each for a specific UI locale.
-        nullable: true
-        example: '{"en_GB":"Some text"}'
-      description: A set of localized string values each for a specific UI locale.
-      nullable: true
-      example:
-        en_GB: Some text
-    OrganizationRef:
-      required:
-      - uuid
-      type: object
-      description: A reference to an organization in the institution
-      nullable: true
-      allOf:
-      - $ref: '#/components/schemas/ContentRef'
-    PublisherRef:
-      required:
-      - uuid
-      type: object
-      description: A reference to a publisher
-      nullable: true
-      allOf:
-      - $ref: '#/components/schemas/ContentRef'
-    AbstractDataSetPersonAssociation:
-      required:
-      - role
-      - typeDiscriminator
-      type: object
-      properties:
-        pureId:
-          type: integer
-          description: Pure database ID of the object, prefer using the UUID if it is present on the entity
-          format: int64
-          readOnly: true
-        externalOrganizations:
-          type: array
-          description: A collection of external organization affiliations.
-          nullable: true
-          items:
-            $ref: '#/components/schemas/ExternalOrganizationRef'
-        name:
-          $ref: '#/components/schemas/Name'
-        role:
-          $ref: '#/components/schemas/ClassificationRef'
-        period:
-          $ref: '#/components/schemas/DateRange'
-        typeDiscriminator:
-          type: string
-      description: An association between dataset and a person
-      discriminator:
-        propertyName: typeDiscriminator
-        mapping:
-          InternalDataSetPersonAssociation: '#/components/schemas/InternalDataSetPersonAssociation'
-          ExternalDataSetPersonAssociation: '#/components/schemas/ExternalDataSetPersonAssociation'
-    DataSetProjectAssociation:
-      required:
-      - project
-      type: object
-      properties:
-        project:
-          $ref: '#/components/schemas/ProjectRef'
-      description: An association to a project.
-    CompoundDateRange:
-      type: object
-      properties:
-        startDate:
-          $ref: '#/components/schemas/CompoundDate'
-        endDate:
-          $ref: '#/components/schemas/CompoundDate'
-      description: A date range of that can be defined by only year, year and month or a full date
-    ContentRefListResult:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/ContentRef'
-      description: List of Content Refs
-    Note:
-      required:
-      - text
-      type: object
-      properties:
-        date:
-          type: string
-          description: Date and time of when the note was created, an event occurred or similar. Can be any point in time, but <now> is normally preferred
-          format: date-time
-          nullable: true
-        username:
-          type: string
-          description: Username related to the note. Usually a username of the user creating the note. Does not have to be a username of a Pure user
-          nullable: true
-        text:
-          type: string
-          description: Note text
-      description: A note
-    NoteListResult:
+    DataSetListResult:
       type: object
       properties:
         count:
@@ -1143,10 +928,147 @@ components:
           $ref: '#/components/schemas/PageInformation'
         items:
           type: array
-          description: Notes
+          description: DataSets
           items:
-            $ref: '#/components/schemas/Note'
-      description: List of notes
+            $ref: '#/components/schemas/DataSet'
+      description: List of datasets. Can contain a subset of all items along with the full count
+    DataSetRef:
+      required:
+      - uuid
+      type:
+      - object
+      - 'null'
+      description: A reference to a data set
+      allOf:
+      - $ref: '#/components/schemas/ContentRef'
+    PressMediaRef:
+      required:
+      - uuid
+      type:
+      - object
+      - 'null'
+      description: A reference to a press/media
+      allOf:
+      - $ref: '#/components/schemas/ContentRef'
+    ContentRefListResult:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContentRef'
+      description: List of Content Refs
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type: string
+          description: A URI reference [RFC3986] that identifies the problem type.
+        title:
+          type: string
+          description: A short, human-readable summary of the problem type. It SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization (e.g., using proactive content negotiation; see [RFC7231], Section 3.4).
+        status:
+          type: integer
+          description: The HTTP status code ([RFC7231], Section 6) generated by the origin server for this occurrence of the problem.
+          format: int32
+        detail:
+          type: string
+          description: A human-readable explanation specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: A URI reference that identifies the specific occurrence of the problem.  It may or may not yield further information if dereferenced.
+      description: RFC7807 Error details
+      discriminator:
+        propertyName: type
+        mapping:
+          /error: '#/components/schemas/GenericProblemDetails'
+          /validation-error: '#/components/schemas/ValidationProblemDetails'
+          /dependency-violation-error: '#/components/schemas/DependencyViolationProblemDetails'
+    UploadedFile:
+      required:
+      - key
+      type: object
+      properties:
+        digest:
+          type: string
+          description: The calculated digest for the file in Pure
+          readOnly: true
+        digestType:
+          type: string
+          description: The digest type
+          readOnly: true
+        size:
+          type: integer
+          description: The file size of the file in Pure
+          format: int64
+          readOnly: true
+        mimeType:
+          type: string
+          description: The mime type detected for the file
+          readOnly: true
+        timeStamp:
+          type: string
+          description: The timestamp Pure received the file
+          format: date-time
+          readOnly: true
+        expires:
+          type: string
+          description: The timestamp where Pure deletes the uploaded file if it has not been attached to any content
+          format: date-time
+          readOnly: true
+        key:
+          type: string
+          description: Pure key identifer for the file upload
+          readOnly: true
+      description: Information about the uploaded file
+    CustomDefinedField:
+      required:
+      - typeDiscriminator
+      type:
+      - object
+      - 'null'
+      properties:
+        typeDiscriminator:
+          type: string
+      description: Map of CustomDefinedField values, where the key is the field identifier
+      example: '{ "fieldName1": "typeDiscriminator": "Integer", "value" : 1}'
+      discriminator:
+        propertyName: typeDiscriminator
+        mapping:
+          Integer: '#/components/schemas/CustomDefinedFieldInteger'
+          String: '#/components/schemas/CustomDefinedFieldString'
+          Date: '#/components/schemas/CustomDefinedFieldDate'
+          Classification: '#/components/schemas/CustomDefinedFieldClassification'
+          Boolean: '#/components/schemas/CustomDefinedFieldBoolean'
+          Decimal: '#/components/schemas/CustomDefinedFieldDecimal'
+    ImpactRef:
+      required:
+      - uuid
+      type:
+      - object
+      - 'null'
+      description: A reference to impact
+      allOf:
+      - $ref: '#/components/schemas/ContentRef'
+    OrganizationOrExternalOrganizationRef:
+      type:
+      - object
+      - 'null'
+      properties:
+        organizationRef:
+          $ref: '#/components/schemas/OrganizationRef'
+        externalOrganizationRef:
+          $ref: '#/components/schemas/ExternalOrganizationRef'
+      description: A reference to an organization in the institution or an external organization
+    OrganizationRef:
+      required:
+      - uuid
+      type:
+      - object
+      - 'null'
+      description: A reference to an organization in the institution
+      allOf:
+      - $ref: '#/components/schemas/ContentRef'
     Visibility:
       required:
       - key
@@ -1163,14 +1085,6 @@ components:
         description:
           $ref: '#/components/schemas/SystemLocalizedString'
       description: Visibility of an object
-    DataSetStudentThesisAssociation:
-      required:
-      - studentThesis
-      type: object
-      properties:
-        studentThesis:
-          $ref: '#/components/schemas/StudentThesisRef'
-      description: An association to a student thesis.
     ImageFile:
       required:
       - fileName
@@ -1220,9 +1134,10 @@ components:
         type:
           $ref: '#/components/schemas/ClassificationRef'
         copyrightConfirmation:
-          type: boolean
+          type:
+          - boolean
+          - 'null'
           description: Indicates whether this file has been confirmed to adhere to the appropriate copyrights
-          nullable: true
         caption:
           $ref: '#/components/schemas/LocalizedString'
         altText:
@@ -1230,47 +1145,7 @@ components:
         copyrightStatement:
           $ref: '#/components/schemas/LocalizedString'
       description: An image file
-    RemoteFile:
-      required:
-      - fileId
-      - fileState
-      - sourceId
-      - storeName
-      type: object
-      properties:
-        sourceId:
-          type: string
-          description: The remote source ID
-        storeName:
-          type: string
-          description: The name of the remote store
-        timeStamp:
-          type: string
-          description: The timestamp at which the file was stored
-          format: date-time
-        fileId:
-          type: string
-          description: The remote file ID
-        fileState:
-          type: string
-          description: The remote file state
-          enum:
-          - AWAITING_CREATION
-          - CREATION_IN_PROGRESS
-          - CREATION_FAILED
-          - STORED
-          - AWAITING_DELETE
-          - DELETE_IN_PROGRESS
-          - DELETE_FAILED
-          - DELETED
-        metadataUpdateRequired:
-          type: boolean
-          description: Whether the file's metadata should be updated
-          default: false
-      description: Information about a remote file (Elsevier only)
-    Link:
-      required:
-      - url
+    DataSetDoi:
       type: object
       properties:
         pureId:
@@ -1278,72 +1153,21 @@ components:
           description: Pure database ID of the object, prefer using the UUID if it is present on the entity
           format: int64
           readOnly: true
-        url:
-          type: string
-          description: The URL (Uniform Resource Locator) of the link
-        alias:
-          type: string
-          description: A user-friendly text to show instead of the URL
-          nullable: true
-        description:
-          $ref: '#/components/schemas/LocalizedString'
-        linkType:
+        doi:
+          type:
+          - string
+          - 'null'
+          description: DOI.
+        accessType:
           $ref: '#/components/schemas/ClassificationRef'
-      description: A hyperlink describing a location on the web.
-    ActivityRef:
-      required:
-      - uuid
-      type: object
-      description: A reference to an activity
-      nullable: true
-      allOf:
-      - $ref: '#/components/schemas/ContentRef'
-    DataSetRef:
-      required:
-      - uuid
-      type: object
-      description: A reference to a data set
-      nullable: true
-      allOf:
-      - $ref: '#/components/schemas/ContentRef'
-    Workflow:
-      required:
-      - step
-      type: object
-      properties:
-        step:
-          type: string
-          description: Current workflow step
-        description:
-          $ref: '#/components/schemas/SystemLocalizedString'
-      description: Information about workflow
-    OpenAccess:
-      type: object
-      properties:
-        openAccessPermission:
+        embargoPeriod:
+          $ref: '#/components/schemas/DateRange'
+        licenseType:
           $ref: '#/components/schemas/ClassificationRef'
-        openAccessEmbargoMonths:
-          type: integer
-          description: Open access embargo months.
-          format: int32
-          nullable: true
-        openAccessEmbargoDate:
-          type: string
-          description: Open access embargo date.
-          format: date
-          nullable: true
-          readOnly: true
-      description: Open Access information.
-    DataSetPrizeAssociation:
+      description: A DOI.
+    AbstractDataSetPersonAssociation:
       required:
-      - prize
-      type: object
-      properties:
-        prize:
-          $ref: '#/components/schemas/PrizeRef'
-      description: An association to a prize.
-    AbstractDataSetContributorAssociation:
-      required:
+      - role
       - typeDiscriminator
       type: object
       properties:
@@ -1353,96 +1177,63 @@ components:
           format: int64
           readOnly: true
         externalOrganizations:
-          type: array
+          type:
+          - array
+          - 'null'
           description: A collection of external organization affiliations.
-          nullable: true
           items:
             $ref: '#/components/schemas/ExternalOrganizationRef'
+        name:
+          $ref: '#/components/schemas/Name'
+        role:
+          $ref: '#/components/schemas/ClassificationRef'
+        period:
+          $ref: '#/components/schemas/DateRange'
         typeDiscriminator:
           type: string
-      description: An association between dataset and a contributor
+      description: An association between dataset and a person
       discriminator:
         propertyName: typeDiscriminator
         mapping:
-          DataSetInternalContributorAssociation: '#/components/schemas/DataSetInternalContributorAssociation'
-          DataSetExternalContributorAssociation: '#/components/schemas/DataSetExternalContributorAssociation'
-          DataSetAuthorCollaborationContributorAssociation: '#/components/schemas/DataSetAuthorCollaborationContributorAssociation'
-    LocalesList:
-      type: object
-      properties:
-        locales:
-          pattern: /^[a-z]{2}_[A-Z]{2}$/
-          type: array
-          description: Allowed locale values for use in localized string entities. The locale format consists of lower-case ISO 639 alpha-2 language code and upper-cased ISO 3166 alpha-2 country code.
-          items:
-            pattern: /^[a-z]{2}_[A-Z]{2}$/
-            type: string
-            description: Allowed locale values for use in localized string entities. The locale format consists of lower-case ISO 639 alpha-2 language code and upper-cased ISO 3166 alpha-2 country code.
-      description: List of available locales
-    UploadedFile:
-      required:
-      - key
-      type: object
-      properties:
-        digest:
-          type: string
-          description: The calculated digest for the file in Pure
-          readOnly: true
-        digestType:
-          type: string
-          description: The digest type
-          readOnly: true
-        size:
-          type: integer
-          description: The file size of the file in Pure
-          format: int64
-          readOnly: true
-        mimeType:
-          type: string
-          description: The mime type detected for the file
-          readOnly: true
-        timeStamp:
-          type: string
-          description: The timestamp Pure received the file
-          format: date-time
-          readOnly: true
-        expires:
-          type: string
-          description: The timestamp where Pure deletes the uploaded file if it has not been attached to any content
-          format: date-time
-          readOnly: true
-        key:
-          type: string
-          description: Pure key identifer for the file upload
-          readOnly: true
-      description: Information about the uploaded file
-    CustomDefinedField:
+          InternalDataSetPersonAssociation: '#/components/schemas/InternalDataSetPersonAssociation'
+          ExternalDataSetPersonAssociation: '#/components/schemas/ExternalDataSetPersonAssociation'
+    Identifier:
       required:
       - typeDiscriminator
       type: object
       properties:
         typeDiscriminator:
           type: string
-      description: Map of CustomDefinedField values, where the key is the field identifier
-      nullable: true
-      example: '{ "fieldName1": "typeDiscriminator": "Integer", "value" : 1}'
       discriminator:
         propertyName: typeDiscriminator
         mapping:
-          Integer: '#/components/schemas/CustomDefinedFieldInteger'
-          String: '#/components/schemas/CustomDefinedFieldString'
-          Date: '#/components/schemas/CustomDefinedFieldDate'
-          Classification: '#/components/schemas/CustomDefinedFieldClassification'
-          Boolean: '#/components/schemas/CustomDefinedFieldBoolean'
-          Decimal: '#/components/schemas/CustomDefinedFieldDecimal'
-    DataSetImpactAssociation:
-      required:
-      - impact
+          ClassifiedId: '#/components/schemas/ClassifiedId'
+          PrimaryId: '#/components/schemas/PrimaryId'
+          Id: '#/components/schemas/Id'
+    DataSetLegalCondition:
       type: object
       properties:
-        impact:
-          $ref: '#/components/schemas/ImpactRef'
-      description: An association to an impact.
+        pureId:
+          type: integer
+          description: Pure database ID of the object, prefer using the UUID if it is present on the entity
+          format: int64
+          readOnly: true
+        description:
+          type:
+          - string
+          - 'null'
+          description: Description.
+        type:
+          $ref: '#/components/schemas/ClassificationRef'
+      description: A description of a legal condition.
+    DataSetProjectAssociation:
+      required:
+      - project
+      type: object
+      properties:
+        project:
+          $ref: '#/components/schemas/ProjectRef'
+      description: An association to a project.
     ClassifiedLocalizedValue:
       required:
       - type
@@ -1458,59 +1249,40 @@ components:
         type:
           $ref: '#/components/schemas/ClassificationRef'
       description: A classified localized value
-    DataSetListResult:
-      type: object
-      properties:
-        count:
-          type: integer
-          description: The full count, ignoring paging
-          format: int32
-        pageInformation:
-          $ref: '#/components/schemas/PageInformation'
-        items:
-          type: array
-          description: DataSets
-          items:
-            $ref: '#/components/schemas/DataSet'
-      description: List of datasets. Can contain a subset of all items along with the full count
-    Identifier:
+    Link:
       required:
-      - typeDiscriminator
+      - url
       type: object
       properties:
-        typeDiscriminator:
-          type: string
-      discriminator:
-        propertyName: typeDiscriminator
-        mapping:
-          ClassifiedId: '#/components/schemas/ClassifiedId'
-          PrimaryId: '#/components/schemas/PrimaryId'
-          Id: '#/components/schemas/Id'
-    ConflictProblemDetails:
-      type: object
-      properties:
-        type:
-          type: string
-          description: A URI reference [RFC3986] that identifies the problem type.
-        title:
-          type: string
-          description: A short, human-readable summary of the problem type. It SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization (e.g., using proactive content negotiation; see [RFC7231], Section 3.4).
-        status:
+        pureId:
           type: integer
-          description: The HTTP status code ([RFC7231], Section 6) generated by the origin server for this occurrence of the problem.
-          format: int32
-        detail:
+          description: Pure database ID of the object, prefer using the UUID if it is present on the entity
+          format: int64
+          readOnly: true
+        url:
           type: string
-          description: A human-readable explanation specific to this occurrence of the problem.
-        instance:
+          description: The URL (Uniform Resource Locator) of the link
+        alias:
+          type:
+          - string
+          - 'null'
+          description: A user-friendly text to show instead of the URL
+        description:
+          $ref: '#/components/schemas/LocalizedString'
+        linkType:
+          $ref: '#/components/schemas/ClassificationRef'
+      description: A hyperlink describing a location on the web.
+    Workflow:
+      required:
+      - step
+      type: object
+      properties:
+        step:
           type: string
-          description: A URI reference that identifies the specific occurrence of the problem.  It may or may not yield further information if dereferenced.
-        modified:
-          type: string
-          format: date-time
-        modifiedBy:
-          type: string
-      description: Problem details for state conflict failures
+          description: Current workflow step
+        description:
+          $ref: '#/components/schemas/SystemLocalizedString'
+      description: Information about workflow
     DataSetDocument:
       required:
       - fileName
@@ -1560,9 +1332,10 @@ components:
           format: byte
           writeOnly: true
         title:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Document title
-          nullable: true
         type:
           $ref: '#/components/schemas/ClassificationRef'
         license:
@@ -1584,15 +1357,291 @@ components:
           format: date-time
           readOnly: true
         embargoDate:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Embargo date.
           format: date-time
-          nullable: true
       description: A dataset document.
+    DateRange:
+      type: object
+      properties:
+        startDate:
+          type:
+          - string
+          - 'null'
+          description: Start date
+          format: date
+        endDate:
+          type:
+          - string
+          - 'null'
+          description: End date
+          format: date
+      description: A date range
+    FundingDetails:
+      type: object
+      properties:
+        pureId:
+          type: integer
+          description: Pure database ID of the object, prefer using the UUID if it is present on the entity
+          format: int64
+          readOnly: true
+        fundingOrganizations:
+          maxItems: 1
+          type:
+          - array
+          - 'null'
+          description: The internal or external funding organizations
+          items:
+            $ref: '#/components/schemas/OrganizationOrExternalOrganizationRef'
+        fundingOrganizationAcronym:
+          type:
+          - string
+          - 'null'
+          description: The acronym of the funding organization
+        fundingNumbers:
+          type:
+          - array
+          - 'null'
+          description: Funding numbers/IDs
+          items:
+            type: string
+      description: Details about funding.
+    DataSetPrizeAssociation:
+      required:
+      - prize
+      type: object
+      properties:
+        prize:
+          $ref: '#/components/schemas/PrizeRef'
+      description: An association to a prize.
+    ClassificationRef:
+      required:
+      - uri
+      type:
+      - object
+      - 'null'
+      properties:
+        uri:
+          type: string
+          description: Classification URI of the referred classification
+        term:
+          $ref: '#/components/schemas/SystemLocalizedString'
+      description: A reference to a classification value
+    DataSetPhysicalData:
+      required:
+      - media
+      - storageLocation
+      - title
+      type: object
+      properties:
+        pureId:
+          type: integer
+          description: Pure database ID of the object, prefer using the UUID if it is present on the entity
+          format: int64
+          readOnly: true
+        title:
+          type: string
+          description: Title.
+        storageLocation:
+          type: string
+          description: Storage location.
+        accessDescription:
+          type:
+          - string
+          - 'null'
+          description: Access description.
+        media:
+          type: string
+          description: Media.
+        type:
+          $ref: '#/components/schemas/ClassificationRef'
+      description: A description of physical data.
+    DataSetImpactAssociation:
+      required:
+      - impact
+      type: object
+      properties:
+        impact:
+          $ref: '#/components/schemas/ImpactRef'
+      description: An association to an impact.
+    ClassificationSchemeRef:
+      required:
+      - uuid
+      type:
+      - object
+      - 'null'
+      description: A reference to a classification scheme
+      allOf:
+      - $ref: '#/components/schemas/ContentRef'
+    AllowedKeywordGroupConfigurationList:
+      type: object
+      properties:
+        configurations:
+          type: array
+          items:
+            $ref: '#/components/schemas/AllowedKeywordGroupConfiguration'
+      description: List of allowed keyword group configurations
+    StudentThesisRef:
+      required:
+      - uuid
+      type:
+      - object
+      - 'null'
+      description: A reference to student thesis
+      allOf:
+      - $ref: '#/components/schemas/ContentRef'
+    SystemLocalizedString:
+      type:
+      - object
+      - 'null'
+      additionalProperties:
+        type:
+        - string
+        - 'null'
+        description: A set of localized string values each for a specific UI locale.
+        example: '{"en_GB":"Some text"}'
+      description: A set of localized string values each for a specific UI locale.
+      example:
+        en_GB: Some text
+    PersonRef:
+      required:
+      - uuid
+      type:
+      - object
+      - 'null'
+      description: A reference to a person internal to the institution
+      allOf:
+      - $ref: '#/components/schemas/ContentRef'
+    ActivityRef:
+      required:
+      - uuid
+      type:
+      - object
+      - 'null'
+      description: A reference to an activity
+      allOf:
+      - $ref: '#/components/schemas/ContentRef'
+    Note:
+      required:
+      - text
+      type: object
+      properties:
+        date:
+          type:
+          - string
+          - 'null'
+          description: Date and time of when the note was created, an event occurred or similar. Can be any point in time, but <now> is normally preferred
+          format: date-time
+        username:
+          type:
+          - string
+          - 'null'
+          description: Username related to the note. Usually a username of the user creating the note. Does not have to be a username of a Pure user
+        text:
+          type: string
+          description: Note text
+      description: A note
+    CompoundDateRange:
+      type: object
+      properties:
+        startDate:
+          $ref: '#/components/schemas/CompoundDate'
+        endDate:
+          $ref: '#/components/schemas/CompoundDate'
+      description: A date range of that can be defined by only year, year and month or a full date
+    DataSetEquipmentAssociation:
+      required:
+      - equipment
+      type: object
+      properties:
+        equipment:
+          $ref: '#/components/schemas/EquipmentRef'
+      description: An association to an equipment.
+    LocalizedString:
+      type:
+      - object
+      - 'null'
+      additionalProperties:
+        type:
+        - string
+        - 'null'
+        description: 'A set of string values, one for each submission locale. Note: invalid locale values will be ignored.'
+        example: '{"en_GB":"Some text"}'
+      description: 'A set of string values, one for each submission locale. Note: invalid locale values will be ignored.'
+      example:
+        en_GB: Some text
+    WorkflowListResult:
+      type: object
+      properties:
+        workflows:
+          type: array
+          description: Allowed workflow steps.
+          items:
+            $ref: '#/components/schemas/Workflow'
+      description: List of workflow steps.
+    DataSetAssociation:
+      required:
+      - dataSet
+      type: object
+      properties:
+        dataSet:
+          $ref: '#/components/schemas/DataSetRef'
+      description: An association to a dataset.
+    CustomDefinedFields:
+      type:
+      - object
+      - 'null'
+      additionalProperties:
+        $ref: '#/components/schemas/CustomDefinedField'
+      description: Map of CustomDefinedField values, where the key is the field identifier
+      example: '{ "fieldName1": "typeDiscriminator": "Integer", "value" : 1}'
+    ExternalOrganizationRef:
+      required:
+      - uuid
+      type:
+      - object
+      - 'null'
+      description: A reference to an organization external to the institution
+      allOf:
+      - $ref: '#/components/schemas/ContentRef'
+    ResearchOutputRef:
+      required:
+      - uuid
+      type:
+      - object
+      - 'null'
+      description: A reference to a research output
+      allOf:
+      - $ref: '#/components/schemas/ContentRef'
+    DataSetActivityAssociation:
+      required:
+      - activity
+      type: object
+      properties:
+        activity:
+          $ref: '#/components/schemas/ActivityRef'
+      description: An association to an activity.
+    FormattedLocalizedString:
+      type:
+      - object
+      - 'null'
+      additionalProperties:
+        type:
+        - string
+        - 'null'
+        description: A set of localized strings that support formatting. Invalid locale values will be ignored.
+        example: '{"en_GB":"Some text"}'
+      description: A set of localized strings that support formatting. Invalid locale values will be ignored.
+      example:
+        en_GB: Some text
     CompoundDate:
       required:
       - year
-      type: object
+      type:
+      - object
+      - 'null'
       properties:
         year:
           maximum: 4000
@@ -1602,36 +1651,81 @@ components:
         month:
           maximum: 12
           minimum: 1
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
         day:
           maximum: 31
           minimum: 1
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
       description: A date that can be defined by only year, year and month or a full date
-      nullable: true
-    DataSetDoi:
+    ProjectRef:
+      required:
+      - uuid
+      type:
+      - object
+      - 'null'
+      description: A reference to project
+      allOf:
+      - $ref: '#/components/schemas/ContentRef'
+    LocalesList:
       type: object
       properties:
-        pureId:
-          type: integer
-          description: Pure database ID of the object, prefer using the UUID if it is present on the entity
-          format: int64
-          readOnly: true
-        doi:
+        locales:
+          pattern: /^[a-z]{2}_[A-Z]{2}$/
+          type: array
+          description: Allowed locale values for use in localized string entities. The locale format consists of lower-case ISO 639 alpha-2 language code and upper-cased ISO 3166 alpha-2 country code.
+          items:
+            pattern: /^[a-z]{2}_[A-Z]{2}$/
+            type: string
+            description: Allowed locale values for use in localized string entities. The locale format consists of lower-case ISO 639 alpha-2 language code and upper-cased ISO 3166 alpha-2 country code.
+      description: List of available locales
+    ConflictProblemDetails:
+      type: object
+      properties:
+        type:
           type: string
-          description: DOI.
-          nullable: true
-        accessType:
-          $ref: '#/components/schemas/ClassificationRef'
-        embargoPeriod:
-          $ref: '#/components/schemas/DateRange'
-        licenseType:
-          $ref: '#/components/schemas/ClassificationRef'
-      description: A DOI.
+          description: A URI reference [RFC3986] that identifies the problem type.
+        title:
+          type: string
+          description: A short, human-readable summary of the problem type. It SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization (e.g., using proactive content negotiation; see [RFC7231], Section 3.4).
+        status:
+          type: integer
+          description: The HTTP status code ([RFC7231], Section 6) generated by the origin server for this occurrence of the problem.
+          format: int32
+        detail:
+          type: string
+          description: A human-readable explanation specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: A URI reference that identifies the specific occurrence of the problem.  It may or may not yield further information if dereferenced.
+        modified:
+          type: string
+          format: date-time
+        modifiedBy:
+          type: string
+      description: Problem details for state conflict failures
+    DataSetPressMediaAssociation:
+      required:
+      - pressMedia
+      type: object
+      properties:
+        pressMedia:
+          $ref: '#/components/schemas/PressMediaRef'
+      description: An association to a press media.
+    PrizeRef:
+      required:
+      - uuid
+      type:
+      - object
+      - 'null'
+      description: A reference to a prize
+      allOf:
+      - $ref: '#/components/schemas/ContentRef'
     KeywordGroup:
       required:
       - logicalName
@@ -1656,6 +1750,78 @@ components:
           ClassificationsKeywordGroup: '#/components/schemas/ClassificationsKeywordGroup'
           FreeKeywordsKeywordGroup: '#/components/schemas/FreeKeywordsKeywordGroup'
           FullKeywordGroup: '#/components/schemas/FullKeywordGroup'
+    OpenAccess:
+      type: object
+      properties:
+        openAccessPermission:
+          $ref: '#/components/schemas/ClassificationRef'
+        openAccessEmbargoMonths:
+          type:
+          - integer
+          - 'null'
+          description: Open access embargo months.
+          format: int32
+        openAccessEmbargoDate:
+          type:
+          - string
+          - 'null'
+          description: Open access embargo date.
+          format: date
+          readOnly: true
+      description: Open Access information.
+    PageInformation:
+      type: object
+      properties:
+        offset:
+          type: integer
+          description: Offset that returned items start at
+          format: int32
+        size:
+          type: integer
+          description: The requested number of items. May be higher than the actual number of items in the result if there are fewer items in the store than requested
+          format: int32
+      description: Information about pages
+    DataSetsQuery:
+      type: object
+      properties:
+        uuids:
+          type: array
+          items:
+            type: string
+            format: uuid
+        size:
+          type: integer
+          format: int32
+        offset:
+          type: integer
+          format: int32
+        orderings:
+          type: array
+          items:
+            type: string
+        searchString:
+          type: string
+          description: String used to perform search
+        orderBy:
+          type: string
+          writeOnly: true
+      description: Create a query for data sets
+    DataSetStudentThesisAssociation:
+      required:
+      - studentThesis
+      type: object
+      properties:
+        studentThesis:
+          $ref: '#/components/schemas/StudentThesisRef'
+      description: An association to a student thesis.
+    DataSetResearchOutputAssociation:
+      required:
+      - researchOutput
+      type: object
+      properties:
+        researchOutput:
+          $ref: '#/components/schemas/ResearchOutputRef'
+      description: An association to a research output.
     DataSet:
       required:
       - managingOrganization
@@ -1715,15 +1881,17 @@ components:
             description: UUIDs of other content items which have been merged into this content item (or similar)
             readOnly: true
         version:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Used to guard against conflicting updates. For new content this is null, and for existing content the current value. The property should never be modified by a client, except in the rare case where the client wants to perform an update irrespective of if other clients have made updates in the meantime, also known as a "dirty write". A dirty write is performed by not including the property value or setting the property to null
-          nullable: true
         title:
           $ref: '#/components/schemas/LocalizedString'
         descriptions:
-          type: array
+          type:
+          - array
+          - 'null'
           description: A collection of descriptions.
-          nullable: true
           items:
             $ref: '#/components/schemas/ClassifiedLocalizedValue'
         managingOrganization:
@@ -1731,9 +1899,10 @@ components:
         type:
           $ref: '#/components/schemas/ClassificationRef'
         natureTypes:
-          type: array
+          type:
+          - array
+          - 'null'
           description: Nature of activity types for the project.
-          nullable: true
           items:
             $ref: '#/components/schemas/ClassificationRef'
         publisher:
@@ -1743,9 +1912,10 @@ components:
         dataProductionPeriod:
           $ref: '#/components/schemas/CompoundDateRange'
         identifiers:
-          type: array
+          type:
+          - array
+          - 'null'
           description: IDs that this object corresponds to in external systems. Such as a Scopus ID. Used by Pure where it is necessary to identify objects to specific external systems
-          nullable: true
           items:
             $ref: '#/components/schemas/Identifier'
         geoLocation:
@@ -1762,42 +1932,48 @@ components:
           items:
             $ref: '#/components/schemas/AbstractDataSetContributorAssociation'
         totalNumberOfAuthors:
-          type: integer
+          type:
+          - integer
+          - 'null'
           description: The total number of authors from author collaborations.
           format: int32
-          nullable: true
         doi:
           $ref: '#/components/schemas/DataSetDoi'
         documents:
-          type: array
+          type:
+          - array
+          - 'null'
           description: A collection of documents.
-          nullable: true
           items:
             $ref: '#/components/schemas/DataSetDocument'
         physicalData:
-          type: array
+          type:
+          - array
+          - 'null'
           description: A collection of physical data.
-          nullable: true
           items:
             $ref: '#/components/schemas/DataSetPhysicalData'
         contactPerson:
           $ref: '#/components/schemas/PersonRef'
         legalConditions:
-          type: array
+          type:
+          - array
+          - 'null'
           description: A collection of legal conditions.
-          nullable: true
           items:
             $ref: '#/components/schemas/DataSetLegalCondition'
         organizations:
-          type: array
+          type:
+          - array
+          - 'null'
           description: A collection of organizational unit affiliations.
-          nullable: true
           items:
             $ref: '#/components/schemas/OrganizationRef'
         externalOrganizations:
-          type: array
+          type:
+          - array
+          - 'null'
           description: A collection of external organization affiliations.
-          nullable: true
           items:
             $ref: '#/components/schemas/ExternalOrganizationRef'
         publicationAvailableDate:
@@ -1811,85 +1987,98 @@ components:
         license:
           $ref: '#/components/schemas/ClassificationRef'
         dataSets:
-          type: array
+          type:
+          - array
+          - 'null'
           description: A collection of related datasets.
-          nullable: true
           items:
             $ref: '#/components/schemas/DataSetAssociation'
         projects:
-          type: array
+          type:
+          - array
+          - 'null'
           description: A collection of related projects.
-          nullable: true
           items:
             $ref: '#/components/schemas/DataSetProjectAssociation'
         researchOutputs:
-          type: array
+          type:
+          - array
+          - 'null'
           description: A collection of related research outputs.
-          nullable: true
           items:
             $ref: '#/components/schemas/DataSetResearchOutputAssociation'
         activities:
-          type: array
+          type:
+          - array
+          - 'null'
           description: A collection of related activities.
-          nullable: true
           items:
             $ref: '#/components/schemas/DataSetActivityAssociation'
         pressMedia:
-          type: array
+          type:
+          - array
+          - 'null'
           description: A collection of related press media.
-          nullable: true
           items:
             $ref: '#/components/schemas/DataSetPressMediaAssociation'
         studentTheses:
-          type: array
+          type:
+          - array
+          - 'null'
           description: A collection of related student theses.
-          nullable: true
           items:
             $ref: '#/components/schemas/DataSetStudentThesisAssociation'
         impacts:
-          type: array
+          type:
+          - array
+          - 'null'
           description: A collection of related impacts.
-          nullable: true
           items:
             $ref: '#/components/schemas/DataSetImpactAssociation'
         prizes:
-          type: array
+          type:
+          - array
+          - 'null'
           description: A collection of related prizes.
-          nullable: true
           items:
             $ref: '#/components/schemas/DataSetPrizeAssociation'
         equipment:
-          type: array
+          type:
+          - array
+          - 'null'
           description: A collection of related equipment.
-          nullable: true
           items:
             $ref: '#/components/schemas/DataSetEquipmentAssociation'
         links:
-          type: array
+          type:
+          - array
+          - 'null'
           description: A collection of links.
-          nullable: true
           items:
             $ref: '#/components/schemas/Link'
         keywordGroups:
-          type: array
+          type:
+          - array
+          - 'null'
           description: A group for each type of keyword present.
-          nullable: true
           items:
             $ref: '#/components/schemas/KeywordGroup'
         visibility:
           $ref: '#/components/schemas/Visibility'
         images:
-          type: array
+          type:
+          - array
+          - 'null'
           description: Image files with a maximum file size of 1MB
-          nullable: true
           items:
             $ref: '#/components/schemas/ImageFile'
         fundingText:
           $ref: '#/components/schemas/LocalizedString'
         fundingDetails:
-          type: array
+          type:
+          - array
+          - 'null'
           description: The funding details for the dataset
-          nullable: true
           items:
             $ref: '#/components/schemas/FundingDetails'
         customDefinedFields:
@@ -1901,33 +2090,60 @@ components:
           description: The content system name
           readOnly: true
       description: A dataset
-    DataSetActivityAssociation:
+    AbstractDataSetContributorAssociation:
       required:
-      - activity
+      - typeDiscriminator
       type: object
       properties:
-        activity:
-          $ref: '#/components/schemas/ActivityRef'
-      description: An association to an activity.
-    ExternalOrganizationRef:
-      required:
-      - uuid
+        pureId:
+          type: integer
+          description: Pure database ID of the object, prefer using the UUID if it is present on the entity
+          format: int64
+          readOnly: true
+        externalOrganizations:
+          type:
+          - array
+          - 'null'
+          description: A collection of external organization affiliations.
+          items:
+            $ref: '#/components/schemas/ExternalOrganizationRef'
+        typeDiscriminator:
+          type: string
+      description: An association between dataset and a contributor
+      discriminator:
+        propertyName: typeDiscriminator
+        mapping:
+          DataSetInternalContributorAssociation: '#/components/schemas/DataSetInternalContributorAssociation'
+          DataSetExternalContributorAssociation: '#/components/schemas/DataSetExternalContributorAssociation'
+          DataSetAuthorCollaborationContributorAssociation: '#/components/schemas/DataSetAuthorCollaborationContributorAssociation'
+    NoteListResult:
       type: object
-      description: A reference to an organization external to the institution
-      nullable: true
-      allOf:
-      - $ref: '#/components/schemas/ContentRef'
+      properties:
+        count:
+          type: integer
+          description: The full count, ignoring paging
+          format: int32
+        pageInformation:
+          $ref: '#/components/schemas/PageInformation'
+        items:
+          type: array
+          description: Notes
+          items:
+            $ref: '#/components/schemas/Note'
+      description: List of notes
     DataSetGeoLocation:
       type: object
       properties:
         point:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Location expressed as a point
-          nullable: true
         polygon:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Location expressed as a polygon
-          nullable: true
         calculatedPoint:
           type: string
           description: Used to determine whether or not we may update the point. An end-user has not entered a point manually if the value of the calculated point is the same as point
@@ -1935,150 +2151,15 @@ components:
         geographicalCoverage:
           $ref: '#/components/schemas/LocalizedString'
       description: A data set geo-location.
-    WorkflowListResult:
-      type: object
-      properties:
-        workflows:
-          type: array
-          description: Allowed workflow steps.
-          items:
-            $ref: '#/components/schemas/Workflow'
-      description: List of workflow steps.
-    DataSetPressMediaAssociation:
-      required:
-      - pressMedia
-      type: object
-      properties:
-        pressMedia:
-          $ref: '#/components/schemas/PressMediaRef'
-      description: An association to a press media.
-    ProblemDetails:
-      type: object
-      properties:
-        type:
-          type: string
-          description: A URI reference [RFC3986] that identifies the problem type.
-        title:
-          type: string
-          description: A short, human-readable summary of the problem type. It SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization (e.g., using proactive content negotiation; see [RFC7231], Section 3.4).
-        status:
-          type: integer
-          description: The HTTP status code ([RFC7231], Section 6) generated by the origin server for this occurrence of the problem.
-          format: int32
-        detail:
-          type: string
-          description: A human-readable explanation specific to this occurrence of the problem.
-        instance:
-          type: string
-          description: A URI reference that identifies the specific occurrence of the problem.  It may or may not yield further information if dereferenced.
-      description: RFC7807 Error details
-      discriminator:
-        propertyName: type
-        mapping:
-          /error: '#/components/schemas/GenericProblemDetails'
-          /validation-error: '#/components/schemas/ValidationProblemDetails'
-          /dependency-violation-error: '#/components/schemas/DependencyViolationProblemDetails'
-    Name:
-      type: object
-      properties:
-        firstName:
-          type: string
-        lastName:
-          type: string
-      description: A name describing a person, made up of given- and family name
-    ClassificationRef:
-      required:
-      - uri
-      type: object
-      properties:
-        uri:
-          type: string
-          description: Classification URI of the referred classification
-        term:
-          $ref: '#/components/schemas/SystemLocalizedString'
-      description: A reference to a classification value
-      nullable: true
-    DataSetResearchOutputAssociation:
-      required:
-      - researchOutput
-      type: object
-      properties:
-        researchOutput:
-          $ref: '#/components/schemas/ResearchOutputRef'
-      description: An association to a research output.
-    OrganizationOrExternalOrganizationRef:
-      type: object
-      properties:
-        organizationRef:
-          $ref: '#/components/schemas/OrganizationRef'
-        externalOrganizationRef:
-          $ref: '#/components/schemas/ExternalOrganizationRef'
-      description: A reference to an organization in the institution or an external organization
-      nullable: true
-    AllowedKeywordGroupConfigurationList:
-      type: object
-      properties:
-        configurations:
-          type: array
-          items:
-            $ref: '#/components/schemas/AllowedKeywordGroupConfiguration'
-      description: List of allowed keyword group configurations
-    EquipmentRef:
+    PublisherRef:
       required:
       - uuid
-      type: object
-      description: A reference to a piece of equipment
-      nullable: true
+      type:
+      - object
+      - 'null'
+      description: A reference to a publisher
       allOf:
       - $ref: '#/components/schemas/ContentRef'
-    ImpactRef:
-      required:
-      - uuid
-      type: object
-      description: A reference to impact
-      nullable: true
-      allOf:
-      - $ref: '#/components/schemas/ContentRef'
-    CustomDefinedFields:
-      type: object
-      additionalProperties:
-        $ref: '#/components/schemas/CustomDefinedField'
-      description: Map of CustomDefinedField values, where the key is the field identifier
-      nullable: true
-      example: '{ "fieldName1": "typeDiscriminator": "Integer", "value" : 1}'
-    ClassificationSchemeRef:
-      required:
-      - uuid
-      type: object
-      description: A reference to a classification scheme
-      nullable: true
-      allOf:
-      - $ref: '#/components/schemas/ContentRef'
-    DataSetsQuery:
-      type: object
-      properties:
-        uuids:
-          type: array
-          items:
-            type: string
-            format: uuid
-        size:
-          type: integer
-          format: int32
-        offset:
-          type: integer
-          format: int32
-        orderings:
-          type: array
-          items:
-            type: string
-        searchString:
-          type: string
-          description: String used to perform search
-        orderBy:
-          type: string
-          writeOnly: true
-      description: Create a query for data sets
     ClassificationRefList:
       type: object
       properties:
@@ -2087,11 +2168,18 @@ components:
           items:
             $ref: '#/components/schemas/ClassificationRef'
       description: List of classification references
-    DataSetEquipmentAssociation:
+    EquipmentRef:
       required:
-      - equipment
-      type: object
-      properties:
-        equipment:
-          $ref: '#/components/schemas/EquipmentRef'
-      description: An association to an equipment.
+      - uuid
+      type:
+      - object
+      - 'null'
+      description: A reference to a piece of equipment
+      allOf:
+      - $ref: '#/components/schemas/ContentRef'
+  securitySchemes:
+    api-key:
+      type: apiKey
+      description: Security mechanism for the API
+      name: api-key
+      in: header

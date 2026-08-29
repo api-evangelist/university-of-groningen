@@ -1,10 +1,20 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Dataverse Access education API
-  description: Open source research data repository software.
-  version: '6.9'
+  title: Pure Education API
+  description: The Pure API provides a secure and complete web services API for using and managing research information data in Pure. The API enables a broad range of use-cases for interacting with research information, from anonymous Open Data scenarios to enabling the next generation Pure admin.
+  termsOfService: ''
+  contact:
+    name: ''
+    url: ''
+    email: pure-support@elsevier.com
+  license:
+    name: ''
+    url: ''
+  version: 5.35.3-4
 servers:
-- url: https://dataverse.nl
+- url: https://pure.rug.nl/ws/api
+security:
+- api-key: []
 tags:
 - name: education
 paths:
@@ -482,23 +492,13 @@ paths:
                 $ref: '#/components/schemas/ProblemDetails'
 components:
   schemas:
-    PageInformation:
-      type: object
-      properties:
-        offset:
-          type: integer
-          description: Offset that returned items start at
-          format: int32
-        size:
-          type: integer
-          description: The requested number of items. May be higher than the actual number of items in the result if there are fewer items in the store than requested
-          format: int32
-      description: Information about pages
     ContentRef:
       required:
       - systemName
       - uuid
-      type: object
+      type:
+      - object
+      - 'null'
       properties:
         uuid:
           type: string
@@ -506,7 +506,6 @@ components:
           format: uuid
         systemName:
           type: string
-      nullable: true
       discriminator:
         propertyName: systemName
         mapping:
@@ -560,78 +559,6 @@ components:
           Fingerprint: '#/components/schemas/FingerprintRef'
           Specialization: '#/components/schemas/SpecializationRef'
           StudentProject: '#/components/schemas/StudentProjectRef'
-    AllowedKeywordGroupConfiguration:
-      required:
-      - targetSystemName
-      type: object
-      properties:
-        pureId:
-          type: integer
-          description: Pure database ID of the object, prefer using the UUID if it is present on the entity
-          format: int64
-          readOnly: true
-        targetSystemName:
-          type: string
-          description: The content system name this configuration applies to
-        keywordGroupType:
-          type: string
-          description: The OpenAPI schema type of this keyword configuration
-          readOnly: true
-        name:
-          $ref: '#/components/schemas/LocalizedString'
-        description:
-          $ref: '#/components/schemas/FormattedLocalizedString'
-        classificationScheme:
-          $ref: '#/components/schemas/ClassificationSchemeRef'
-        allowUserdefinedKeywords:
-          type: boolean
-          description: Defines if user defined keywords are allowed
-        limitToLeafSelection:
-          type: boolean
-        logicalName:
-          type: string
-        relationType:
-          type: string
-          description: The schema name of the type (with the ability to associate keywords) on which the keyword group configuration is related to, e.g. StaffOrganizationAssociation. It can also be set to null (default value), which means the keyword group configuration is related to the main type (the target system name) and not a relation of the main type.
-          nullable: true
-      description: A specification of the allowed behavior of a specified keyword group
-    LocalizedString:
-      type: object
-      additionalProperties:
-        type: string
-        description: 'A set of string values, one for each submission locale. Note: invalid locale values will be ignored.'
-        nullable: true
-        example: '{"en_GB":"Some text"}'
-      description: 'A set of string values, one for each submission locale. Note: invalid locale values will be ignored.'
-      nullable: true
-      example:
-        en_GB: Some text
-    FormattedLocalizedString:
-      type: object
-      additionalProperties:
-        type: string
-        description: A set of localized strings that support formatting. Invalid locale values will be ignored.
-        nullable: true
-        example: '{"en_GB":"Some text"}'
-      description: A set of localized strings that support formatting. Invalid locale values will be ignored.
-      nullable: true
-      example:
-        en_GB: Some text
-    EducationListResult:
-      type: object
-      properties:
-        count:
-          type: integer
-          description: The full count, ignoring paging
-          format: int32
-        pageInformation:
-          $ref: '#/components/schemas/PageInformation'
-        items:
-          type: array
-          description: Education
-          items:
-            $ref: '#/components/schemas/Education'
-      description: List of educations. Can contain a subset of all items along with the full count
     Education:
       required:
       - name
@@ -689,9 +616,10 @@ components:
             description: UUIDs of other content items which have been merged into this content item (or similar)
             readOnly: true
         version:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Used to guard against conflicting updates. For new content this is null, and for existing content the current value. The property should never be modified by a client, except in the rare case where the client wants to perform an update irrespective of if other clients have made updates in the meantime, also known as a "dirty write". A dirty write is performed by not including the property value or setting the property to null
-          nullable: true
         name:
           $ref: '#/components/schemas/FormattedLocalizedString'
         semesters:
@@ -721,9 +649,10 @@ components:
         profile:
           $ref: '#/components/schemas/FormattedLocalizedString'
         educationId:
-          type: string
+          type:
+          - string
+          - 'null'
           description: The education id
-          nullable: true
         period:
           $ref: '#/components/schemas/DateRange'
         parent:
@@ -734,15 +663,17 @@ components:
           items:
             $ref: '#/components/schemas/LinkIdentifier'
         keywordGroups:
-          type: array
+          type:
+          - array
+          - 'null'
           description: A group for each type of keyword present.
-          nullable: true
           items:
             $ref: '#/components/schemas/KeywordGroup'
         identifiers:
-          type: array
+          type:
+          - array
+          - 'null'
           description: Identifiers related to the education.
-          nullable: true
           items:
             $ref: '#/components/schemas/Identifier'
         visibility:
@@ -754,40 +685,9 @@ components:
           description: The content system name
           readOnly: true
       description: An education
-    DateRange:
-      type: object
-      properties:
-        startDate:
-          type: string
-          description: Start date
-          format: date
-          nullable: true
-        endDate:
-          type: string
-          description: End date
-          format: date
-          nullable: true
-      description: A date range
-    OrganizationRef:
+    AllowedKeywordGroupConfiguration:
       required:
-      - uuid
-      type: object
-      description: A reference to an organization in the institution
-      nullable: true
-      allOf:
-      - $ref: '#/components/schemas/ContentRef'
-    SystemLocalizedString:
-      type: object
-      additionalProperties:
-        type: string
-        description: A set of localized string values each for a specific UI locale.
-        nullable: true
-        example: '{"en_GB":"Some text"}'
-      description: A set of localized string values each for a specific UI locale.
-      nullable: true
-      example:
-        en_GB: Some text
-    LinkIdentifier:
+      - targetSystemName
       type: object
       properties:
         pureId:
@@ -795,11 +695,41 @@ components:
           description: Pure database ID of the object, prefer using the UUID if it is present on the entity
           format: int64
           readOnly: true
-        linkIdentifier:
+        targetSystemName:
           type: string
-          description: The link identifier
-          nullable: true
-      description: A link identifier
+          description: The content system name this configuration applies to
+        keywordGroupType:
+          type: string
+          description: The OpenAPI schema type of this keyword configuration
+          readOnly: true
+        name:
+          $ref: '#/components/schemas/LocalizedString'
+        description:
+          $ref: '#/components/schemas/FormattedLocalizedString'
+        classificationScheme:
+          $ref: '#/components/schemas/ClassificationSchemeRef'
+        allowUserdefinedKeywords:
+          type: boolean
+          description: Defines if user defined keywords are allowed
+        limitToLeafSelection:
+          type: boolean
+        logicalName:
+          type: string
+        relationType:
+          type:
+          - string
+          - 'null'
+          description: The schema name of the type (with the ability to associate keywords) on which the keyword group configuration is related to, e.g. StaffOrganizationAssociation. It can also be set to null (default value), which means the keyword group configuration is related to the main type (the target system name) and not a relation of the main type.
+      description: A specification of the allowed behavior of a specified keyword group
+    OrganizationRef:
+      required:
+      - uuid
+      type:
+      - object
+      - 'null'
+      description: A reference to an organization in the institution
+      allOf:
+      - $ref: '#/components/schemas/ContentRef'
     ContentRefListResult:
       type: object
       properties:
@@ -808,39 +738,41 @@ components:
           items:
             $ref: '#/components/schemas/ContentRef'
       description: List of Content Refs
-    Note:
+    SemesterRef:
       required:
-      - text
+      - uuid
+      type:
+      - object
+      - 'null'
+      description: A reference to semester
+      allOf:
+      - $ref: '#/components/schemas/ContentRef'
+    ProblemDetails:
       type: object
       properties:
-        date:
+        type:
           type: string
-          description: Date and time of when the note was created, an event occurred or similar. Can be any point in time, but <now> is normally preferred
-          format: date-time
-          nullable: true
-        username:
+          description: A URI reference [RFC3986] that identifies the problem type.
+        title:
           type: string
-          description: Username related to the note. Usually a username of the user creating the note. Does not have to be a username of a Pure user
-          nullable: true
-        text:
-          type: string
-          description: Note text
-      description: A note
-    NoteListResult:
-      type: object
-      properties:
-        count:
+          description: A short, human-readable summary of the problem type. It SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization (e.g., using proactive content negotiation; see [RFC7231], Section 3.4).
+        status:
           type: integer
-          description: The full count, ignoring paging
+          description: The HTTP status code ([RFC7231], Section 6) generated by the origin server for this occurrence of the problem.
           format: int32
-        pageInformation:
-          $ref: '#/components/schemas/PageInformation'
-        items:
-          type: array
-          description: Notes
-          items:
-            $ref: '#/components/schemas/Note'
-      description: List of notes
+        detail:
+          type: string
+          description: A human-readable explanation specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: A URI reference that identifies the specific occurrence of the problem.  It may or may not yield further information if dereferenced.
+      description: RFC7807 Error details
+      discriminator:
+        propertyName: type
+        mapping:
+          /error: '#/components/schemas/GenericProblemDetails'
+          /validation-error: '#/components/schemas/ValidationProblemDetails'
+          /dependency-violation-error: '#/components/schemas/DependencyViolationProblemDetails'
     Visibility:
       required:
       - key
@@ -871,34 +803,15 @@ components:
           type: string
           description: The URL (Uniform Resource Locator) of the link
         alias:
-          type: string
+          type:
+          - string
+          - 'null'
           description: A user-friendly text to show instead of the URL
-          nullable: true
         description:
           $ref: '#/components/schemas/LocalizedString'
         linkType:
           $ref: '#/components/schemas/ClassificationRef'
       description: A hyperlink describing a location on the web.
-    SemesterRef:
-      required:
-      - uuid
-      type: object
-      description: A reference to semester
-      nullable: true
-      allOf:
-      - $ref: '#/components/schemas/ContentRef'
-    LocalesList:
-      type: object
-      properties:
-        locales:
-          pattern: /^[a-z]{2}_[A-Z]{2}$/
-          type: array
-          description: Allowed locale values for use in localized string entities. The locale format consists of lower-case ISO 639 alpha-2 language code and upper-cased ISO 3166 alpha-2 country code.
-          items:
-            pattern: /^[a-z]{2}_[A-Z]{2}$/
-            type: string
-            description: Allowed locale values for use in localized string entities. The locale format consists of lower-case ISO 639 alpha-2 language code and upper-cased ISO 3166 alpha-2 country code.
-      description: List of available locales
     Identifier:
       required:
       - typeDiscriminator
@@ -912,6 +825,181 @@ components:
           ClassifiedId: '#/components/schemas/ClassifiedId'
           PrimaryId: '#/components/schemas/PrimaryId'
           Id: '#/components/schemas/Id'
+    EducationQuery:
+      type: object
+      properties:
+        uuids:
+          type: array
+          items:
+            type: string
+            format: uuid
+        size:
+          type: integer
+          format: int32
+        offset:
+          type: integer
+          format: int32
+        orderings:
+          type: array
+          items:
+            type: string
+        searchString:
+          type: string
+          description: String used to perform search
+        orderBy:
+          type: string
+          writeOnly: true
+      description: Create a query for education
+    DateRange:
+      type: object
+      properties:
+        startDate:
+          type:
+          - string
+          - 'null'
+          description: Start date
+          format: date
+        endDate:
+          type:
+          - string
+          - 'null'
+          description: End date
+          format: date
+      description: A date range
+    ClassificationRef:
+      required:
+      - uri
+      type:
+      - object
+      - 'null'
+      properties:
+        uri:
+          type: string
+          description: Classification URI of the referred classification
+        term:
+          $ref: '#/components/schemas/SystemLocalizedString'
+      description: A reference to a classification value
+    ClassificationSchemeRef:
+      required:
+      - uuid
+      type:
+      - object
+      - 'null'
+      description: A reference to a classification scheme
+      allOf:
+      - $ref: '#/components/schemas/ContentRef'
+    AllowedKeywordGroupConfigurationList:
+      type: object
+      properties:
+        configurations:
+          type: array
+          items:
+            $ref: '#/components/schemas/AllowedKeywordGroupConfiguration'
+      description: List of allowed keyword group configurations
+    SystemLocalizedString:
+      type:
+      - object
+      - 'null'
+      additionalProperties:
+        type:
+        - string
+        - 'null'
+        description: A set of localized string values each for a specific UI locale.
+        example: '{"en_GB":"Some text"}'
+      description: A set of localized string values each for a specific UI locale.
+      example:
+        en_GB: Some text
+    Note:
+      required:
+      - text
+      type: object
+      properties:
+        date:
+          type:
+          - string
+          - 'null'
+          description: Date and time of when the note was created, an event occurred or similar. Can be any point in time, but <now> is normally preferred
+          format: date-time
+        username:
+          type:
+          - string
+          - 'null'
+          description: Username related to the note. Usually a username of the user creating the note. Does not have to be a username of a Pure user
+        text:
+          type: string
+          description: Note text
+      description: A note
+    EducationRef:
+      required:
+      - uuid
+      type:
+      - object
+      - 'null'
+      description: A reference to Education
+      allOf:
+      - $ref: '#/components/schemas/ContentRef'
+    LocalizedString:
+      type:
+      - object
+      - 'null'
+      additionalProperties:
+        type:
+        - string
+        - 'null'
+        description: 'A set of string values, one for each submission locale. Note: invalid locale values will be ignored.'
+        example: '{"en_GB":"Some text"}'
+      description: 'A set of string values, one for each submission locale. Note: invalid locale values will be ignored.'
+      example:
+        en_GB: Some text
+    OrderingsList:
+      type: object
+      properties:
+        orderings:
+          type: array
+          description: IDs of ways content can be ordered
+          items:
+            type: string
+            description: IDs of ways content can be ordered
+      description: List of available orderings
+    FormattedLocalizedString:
+      type:
+      - object
+      - 'null'
+      additionalProperties:
+        type:
+        - string
+        - 'null'
+        description: A set of localized strings that support formatting. Invalid locale values will be ignored.
+        example: '{"en_GB":"Some text"}'
+      description: A set of localized strings that support formatting. Invalid locale values will be ignored.
+      example:
+        en_GB: Some text
+    LinkIdentifier:
+      type: object
+      properties:
+        pureId:
+          type: integer
+          description: Pure database ID of the object, prefer using the UUID if it is present on the entity
+          format: int64
+          readOnly: true
+        linkIdentifier:
+          type:
+          - string
+          - 'null'
+          description: The link identifier
+      description: A link identifier
+    LocalesList:
+      type: object
+      properties:
+        locales:
+          pattern: /^[a-z]{2}_[A-Z]{2}$/
+          type: array
+          description: Allowed locale values for use in localized string entities. The locale format consists of lower-case ISO 639 alpha-2 language code and upper-cased ISO 3166 alpha-2 country code.
+          items:
+            pattern: /^[a-z]{2}_[A-Z]{2}$/
+            type: string
+            description: Allowed locale values for use in localized string entities. The locale format consists of lower-case ISO 639 alpha-2 language code and upper-cased ISO 3166 alpha-2 country code.
+      description: List of available locales
     ConflictProblemDetails:
       type: object
       properties:
@@ -937,12 +1025,40 @@ components:
         modifiedBy:
           type: string
       description: Problem details for state conflict failures
-    EducationRef:
+    PageInformation:
+      type: object
+      properties:
+        offset:
+          type: integer
+          description: Offset that returned items start at
+          format: int32
+        size:
+          type: integer
+          description: The requested number of items. May be higher than the actual number of items in the result if there are fewer items in the store than requested
+          format: int32
+      description: Information about pages
+    NoteListResult:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: The full count, ignoring paging
+          format: int32
+        pageInformation:
+          $ref: '#/components/schemas/PageInformation'
+        items:
+          type: array
+          description: Notes
+          items:
+            $ref: '#/components/schemas/Note'
+      description: List of notes
+    SpecializationRef:
       required:
       - uuid
-      type: object
-      description: A reference to Education
-      nullable: true
+      type:
+      - object
+      - 'null'
+      description: A reference to a specialization
       allOf:
       - $ref: '#/components/schemas/ContentRef'
     KeywordGroup:
@@ -969,78 +1085,21 @@ components:
           ClassificationsKeywordGroup: '#/components/schemas/ClassificationsKeywordGroup'
           FreeKeywordsKeywordGroup: '#/components/schemas/FreeKeywordsKeywordGroup'
           FullKeywordGroup: '#/components/schemas/FullKeywordGroup'
-    ProblemDetails:
+    EducationListResult:
       type: object
       properties:
-        type:
-          type: string
-          description: A URI reference [RFC3986] that identifies the problem type.
-        title:
-          type: string
-          description: A short, human-readable summary of the problem type. It SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization (e.g., using proactive content negotiation; see [RFC7231], Section 3.4).
-        status:
+        count:
           type: integer
-          description: The HTTP status code ([RFC7231], Section 6) generated by the origin server for this occurrence of the problem.
+          description: The full count, ignoring paging
           format: int32
-        detail:
-          type: string
-          description: A human-readable explanation specific to this occurrence of the problem.
-        instance:
-          type: string
-          description: A URI reference that identifies the specific occurrence of the problem.  It may or may not yield further information if dereferenced.
-      description: RFC7807 Error details
-      discriminator:
-        propertyName: type
-        mapping:
-          /error: '#/components/schemas/GenericProblemDetails'
-          /validation-error: '#/components/schemas/ValidationProblemDetails'
-          /dependency-violation-error: '#/components/schemas/DependencyViolationProblemDetails'
-    ClassificationRef:
-      required:
-      - uri
-      type: object
-      properties:
-        uri:
-          type: string
-          description: Classification URI of the referred classification
-        term:
-          $ref: '#/components/schemas/SystemLocalizedString'
-      description: A reference to a classification value
-      nullable: true
-    AllowedKeywordGroupConfigurationList:
-      type: object
-      properties:
-        configurations:
+        pageInformation:
+          $ref: '#/components/schemas/PageInformation'
+        items:
           type: array
+          description: Education
           items:
-            $ref: '#/components/schemas/AllowedKeywordGroupConfiguration'
-      description: List of allowed keyword group configurations
-    ClassificationSchemeRef:
-      required:
-      - uuid
-      type: object
-      description: A reference to a classification scheme
-      nullable: true
-      allOf:
-      - $ref: '#/components/schemas/ContentRef'
-    OrderingsList:
-      type: object
-      properties:
-        orderings:
-          type: array
-          description: IDs of ways content can be ordered
-          items:
-            type: string
-            description: IDs of ways content can be ordered
-      description: List of available orderings
-    SpecializationRef:
-      required:
-      - uuid
-      type: object
-      description: A reference to a specialization
-      nullable: true
-      allOf:
-      - $ref: '#/components/schemas/ContentRef'
+            $ref: '#/components/schemas/Education'
+      description: List of educations. Can contain a subset of all items along with the full count
     ClassificationRefList:
       type: object
       properties:
@@ -1049,28 +1108,9 @@ components:
           items:
             $ref: '#/components/schemas/ClassificationRef'
       description: List of classification references
-    EducationQuery:
-      type: object
-      properties:
-        uuids:
-          type: array
-          items:
-            type: string
-            format: uuid
-        size:
-          type: integer
-          format: int32
-        offset:
-          type: integer
-          format: int32
-        orderings:
-          type: array
-          items:
-            type: string
-        searchString:
-          type: string
-          description: String used to perform search
-        orderBy:
-          type: string
-          writeOnly: true
-      description: Create a query for education
+  securitySchemes:
+    api-key:
+      type: apiKey
+      description: Security mechanism for the API
+      name: api-key
+      in: header
