@@ -1,19 +1,21 @@
 ---
 kin_checks:
   slug: university-of-groningen
-  schema_version: 0.15.1
-  scored_at: '2026-08-27'
-  run_ts: 2026-08-27T140727
+  schema_version: 0.16.0
+  scored_at: '2026-08-29'
+  run_ts: 2026-08-29T213958
   note: Actionable checks only (missed + partial). earned/na are every other check
-    in rubric/scoring-0.15.1.yml; counts below let you verify that.
+    in rubric/scoring-0.16.0.yml; counts below let you verify that.
   counts:
     total: 130
-    earned: 31
-    partial: 14
-    missed: 62
+    earned: 30
+    partial: 17
+    missed: 60
     na: 23
   checks:
   - id: maintainer_present
+    status: missed
+  - id: human_url_per_api
     status: missed
   - id: base_url_per_api
     status: missed
@@ -27,15 +29,6 @@ kin_checks:
     status: missed
     detail: 0 of 73 openapi documents pass
   - id: openapi_3_1
-    status: missed
-    detail: 0 of 73 openapi documents pass
-  - id: info_complete
-    status: missed
-    detail: 0 of 73 openapi documents pass
-  - id: security_schemes_defined
-    status: missed
-    detail: 0 of 73 openapi documents pass
-  - id: security_applied
     status: missed
     detail: 0 of 73 openapi documents pass
   - id: webhooks_or_callbacks
@@ -143,6 +136,10 @@ kin_checks:
     status: missed
   - id: agentic_commerce
     status: missed
+  - id: info_complete
+    status: partial
+    earned: 2.03
+    detail: 37 of 73 openapi documents pass
   - id: operations_summary_coverage
     status: partial
     earned: 3.53
@@ -167,6 +164,14 @@ kin_checks:
     status: partial
     earned: 0.0
   - id: components_reuse
+    status: partial
+    earned: 1.52
+    detail: 37 of 73 openapi documents pass
+  - id: security_schemes_defined
+    status: partial
+    earned: 2.03
+    detail: 37 of 73 openapi documents pass
+  - id: security_applied
     status: partial
     earned: 1.52
     detail: 37 of 73 openapi documents pass
