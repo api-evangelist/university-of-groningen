@@ -65,31 +65,121 @@ created: '2026-06-03'
 modified: '2026-08-30'
 specificationVersion: '0.23'
 apis:
-- aid: university-of-groningen:ocasys-course-catalog
-  name: University of Groningen Ocasys Course Catalog API
+- aid: university-of-groningen:identity-provider
+  name: University of Groningen Identity Provider (SURFconext / eduGAIN)
   x-operator: institution
   description: >-
-    The JSON backend behind Ocasys, the University's own course and degree-programme catalog.
-    Verified live 2026-08-30 with no credentials: course search, full course records, the catalog
-    page projection, programme search, faculties and organizational units, controlled option lists
-    and the academic-year list all return 200 to an anonymous GET. Course records are bilingual and
-    carry ECTS credits, study level, assessments, formats, prerequisites, offerings, ENLIGHT alliance
-    status and per-course UN Sustainable Development Goal flags. Enrollment, permission and
-    course-offering paths in the same namespace return 403 without an institutional SAML session and
-    are documented as gated, not as callable. This is the one genuinely institution-engineered API
-    surface in the University's footprint. The OpenAPI below is DERIVED by API Evangelist from live
-    probes — the University publishes none, and does not advertise this interface at all.
+    The University runs its own SAML 2.0 identity provider and publishes signed federation metadata at
+    signon.rug.nl for entityID https://signon.rug.nl/nidp/saml2/metadata. Verified live 2026-08-30: 25KB
+    of XML carrying IDPSSODescriptor, SPSSODescriptor and AttributeAuthorityDescriptor roles, HTTP-POST,
+    HTTP-Redirect, HTTP-Artifact and SOAP bindings, OrganizationName "Rijksuniversiteit Groningen" and
+    technical contact cit-iam@list.rug.nl. The entity is registered in eduGAIN with SURFconext as registration
+    authority, alongside a second University-registered service provider at enlight.hpc.rug.nl. Machine-readable,
+    institution-operated by definition, and the surface class this cohort almost never has catalogued.
+    The software is NetIQ Access Manager, not Shibboleth.
+  humanURL: https://www.rug.nl/society-business/center-for-information-technology/
+  baseURL: https://signon.rug.nl/nidp/saml2/metadata
+  tags:
+  - Identity Federation
+  - SAML
+  - eduGAIN
+  - SURFconext
+  - Single Sign-On
+  properties:
+  - type: IdentityFederation
+    url: https://signon.rug.nl/nidp/saml2/metadata
+  - type: Conformance
+    url: conformance/university-of-groningen-education-standards-conformance.yml
+  - type: Authentication
+    url: authentication/university-of-groningen-authentication.yml
+  - type: Documentation
+    url: https://wiki.surfnet.nl/display/surfconext/
+- aid: university-of-groningen:pure-ws-api
+  name: University of Groningen Research Portal (Pure) REST API
+  x-operator: tenant
+  description: >-
+    The Elsevier Pure web service deployed on the University's CRIS host. Probed 2026-08-30: pure.rug.nl/ws/api
+    redirects to /ws/api/documentation/index.html, whose rel=canonical is https://api.elsevierpure.com/ws/api/documentation/index.html
+    — the contract, the version numbering, the documentation and the api-key scheme are all Elsevier's,
+    and the archived source specification carried info.contact.email pure-support@elsevier.com. The University
+    is the tenant and the data is the University's research record. Recorded here as a relationship; Elsevier's
+    specification is deliberately not saved under this institution, and the thirty-seven per-tag splits
+    of it that this repo carried until 2026-08-30 have been removed.
+  humanURL: https://www.rug.nl/library/support/pure/?lang=en
+  baseURL: https://pure.rug.nl/ws/api
+  tags:
+  - CRIS
+  - Pure
+  - Elsevier
+  - Research
+  - Tenant
+  properties:
+  - type: Documentation
+    url: https://pure.rug.nl/ws/api
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: Website
+    url: https://research.rug.nl/
+  - type: Authentication
+    url: authentication/university-of-groningen-authentication.yml
+- aid: university-of-groningen:dataversenl-collection
+  name: University of Groningen research data collection on DataverseNL
+  x-operator: tenant
+  description: >-
+    The University's default repository for research data and software is a collection inside DataverseNL,
+    the shared national Dataverse installation that DANS and SURF operate at dataverse.nl — a host the
+    University does not own and that at least seven other institutions in this catalog also point at.
+    The data, the DOIs and the curation are the University's; the Dataverse Native API contract is the
+    platform's. Probed 2026-08-30: dataverse.nl and dataverse.nl/dataverse/rug are live but sit behind
+    a bot challenge, so no API response could be read. The thirty-six per-tag splits of the Dataverse
+    contract that this repo carried under the University's name until 2026-08-30 have been removed.
+  humanURL: >-
+    https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/dataversenl
+  baseURL: https://dataverse.nl/api
+  tags:
+  - Research Data
+  - Dataverse
+  - Repository
+  - DANS
+  - Tenant
+  properties:
+  - type: Documentation
+    url: >-
+      https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/dataversenl
+  - type: Documentation
+    url: https://guides.dataverse.org/en/latest/api/native-api.html
+  - type: ResearchRepository
+    url: https://dataverse.nl/dataverse/rug
+- aid: university-of-groningen:worldcat-discovery
+  name: University of Groningen Library discovery (OCLC WorldCat)
+  x-operator: tenant
+  description: >-
+    Library discovery runs on OCLC WorldCat Discovery at rug.on.worldcat.org, a tenant instance on OCLC's
+    platform rather than a catalog interface the University operates. Verified live 2026-08-30. Any WorldCat
+    Search API contract belongs to OCLC and is not saved here.
+  humanURL: https://www.rug.nl/library/
+  baseURL: https://rug.on.worldcat.org/discovery
+  tags:
+  - Library
+  - Discovery
+  - OCLC
+  - WorldCat
+  - Tenant
+  properties:
+  - type: LibraryCatalog
+    url: https://rug.on.worldcat.org/discovery
+  - type: Website
+    url: https://www.rug.nl/library/
+- aid: university-of-groningen:university-of-groningen-academic-years-api
+  name: University of Groningen Academic Years API
+  description: Which academic years the catalog holds and when the next one starts.
   humanURL: https://ocasys.rug.nl/
   baseURL: https://ocasys.rug.nl/api
   tags:
-  - Course Catalog
-  - Education
-  - Curriculum
-  - Registrar
-  - Open Data
+  - Academic Years
   properties:
   - type: OpenAPI
-    url: openapi/university-of-groningen-course-catalog-api-openapi.yml
+    url: openapi/university-of-groningen-academic-years-api-openapi.yml
   - type: x-openapi-original
     url: openapi/_original/university-of-groningen-course-catalog-api.yaml
   - type: Website
@@ -118,32 +208,6 @@ apis:
     url: examples/university-of-groningen-ocasys-faculties-example.json
   - type: x-example
     url: examples/university-of-groningen-ocasys-problem-detail-example.json
-- aid: university-of-groningen:pure-oai-pmh
-  name: University of Groningen Research Database OAI-PMH
-  x-operator: institution
-  description: >-
-    Keyless OAI-PMH 2.0 metadata-harvesting endpoint operated by the University on its own domain.
-    Verified live 2026-08-30: Identify reports protocolVersion 2.0, repositoryName "University of
-    Groningen Research Database", adminEmail pure@rug.nl, earliest datestamp 2014-03-11,
-    deletedRecord "no" and second-level granularity; ListIdentifiers over oai_dc reports a
-    completeListSize of 1,521,703. Six metadata prefixes are offered — oai_cerif_openaire, qdc,
-    oai_dc, nl_didl, mods, xmetadiss — and the set hierarchy follows the OpenAIRE CRIS entity model
-    plus per-year publication sets reaching back to 1770. Person records in the CERIF profile carry
-    resolvable ORCID iDs. The CRIS software underneath is Elsevier Pure, but this harvesting surface
-    carries the University's own repository name, sets, profiles and contact and is served from
-    rug.nl, so it is treated as institution-operated. The OpenAPI below is DERIVED from live probes.
-  humanURL: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
-  baseURL: https://pure.rug.nl/ws/oai
-  tags:
-  - OAI-PMH
-  - Research
-  - Metadata
-  - Repository
-  - CERIF
-  - ORCID
-  properties:
-  - type: OpenAPI
-    url: openapi/university-of-groningen-oai-pmh-openapi.yml
   - type: x-openapi-original
     url: openapi/_original/university-of-groningen-oai-pmh.yaml
   - type: Documentation
@@ -154,120 +218,282 @@ apis:
     url: https://pure.rug.nl/ws/oai?verb=Identify
   - type: Conformance
     url: conformance/university-of-groningen-education-standards-conformance.yml
-  - type: Errors
-    url: errors/university-of-groningen-errors.yml
   - type: x-example
     url: examples/university-of-groningen-oai-identify-example.xml
   - type: x-example
     url: examples/university-of-groningen-oai-listmetadataformats-example.xml
   - type: x-example
     url: examples/university-of-groningen-oai-badverb-example.xml
-- aid: university-of-groningen:identity-provider
-  name: University of Groningen Identity Provider (SURFconext / eduGAIN)
-  x-operator: institution
-  description: >-
-    The University runs its own SAML 2.0 identity provider and publishes signed federation metadata
-    at signon.rug.nl for entityID https://signon.rug.nl/nidp/saml2/metadata. Verified live
-    2026-08-30: 25KB of XML carrying IDPSSODescriptor, SPSSODescriptor and AttributeAuthorityDescriptor
-    roles, HTTP-POST, HTTP-Redirect, HTTP-Artifact and SOAP bindings, OrganizationName
-    "Rijksuniversiteit Groningen" and technical contact cit-iam@list.rug.nl. The entity is registered
-    in eduGAIN with SURFconext as registration authority, alongside a second University-registered
-    service provider at enlight.hpc.rug.nl. Machine-readable, institution-operated by definition, and
-    the surface class this cohort almost never has catalogued. The software is NetIQ Access Manager,
-    not Shibboleth.
-  humanURL: https://www.rug.nl/society-business/center-for-information-technology/
-  baseURL: https://signon.rug.nl/nidp/saml2/metadata
+- aid: university-of-groningen:university-of-groningen-courses-api
+  name: University of Groningen Courses API
+  description: Course search and full course descriptions.
+  humanURL: https://ocasys.rug.nl/
+  baseURL: https://ocasys.rug.nl/api
   tags:
-  - Identity Federation
-  - SAML
-  - eduGAIN
-  - SURFconext
-  - Single Sign-On
+  - Courses
   properties:
-  - type: IdentityFederation
-    url: https://signon.rug.nl/nidp/saml2/metadata
+  - type: OpenAPI
+    url: openapi/university-of-groningen-courses-api-openapi.yml
+  - type: x-openapi-original
+    url: openapi/_original/university-of-groningen-course-catalog-api.yaml
+  - type: Website
+    url: https://ocasys.rug.nl/
+  - type: x-json-schema
+    url: json-schema/university-of-groningen-ocasys-course-schema.json
+  - type: x-json-schema
+    url: json-schema/university-of-groningen-ocasys-program-schema.json
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-course-context.jsonld
+  - type: x-rules
+    url: rules/university-of-groningen-course-catalog-rules.yml
+  - type: Vocabulary
+    url: vocabulary/university-of-groningen-course-catalog-vocabulary.yml
+  - type: Errors
+    url: errors/university-of-groningen-errors.yml
+  - type: Authentication
+    url: authentication/university-of-groningen-authentication.yml
+  - type: x-example
+    url: examples/university-of-groningen-ocasys-course-search-example.json
+  - type: x-example
+    url: examples/university-of-groningen-ocasys-get-course-example.json
+  - type: x-example
+    url: examples/university-of-groningen-ocasys-program-search-example.json
+  - type: x-example
+    url: examples/university-of-groningen-ocasys-faculties-example.json
+  - type: x-example
+    url: examples/university-of-groningen-ocasys-problem-detail-example.json
+  - type: x-openapi-original
+    url: openapi/_original/university-of-groningen-oai-pmh.yaml
+  - type: Documentation
+    url: https://www.openarchives.org/OAI/openarchivesprotocol.html
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  - type: x-oai-pmh-identify
+    url: https://pure.rug.nl/ws/oai?verb=Identify
   - type: Conformance
     url: conformance/university-of-groningen-education-standards-conformance.yml
+  - type: x-example
+    url: examples/university-of-groningen-oai-identify-example.xml
+  - type: x-example
+    url: examples/university-of-groningen-oai-listmetadataformats-example.xml
+  - type: x-example
+    url: examples/university-of-groningen-oai-badverb-example.xml
+- aid: university-of-groningen:university-of-groningen-oai-pmh-api
+  name: University of Groningen OAI PMH API
+  description: The six verbs of the Open Archives Initiative Protocol for Metadata Harvesting 2.0.
+  humanURL: https://ocasys.rug.nl/
+  baseURL: https://ocasys.rug.nl/api
+  tags:
+  - OAI-PMH
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-oai-pmh-api-openapi.yml
+  - type: x-openapi-original
+    url: openapi/_original/university-of-groningen-course-catalog-api.yaml
+  - type: Website
+    url: https://ocasys.rug.nl/
+  - type: x-json-schema
+    url: json-schema/university-of-groningen-ocasys-course-schema.json
+  - type: x-json-schema
+    url: json-schema/university-of-groningen-ocasys-program-schema.json
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-course-context.jsonld
+  - type: x-rules
+    url: rules/university-of-groningen-course-catalog-rules.yml
+  - type: Vocabulary
+    url: vocabulary/university-of-groningen-course-catalog-vocabulary.yml
+  - type: Errors
+    url: errors/university-of-groningen-errors.yml
   - type: Authentication
     url: authentication/university-of-groningen-authentication.yml
+  - type: x-example
+    url: examples/university-of-groningen-ocasys-course-search-example.json
+  - type: x-example
+    url: examples/university-of-groningen-ocasys-get-course-example.json
+  - type: x-example
+    url: examples/university-of-groningen-ocasys-program-search-example.json
+  - type: x-example
+    url: examples/university-of-groningen-ocasys-faculties-example.json
+  - type: x-example
+    url: examples/university-of-groningen-ocasys-problem-detail-example.json
+  - type: x-openapi-original
+    url: openapi/_original/university-of-groningen-oai-pmh.yaml
   - type: Documentation
-    url: https://wiki.surfnet.nl/display/surfconext/
-- aid: university-of-groningen:pure-ws-api
-  name: University of Groningen Research Portal (Pure) REST API
-  x-operator: tenant
-  description: >-
-    The Elsevier Pure web service deployed on the University's CRIS host. Probed 2026-08-30:
-    pure.rug.nl/ws/api redirects to /ws/api/documentation/index.html, whose rel=canonical is
-    https://api.elsevierpure.com/ws/api/documentation/index.html — the contract, the version
-    numbering, the documentation and the api-key scheme are all Elsevier's, and the archived source
-    specification carried info.contact.email pure-support@elsevier.com. The University is the tenant
-    and the data is the University's research record. Recorded here as a relationship; Elsevier's
-    specification is deliberately not saved under this institution, and the thirty-seven per-tag
-    splits of it that this repo carried until 2026-08-30 have been removed.
-  humanURL: https://www.rug.nl/library/support/pure/?lang=en
-  baseURL: https://pure.rug.nl/ws/api
+    url: https://www.openarchives.org/OAI/openarchivesprotocol.html
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  - type: x-oai-pmh-identify
+    url: https://pure.rug.nl/ws/oai?verb=Identify
+  - type: Conformance
+    url: conformance/university-of-groningen-education-standards-conformance.yml
+  - type: x-example
+    url: examples/university-of-groningen-oai-identify-example.xml
+  - type: x-example
+    url: examples/university-of-groningen-oai-listmetadataformats-example.xml
+  - type: x-example
+    url: examples/university-of-groningen-oai-badverb-example.xml
+- aid: university-of-groningen:university-of-groningen-option-lists-api
+  name: University of Groningen Option Lists API
+  description: Controlled vocabularies used by course and programme records.
+  humanURL: https://ocasys.rug.nl/
+  baseURL: https://ocasys.rug.nl/api
   tags:
-  - CRIS
-  - Pure
-  - Elsevier
-  - Research
-  - Tenant
+  - Option Lists
   properties:
-  - type: Documentation
-    url: https://pure.rug.nl/ws/api
-  - type: Documentation
-    url: https://www.rug.nl/library/support/pure/?lang=en
+  - type: OpenAPI
+    url: openapi/university-of-groningen-option-lists-api-openapi.yml
+  - type: x-openapi-original
+    url: openapi/_original/university-of-groningen-course-catalog-api.yaml
   - type: Website
-    url: https://research.rug.nl/
+    url: https://ocasys.rug.nl/
+  - type: x-json-schema
+    url: json-schema/university-of-groningen-ocasys-course-schema.json
+  - type: x-json-schema
+    url: json-schema/university-of-groningen-ocasys-program-schema.json
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-course-context.jsonld
+  - type: x-rules
+    url: rules/university-of-groningen-course-catalog-rules.yml
+  - type: Vocabulary
+    url: vocabulary/university-of-groningen-course-catalog-vocabulary.yml
+  - type: Errors
+    url: errors/university-of-groningen-errors.yml
   - type: Authentication
     url: authentication/university-of-groningen-authentication.yml
-- aid: university-of-groningen:dataversenl-collection
-  name: University of Groningen research data collection on DataverseNL
-  x-operator: tenant
-  description: >-
-    The University's default repository for research data and software is a collection inside
-    DataverseNL, the shared national Dataverse installation that DANS and SURF operate at
-    dataverse.nl — a host the University does not own and that at least seven other institutions in
-    this catalog also point at. The data, the DOIs and the curation are the University's; the
-    Dataverse Native API contract is the platform's. Probed 2026-08-30: dataverse.nl and
-    dataverse.nl/dataverse/rug are live but sit behind a bot challenge, so no API response could be
-    read. The thirty-six per-tag splits of the Dataverse contract that this repo carried under the
-    University's name until 2026-08-30 have been removed.
-  humanURL: https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/dataversenl
-  baseURL: https://dataverse.nl/api
-  tags:
-  - Research Data
-  - Dataverse
-  - Repository
-  - DANS
-  - Tenant
-  properties:
+  - type: x-example
+    url: examples/university-of-groningen-ocasys-course-search-example.json
+  - type: x-example
+    url: examples/university-of-groningen-ocasys-get-course-example.json
+  - type: x-example
+    url: examples/university-of-groningen-ocasys-program-search-example.json
+  - type: x-example
+    url: examples/university-of-groningen-ocasys-faculties-example.json
+  - type: x-example
+    url: examples/university-of-groningen-ocasys-problem-detail-example.json
+  - type: x-openapi-original
+    url: openapi/_original/university-of-groningen-oai-pmh.yaml
   - type: Documentation
-    url: https://www.rug.nl/digital-competence-centre/research-data/archive-and-publish/dataversenl
+    url: https://www.openarchives.org/OAI/openarchivesprotocol.html
   - type: Documentation
-    url: https://guides.dataverse.org/en/latest/api/native-api.html
-  - type: ResearchRepository
-    url: https://dataverse.nl/dataverse/rug
-- aid: university-of-groningen:worldcat-discovery
-  name: University of Groningen Library discovery (OCLC WorldCat)
-  x-operator: tenant
-  description: >-
-    Library discovery runs on OCLC WorldCat Discovery at rug.on.worldcat.org, a tenant instance on
-    OCLC's platform rather than a catalog interface the University operates. Verified live
-    2026-08-30. Any WorldCat Search API contract belongs to OCLC and is not saved here.
-  humanURL: https://www.rug.nl/library/
-  baseURL: https://rug.on.worldcat.org/discovery
+    url: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  - type: x-oai-pmh-identify
+    url: https://pure.rug.nl/ws/oai?verb=Identify
+  - type: Conformance
+    url: conformance/university-of-groningen-education-standards-conformance.yml
+  - type: x-example
+    url: examples/university-of-groningen-oai-identify-example.xml
+  - type: x-example
+    url: examples/university-of-groningen-oai-listmetadataformats-example.xml
+  - type: x-example
+    url: examples/university-of-groningen-oai-badverb-example.xml
+- aid: university-of-groningen:university-of-groningen-organization-api
+  name: University of Groningen Organization API
+  description: Faculties and departments used to scope courses and programmes.
+  humanURL: https://ocasys.rug.nl/
+  baseURL: https://ocasys.rug.nl/api
   tags:
-  - Library
-  - Discovery
-  - OCLC
-  - WorldCat
-  - Tenant
+  - Organization
   properties:
-  - type: LibraryCatalog
-    url: https://rug.on.worldcat.org/discovery
+  - type: OpenAPI
+    url: openapi/university-of-groningen-organization-api-openapi.yml
+  - type: x-openapi-original
+    url: openapi/_original/university-of-groningen-course-catalog-api.yaml
   - type: Website
-    url: https://www.rug.nl/library/
+    url: https://ocasys.rug.nl/
+  - type: x-json-schema
+    url: json-schema/university-of-groningen-ocasys-course-schema.json
+  - type: x-json-schema
+    url: json-schema/university-of-groningen-ocasys-program-schema.json
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-course-context.jsonld
+  - type: x-rules
+    url: rules/university-of-groningen-course-catalog-rules.yml
+  - type: Vocabulary
+    url: vocabulary/university-of-groningen-course-catalog-vocabulary.yml
+  - type: Errors
+    url: errors/university-of-groningen-errors.yml
+  - type: Authentication
+    url: authentication/university-of-groningen-authentication.yml
+  - type: x-example
+    url: examples/university-of-groningen-ocasys-course-search-example.json
+  - type: x-example
+    url: examples/university-of-groningen-ocasys-get-course-example.json
+  - type: x-example
+    url: examples/university-of-groningen-ocasys-program-search-example.json
+  - type: x-example
+    url: examples/university-of-groningen-ocasys-faculties-example.json
+  - type: x-example
+    url: examples/university-of-groningen-ocasys-problem-detail-example.json
+  - type: x-openapi-original
+    url: openapi/_original/university-of-groningen-oai-pmh.yaml
+  - type: Documentation
+    url: https://www.openarchives.org/OAI/openarchivesprotocol.html
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  - type: x-oai-pmh-identify
+    url: https://pure.rug.nl/ws/oai?verb=Identify
+  - type: Conformance
+    url: conformance/university-of-groningen-education-standards-conformance.yml
+  - type: x-example
+    url: examples/university-of-groningen-oai-identify-example.xml
+  - type: x-example
+    url: examples/university-of-groningen-oai-listmetadataformats-example.xml
+  - type: x-example
+    url: examples/university-of-groningen-oai-badverb-example.xml
+- aid: university-of-groningen:university-of-groningen-programmes-api
+  name: University of Groningen Programmes API
+  description: Degree-programme search.
+  humanURL: https://ocasys.rug.nl/
+  baseURL: https://ocasys.rug.nl/api
+  tags:
+  - Programmes
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-groningen-programmes-api-openapi.yml
+  - type: x-openapi-original
+    url: openapi/_original/university-of-groningen-course-catalog-api.yaml
+  - type: Website
+    url: https://ocasys.rug.nl/
+  - type: x-json-schema
+    url: json-schema/university-of-groningen-ocasys-course-schema.json
+  - type: x-json-schema
+    url: json-schema/university-of-groningen-ocasys-program-schema.json
+  - type: x-json-ld
+    url: json-ld/university-of-groningen-course-context.jsonld
+  - type: x-rules
+    url: rules/university-of-groningen-course-catalog-rules.yml
+  - type: Vocabulary
+    url: vocabulary/university-of-groningen-course-catalog-vocabulary.yml
+  - type: Errors
+    url: errors/university-of-groningen-errors.yml
+  - type: Authentication
+    url: authentication/university-of-groningen-authentication.yml
+  - type: x-example
+    url: examples/university-of-groningen-ocasys-course-search-example.json
+  - type: x-example
+    url: examples/university-of-groningen-ocasys-get-course-example.json
+  - type: x-example
+    url: examples/university-of-groningen-ocasys-program-search-example.json
+  - type: x-example
+    url: examples/university-of-groningen-ocasys-faculties-example.json
+  - type: x-example
+    url: examples/university-of-groningen-ocasys-problem-detail-example.json
+  - type: x-openapi-original
+    url: openapi/_original/university-of-groningen-oai-pmh.yaml
+  - type: Documentation
+    url: https://www.openarchives.org/OAI/openarchivesprotocol.html
+  - type: Documentation
+    url: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en
+  - type: x-oai-pmh-identify
+    url: https://pure.rug.nl/ws/oai?verb=Identify
+  - type: Conformance
+    url: conformance/university-of-groningen-education-standards-conformance.yml
+  - type: x-example
+    url: examples/university-of-groningen-oai-identify-example.xml
+  - type: x-example
+    url: examples/university-of-groningen-oai-listmetadataformats-example.xml
+  - type: x-example
+    url: examples/university-of-groningen-oai-badverb-example.xml
 common:
 - type: Website
   url: https://www.rug.nl/
