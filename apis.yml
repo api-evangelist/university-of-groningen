@@ -84,6 +84,12 @@ apis:
   - SAML
   - eduGAIN
   - SURFconext
+  - SSO
+  tags_raw:
+  - Identity Federation
+  - SAML
+  - eduGAIN
+  - SURFconext
   - Single Sign-On
   properties:
   - type: IdentityFederation
@@ -108,6 +114,12 @@ apis:
   humanURL: https://www.rug.nl/library/support/pure/?lang=en
   baseURL: https://pure.rug.nl/ws/api
   tags:
+  - CRI
+  - Pure
+  - Elsevier
+  - Research
+  - Tenants
+  tags_raw:
   - CRIS
   - Pure
   - Elsevier
@@ -141,6 +153,12 @@ apis:
   - Dataverse
   - Repository
   - DANS
+  - Tenants
+  tags_raw:
+  - Research Data
+  - Dataverse
+  - Repository
+  - DANS
   - Tenant
   properties:
   - type: Documentation
@@ -160,6 +178,12 @@ apis:
   humanURL: https://www.rug.nl/library/
   baseURL: https://rug.on.worldcat.org/discovery
   tags:
+  - Library
+  - Discovery
+  - OCLC
+  - WorldCat
+  - Tenants
+  tags_raw:
   - Library
   - Discovery
   - OCLC
