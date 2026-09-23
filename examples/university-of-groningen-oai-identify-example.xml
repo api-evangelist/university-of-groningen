@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- generated: 2026-08-30 | method: probed | operator: institution
+     source: https://pure.rug.nl/ws/oai?verb=Identify
+     http-status: 200 | content-type: application/xml
+     Verbatim Identify response. Captured live by API Evangelist; not a University of Groningen publication. -->
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd https://www.openaire.eu/cerif-profile/1.2/ https://www.openaire.eu/schema/cris/1.2/openaire-cerif-profile.xsd">
+  <responseDate>2026-08-30T19:11:19Z</responseDate>
+  <request verb="Identify">https://pure.rug.nl/ws/oai</request>
+  <Identify>
+    <repositoryName>University of Groningen Research Database</repositoryName>
+    <baseURL>https://pure.rug.nl/ws/oai</baseURL>
+    <protocolVersion>2.0</protocolVersion>
+    <adminEmail>pure@rug.nl</adminEmail>
+    <earliestDatestamp>2014-03-11T08:52:52Z</earliestDatestamp>
+    <deletedRecord>no</deletedRecord>
+    <granularity>YYYY-MM-DDThh:mm:ssZ</granularity>
+    <description>
+      <Service xmlns="https://www.openaire.eu/cerif-profile/1.2/" id="pure.rug.nl">
+        <Compatibility xmlns="https://www.openaire.eu/cerif-profile/vocab/OpenAIRE_Service_Compatibility">https://www.openaire.eu/cerif-profile/vocab/OpenAIRE_Service_Compatibility#1.2</Compatibility>
+        <Acronym>pure.rug.nl</Acronym>
+        <Name xml:lang="en">University of Groningen Research Database</Name>
+        <Description xml:lang="en">This service is based on Pure.</Description>
+        <WebsiteURL>https://pure.rug.nl/portal</WebsiteURL>
+        <OAIPMHBaseURL>https://pure.rug.nl/ws/oai</OAIPMHBaseURL>
+      </Service>
+    </description>
+  </Identify>
+</OAI-PMH>

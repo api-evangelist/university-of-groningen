@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- generated: 2026-08-30 | method: probed | operator: institution
+     source: https://pure.rug.nl/ws/oai?verb=Bogus
+     http-status: 200 | content-type: application/xml
+     Verbatim badVerb error response. Note the HTTP status is 200; the failure is inside the XML. Captured live by API Evangelist; not a University of Groningen publication. -->
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd https://www.openaire.eu/cerif-profile/1.2/ https://www.openaire.eu/schema/cris/1.2/openaire-cerif-profile.xsd">
+  <responseDate>2026-08-30T19:11:20Z</responseDate>
+  <request>https://pure.rug.nl/ws/oai</request>
+  <error code="badVerb">Value of the verb argument is not a legal OAI-PMH verb, the verb argument is missing, or the verb argument is repeated.</error>
+</OAI-PMH>

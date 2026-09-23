@@ -1,0 +1,26 @@
+{
+  "x-generated": "2026-08-30",
+  "x-method": "probed",
+  "x-source": "https://ocasys.rug.nl/api/2026-2027/program",
+  "x-description": "RFC 9457 problem detail returned when the required searchTerm parameter is omitted.",
+  "x-operator": "institution",
+  "request": {
+    "method": "GET",
+    "url": "https://ocasys.rug.nl/api/2026-2027/program",
+    "headers": {
+      "Accept": "application/json"
+    },
+    "auth": "none"
+  },
+  "response": {
+    "status": 400,
+    "content-type": "application/problem+json",
+    "body": {
+      "type": "about:blank",
+      "title": "Bad Request",
+      "status": 400,
+      "detail": "Required parameter 'searchTerm' is not present.",
+      "instance": "/api/2026-2027/program"
+    }
+  }
+}

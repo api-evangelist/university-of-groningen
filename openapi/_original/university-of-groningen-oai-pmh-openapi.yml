@@ -1,0 +1,107 @@
+# x-archived-from: university-of-groningen-oai-pmh-openapi.yml
+# x-archived-on: 2026-09-16
+# authorship: derived by API Evangelist from live probes of the University of Groningen's
+# own OAI-PMH endpoint on 2026-08-30. The University publishes no OpenAPI for it; the
+# protocol is OAI-PMH 2.0 and the parameters below are the protocol's, constrained to the
+# metadata prefixes and sets this repository actually answers with.
+x-method: probed
+x-generated: '2026-08-30'
+x-operator: institution
+x-source:
+  - https://pure.rug.nl/ws/oai?verb=Identify
+  - https://pure.rug.nl/ws/oai?verb=ListMetadataFormats
+  - https://pure.rug.nl/ws/oai?verb=ListSets
+  - https://pure.rug.nl/ws/oai?verb=ListIdentifiers&metadataPrefix=oai_dc
+  - https://pure.rug.nl/ws/oai?verb=Bogus
+openapi: 3.1.0
+info:
+  title: University of Groningen Research Database OAI-PMH
+  version: '2.0'
+  summary: Keyless OAI-PMH 2.0 harvesting over the University of Groningen research record.
+  description: >-
+    The University of Groningen Research Database exposes its research outputs, persons, projects,
+    organizational units, events, equipment and patents for harvesting over OAI-PMH 2.0 at
+    pure.rug.nl/ws/oai. Verified live 2026-08-30: Identify reports protocolVersion 2.0,
+    repositoryName "University of Groningen Research Database", adminEmail pure@rug.nl, earliest
+    datestamp 2014-03-11, deletedRecord "no" and second-level granularity; ListIdentifiers over
+    oai_dc reports a completeListSize of 1,521,703. Six metadata prefixes are offered, including the
+    OpenAIRE CERIF 1.2 CRIS profile whose person records carry resolvable ORCID iDs. The CRIS
+    software underneath is Elsevier Pure, but this harvesting surface carries the University's own
+    sets, profiles, repository name and contact, and is served from rug.nl — so it is treated as
+    institution-operated. Every OAI-PMH response is HTTP 200, including protocol errors, which
+    carry an <error code> element inside the XML body instead.
+  contact:
+    name: University of Groningen — Pure support
+    email: pure@rug.nl
+    url: https://www.rug.nl/library/support/pure/?lang=en
+  termsOfService: https://www.rug.nl/info/disclaimer-copyright
+servers:
+  - url: https://pure.rug.nl/ws
+    description: Institution-operated OAI-PMH base (verified live 2026-08-30)
+tags:
+  - name: OAI-PMH
+    description: The six verbs of the Open Archives Initiative Protocol for Metadata Harvesting 2.0.
+paths:
+  /oai:
+    get:
+      tags: [OAI-PMH]
+      operationId: oaiPmhRequest
+      summary: Issue an OAI-PMH request
+      description: >-
+        A single endpoint dispatching on the verb parameter. Responses are always application/xml
+        with HTTP 200; protocol failures are reported as an <error> element with an OAI-PMH error
+        code (badVerb, badArgument, idDoesNotExist, cannotDisseminateFormat, noRecordsMatch,
+        badResumptionToken, noSetHierarchy, noMetadataFormats).
+      parameters:
+        - name: verb
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [Identify, ListMetadataFormats, ListSets, ListIdentifiers, ListRecords, GetRecord]
+        - name: metadataPrefix
+          in: query
+          required: false
+          description: Required for ListIdentifiers, ListRecords and GetRecord.
+          schema:
+            type: string
+            enum: [oai_cerif_openaire, qdc, oai_dc, nl_didl, mods, xmetadiss]
+        - name: set
+          in: query
+          required: false
+          description: >-
+            Set to harvest. This repository offers the seven OpenAIRE CRIS sets
+            (openaire_cris_publications, _patents, _persons, _orgunits, _events, _equipments,
+            _products) plus persons:all and per-year publication sets from 1770 onward,
+            each with a :withFiles variant.
+          schema: { type: string }
+        - name: identifier
+          in: query
+          required: false
+          description: OAI identifier, required for GetRecord.
+          schema: { type: string }
+        - name: from
+          in: query
+          required: false
+          description: Lower bound on datestamp, granularity YYYY-MM-DDThh:mm:ssZ.
+          schema: { type: string }
+        - name: until
+          in: query
+          required: false
+          description: Upper bound on datestamp, granularity YYYY-MM-DDThh:mm:ssZ.
+          schema: { type: string }
+        - name: resumptionToken
+          in: query
+          required: false
+          description: Continuation token for a paged list response; exclusive of all other arguments but verb.
+          schema: { type: string }
+      responses:
+        '200':
+          description: >-
+            An OAI-PMH XML envelope. Protocol errors also return 200 with an <error code> element,
+            so a client MUST parse the body rather than trust the status code.
+          content:
+            application/xml:
+              schema:
+                type: string
+                contentMediaType: application/xml

@@ -1,0 +1,261 @@
+{
+  "x-generated": "2026-08-30",
+  "x-method": "probed",
+  "x-source": "https://ocasys.rug.nl/api/2026-2027/course?searchTerm=biology",
+  "x-description": "Course search within the 2026-2027 academic year. Trimmed to the first three matches; the live response is longer.",
+  "x-operator": "institution",
+  "request": {
+    "method": "GET",
+    "url": "https://ocasys.rug.nl/api/2026-2027/course?searchTerm=biology",
+    "headers": {
+      "Accept": "application/json"
+    },
+    "auth": "none"
+  },
+  "response": {
+    "status": 200,
+    "content-type": "application/json",
+    "body": [
+      {
+        "id": "b4d3ecd0-ec88-474c-98ad-7644c799dee9",
+        "code": "WMMB015-05",
+        "title": {
+          "en": "Academic Skills in Marine Biology",
+          "nl": "Academic Skills in Marine Biology"
+        },
+        "levels": [
+          "MASTER"
+        ],
+        "credits": 5.0,
+        "otherPeriods": false,
+        "draft": true,
+        "duration": 0,
+        "facultyTitle": {
+          "en": "Science and Engineering",
+          "nl": "Science and Engineering"
+        },
+        "organizationalUnitTitle": {
+          "en": "Cluster Biology",
+          "nl": "Cluster Biology"
+        },
+        "courseOfferings": [
+          {
+            "id": "f4c1b012-f77f-42f0-9b41-313af7f1667c",
+            "term": {
+              "id": "b81304b5-ae93-4502-94f0-d8790f0854c8",
+              "orgUnit": {
+                "id": "2591c619-3e53-4bb7-8d1a-0c5a2870dbbc",
+                "code": "fse",
+                "titleEn": "Science and Engineering",
+                "titleNl": "Science and Engineering",
+                "ouClass": "FACULTY",
+                "parent": null
+              },
+              "ugTerms": [
+                "TERM1B"
+              ],
+              "academicYear": "2026-2027",
+              "startDate": [
+                2026,
+                11,
+                30
+              ],
+              "endDate": [
+                2026,
+                12,
+                20
+              ],
+              "nameEn": "Blok 1b.2",
+              "nameNl": "Blok 1b.2",
+              "code": "TERM_1b2",
+              "facultySpecific": true
+            },
+            "language": [
+              "ENGLISH"
+            ],
+            "coordinators": [
+              {
+                "id": "3c7f3487-1710-4635-b5d0-2e8fdd4e4e41",
+                "username": "",
+                "givenName": "Elise",
+                "familyName": "Laetz",
+                "titlePrefix": "",
+                "titleSuffix": "PhD",
+                "initials": "E.M.J.",
+                "customText": "",
+                "roles": [
+                  "COORDINATOR",
+                  "LECTURER"
+                ],
+                "mepaId": "e.m.j.laetz",
+                "email": "E.M.J.Laetz@rug.nl",
+                "sortIndex": 0
+              }
+            ]
+          }
+        ],
+        "yearVisible": true
+      },
+      {
+        "id": "e334c52b-dd36-4459-aee2-ec2b00dbeadd",
+        "code": "WBBE026-04",
+        "title": {
+          "en": "Microbiology",
+          "nl": "Microbiology"
+        },
+        "levels": [
+          "BACHELOR"
+        ],
+        "credits": 4.0,
+        "otherPeriods": false,
+        "draft": false,
+        "duration": 0,
+        "facultyTitle": {
+          "en": "Science and Engineering",
+          "nl": "Science and Engineering"
+        },
+        "organizationalUnitTitle": {
+          "en": "Cluster Engineering",
+          "nl": "Cluster Engineering"
+        },
+        "courseOfferings": [
+          {
+            "id": "341dcd21-6e03-4a46-a2fa-dc1f50758d99",
+            "term": {
+              "id": "d44ad4f0-afbb-43e1-954b-49c8782e85c4",
+              "orgUnit": {
+                "id": "0f3ff37e-8d4a-437e-a32a-1bee94492552",
+                "code": "rug",
+                "titleEn": "University of Groningen",
+                "titleNl": "Rijksuniversiteit Groningen",
+                "ouClass": "UNIVERSITY",
+                "parent": null
+              },
+              "ugTerms": [
+                "TERM2B"
+              ],
+              "academicYear": "2026-2027",
+              "startDate": [
+                2027,
+                4,
+                12
+              ],
+              "endDate": [
+                2027,
+                6,
+                20
+              ],
+              "nameEn": "Semester 2b",
+              "nameNl": "Semester 2b",
+              "code": "TERM2B",
+              "facultySpecific": false
+            },
+            "language": [
+              "ENGLISH"
+            ],
+            "coordinators": [
+              {
+                "id": "81b96fe5-5b8c-4b45-ac1a-bbe4a001a122",
+                "username": "",
+                "givenName": "Brandon",
+                "familyName": "Peterson",
+                "titlePrefix": "dr",
+                "titleSuffix": "",
+                "initials": "B.W.",
+                "customText": "",
+                "roles": [
+                  "COORDINATOR",
+                  "LECTURER"
+                ],
+                "mepaId": "b.w.peterson",
+                "email": "b.w.peterson@umcg.nl",
+                "sortIndex": 0
+              }
+            ]
+          }
+        ],
+        "yearVisible": true
+      },
+      {
+        "id": "90521306-995f-45a8-8b99-60429980740d",
+        "code": "WBBY003-05",
+        "title": {
+          "en": "Chronobiology",
+          "nl": "Chronobiology"
+        },
+        "levels": [
+          "BACHELOR"
+        ],
+        "credits": 5.0,
+        "otherPeriods": false,
+        "draft": true,
+        "duration": 0,
+        "facultyTitle": {
+          "en": "Science and Engineering",
+          "nl": "Science and Engineering"
+        },
+        "organizationalUnitTitle": {
+          "en": "Cluster Biology",
+          "nl": "Cluster Biology"
+        },
+        "courseOfferings": [
+          {
+            "id": "f70f27a8-aacd-4cfb-8c32-8e62bdbc273e",
+            "term": {
+              "id": "874cb3a5-3ce4-4fa5-828b-361c367d09e7",
+              "orgUnit": {
+                "id": "2591c619-3e53-4bb7-8d1a-0c5a2870dbbc",
+                "code": "fse",
+                "titleEn": "Science and Engineering",
+                "titleNl": "Science and Engineering",
+                "ouClass": "FACULTY",
+                "parent": null
+              },
+              "ugTerms": [
+                "TERM1A"
+              ],
+              "academicYear": "2026-2027",
+              "startDate": [
+                2026,
+                10,
+                12
+              ],
+              "endDate": [
+                2026,
+                11,
+                1
+              ],
+              "nameEn": "Blok 1a.3",
+              "nameNl": "Blok 1a.3",
+              "code": "TERM_1a3",
+              "facultySpecific": true
+            },
+            "language": [
+              "ENGLISH"
+            ],
+            "coordinators": [
+              {
+                "id": "6906aab2-f9e0-485f-a084-4267af4d79ad",
+                "username": "",
+                "givenName": "Roelof",
+                "familyName": "Hut",
+                "titlePrefix": "prof dr",
+                "titleSuffix": "",
+                "initials": "R.A.",
+                "customText": "",
+                "roles": [
+                  "COORDINATOR",
+                  "LECTURER"
+                ],
+                "mepaId": "r.a.hut",
+                "email": "R.A.Hut@rug.nl",
+                "sortIndex": 0
+              }
+            ]
+          }
+        ],
+        "yearVisible": true
+      }
+    ]
+  }
+}

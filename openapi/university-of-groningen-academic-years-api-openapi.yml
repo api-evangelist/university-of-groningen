@@ -1,0 +1,87 @@
+openapi: 3.2.0
+info:
+  title: University of Groningen Ocasys Course Catalog Academic…
+  version: 2026-2027
+  summary: Keyless read API behind Ocasys, the University of Groningen course and programme catalog.
+  description: Ocasys (ocasys.rug.nl) is the University of Groningen's own course and degree-programme catalog.
+  contact:
+    name: University of Groningen — Center for Information Technology
+    url: https://www.rug.nl/society-business/center-for-information-technology/
+  termsOfService: https://www.rug.nl/info/disclaimer-copyright
+  license:
+    name: No licence published for the interface or its data
+    identifier: NOASSERTION
+servers:
+- url: https://ocasys.rug.nl/api
+  description: Production Ocasys backend (institution-operated, verified live 2026-08-30)
+tags:
+- name: Academic Years
+  description: Which academic years the catalog holds and when the next one starts.
+paths:
+  /year-status:
+    get:
+      tags:
+      - Academic Years
+      operationId: listAcademicYears
+      summary: List every academic year the catalog holds
+      description: Returns each academic year with its identifier and whether it is active. Observed 200 with 40+ years, earliest 2010-2011.
+      responses:
+        '200':
+          description: Academic years
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  years:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AcademicYear'
+  /year/next-academic-year-start-date:
+    get:
+      tags:
+      - Academic Years
+      operationId: getNextAcademicYearStartDate
+      summary: Start date of the next academic year
+      description: Returns a bare [year, month, day] array — a Java LocalDate serialized as an array, not an ISO-8601 string.
+      responses:
+        '200':
+          description: Date as a three-element array
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: integer
+                minItems: 3
+                maxItems: 3
+                examples:
+                - - 2026
+                  - 8
+                  - 31
+components:
+  schemas:
+    AcademicYear:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        year:
+          type: string
+          examples:
+          - 2026-2027
+        active:
+          type: boolean
+x-method: probed
+x-generated: '2026-08-30'
+x-source:
+- https://ocasys.rug.nl/api/year-status
+- https://ocasys.rug.nl/api/orgunit/faculties-and-universities
+- https://ocasys.rug.nl/api/2026-2027/course?searchTerm=biology
+- https://ocasys.rug.nl/api/2026-2027/course/WMMB015-05
+- https://ocasys.rug.nl/api/2026-2027/course/page/WMMB015-05
+- https://ocasys.rug.nl/api/2026-2027/program?searchTerm=biology
+- https://ocasys.rug.nl/api/2026-2027/option-list
+- https://ocasys.rug.nl/api/year/next-academic-year-start-date
+x-operator: institution

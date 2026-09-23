@@ -1,0 +1,84 @@
+openapi: 3.2.0
+info:
+  title: University of Groningen Ocasys Course Catalog Option Lists…
+  version: 2026-2027
+  summary: Keyless read API behind Ocasys, the University of Groningen course and programme catalog.
+  description: Ocasys (ocasys.rug.nl) is the University of Groningen's own course and degree-programme catalog.
+  contact:
+    name: University of Groningen — Center for Information Technology
+    url: https://www.rug.nl/society-business/center-for-information-technology/
+  termsOfService: https://www.rug.nl/info/disclaimer-copyright
+  license:
+    name: No licence published for the interface or its data
+    identifier: NOASSERTION
+servers:
+- url: https://ocasys.rug.nl/api
+  description: Production Ocasys backend (institution-operated, verified live 2026-08-30)
+tags:
+- name: Option Lists
+  description: Controlled vocabularies used by course and programme records.
+paths:
+  /{academicYear}/option-list:
+    get:
+      tags:
+      - Option Lists
+      operationId: listOptions
+      summary: List the controlled option lists used by course and programme records
+      parameters:
+      - $ref: '#/components/parameters/AcademicYear'
+      responses:
+        '200':
+          description: Option list entries, bilingual
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Option'
+components:
+  schemas:
+    Option:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        textEn:
+          type: string
+        textNl:
+          type: string
+        position:
+          type: integer
+        handle:
+          type: string
+        path:
+          type: array
+          items:
+            type: string
+            format: uuid
+        ouIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+  parameters:
+    AcademicYear:
+      name: academicYear
+      in: path
+      required: true
+      description: Academic year in YYYY-YYYY form, e.g. 2026-2027. A value that does not parse returns 400.
+      schema:
+        type: string
+        pattern: ^[0-9]{4}-[0-9]{4}$
+x-method: probed
+x-generated: '2026-08-30'
+x-source:
+- https://ocasys.rug.nl/api/year-status
+- https://ocasys.rug.nl/api/orgunit/faculties-and-universities
+- https://ocasys.rug.nl/api/2026-2027/course?searchTerm=biology
+- https://ocasys.rug.nl/api/2026-2027/course/WMMB015-05
+- https://ocasys.rug.nl/api/2026-2027/course/page/WMMB015-05
+- https://ocasys.rug.nl/api/2026-2027/program?searchTerm=biology
+- https://ocasys.rug.nl/api/2026-2027/option-list
+- https://ocasys.rug.nl/api/year/next-academic-year-start-date
+x-operator: institution

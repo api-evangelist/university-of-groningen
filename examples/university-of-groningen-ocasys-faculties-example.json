@@ -1,0 +1,61 @@
+{
+  "x-generated": "2026-08-30",
+  "x-method": "probed",
+  "x-source": "https://ocasys.rug.nl/api/orgunit/faculties-and-universities",
+  "x-description": "Faculties and the university root organizational unit, trimmed to five entries.",
+  "x-operator": "institution",
+  "request": {
+    "method": "GET",
+    "url": "https://ocasys.rug.nl/api/orgunit/faculties-and-universities",
+    "headers": {
+      "Accept": "application/json"
+    },
+    "auth": "none"
+  },
+  "response": {
+    "status": 200,
+    "content-type": "application/json",
+    "body": [
+      {
+        "id": "3b4d6db6-ca4c-421c-85b1-e1602e8b89c9",
+        "code": "rcs",
+        "titleEn": "Religion, Culture and Society",
+        "titleNl": "Religie, Cultuur en Maatschappij",
+        "ouClass": "FACULTY",
+        "parent": "0f3ff37e-8d4a-437e-a32a-1bee94492552"
+      },
+      {
+        "id": "2ed7c1b9-c84f-4886-9d26-d467b9997703",
+        "code": "let",
+        "titleEn": "Arts",
+        "titleNl": "Letteren",
+        "ouClass": "FACULTY",
+        "parent": "0f3ff37e-8d4a-437e-a32a-1bee94492552"
+      },
+      {
+        "id": "aa6eb62e-8954-4d1b-93ef-7109766f7cfa",
+        "code": "feb",
+        "titleEn": "Economics and Business",
+        "titleNl": "Economie en Bedrijfskunde",
+        "ouClass": "FACULTY",
+        "parent": "0f3ff37e-8d4a-437e-a32a-1bee94492552"
+      },
+      {
+        "id": "a2b5b4ae-f982-4bfd-a3a4-6d958e0d08bc",
+        "code": "ucg",
+        "titleEn": "University College",
+        "titleNl": "University College Groningen",
+        "ouClass": "FACULTY",
+        "parent": "0f3ff37e-8d4a-437e-a32a-1bee94492552"
+      },
+      {
+        "id": "79ad82b2-3ea8-4c78-ac12-57f6a8b7dfff",
+        "code": "honours",
+        "titleEn": "Honours College",
+        "titleNl": "Honours College",
+        "ouClass": "FACULTY",
+        "parent": "0f3ff37e-8d4a-437e-a32a-1bee94492552"
+      }
+    ]
+  }
+}

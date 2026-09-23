@@ -1,0 +1,34 @@
+{
+  "provider": "university-of-groningen",
+  "sources": [
+    "_original/university-of-groningen-course-catalog-api.yaml",
+    "_original/university-of-groningen-oai-pmh-openapi.yml"
+  ],
+  "outputs": [
+    "university-of-groningen-academic-years-api-openapi.yml",
+    "university-of-groningen-courses-api-openapi.yml",
+    "university-of-groningen-option-lists-api-openapi.yml",
+    "university-of-groningen-organization-api-openapi.yml",
+    "university-of-groningen-programmes-api-openapi.yml",
+    "university-of-groningen-oai-pmh-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "1 archived document(s) dropped as subsets of other archived documents",
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "university-of-groningen-course-catalog-api.yaml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "university-of-groningen-oai-pmh-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "_original/university-of-groningen-oai-pmh.yaml: archived document superseded by a larger archived document",
+    "university-of-groningen-academic-years-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "university-of-groningen-courses-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "university-of-groningen-oai-pmh-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "university-of-groningen-option-lists-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "university-of-groningen-organization-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "university-of-groningen-programmes-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
+}

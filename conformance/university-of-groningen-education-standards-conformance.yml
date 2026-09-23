@@ -1,0 +1,108 @@
+specification: API Commons Conformance
+specificationVersion: '0.1'
+provider: University of Groningen
+providerId: university-of-groningen
+generated: '2026-08-30'
+method: probed
+x-operator: institution
+regime: education
+description: >-
+  Conformance to the education-regime domain standards, established by probing live endpoints on
+  2026-08-30 rather than by reading prose claims. Only standards with a fetched, inspected response
+  are recorded as met. Everything the University of Groningen does not demonstrably implement on a
+  surface it operates is listed as not-observed, with the reason — an absent standard is a
+  measurement, not a gap to be filled with a guess.
+source:
+  - https://pure.rug.nl/ws/oai?verb=Identify
+  - https://pure.rug.nl/ws/oai?verb=ListMetadataFormats
+  - https://pure.rug.nl/ws/oai?verb=ListRecords&metadataPrefix=oai_cerif_openaire&set=openaire_cris_persons
+  - https://signon.rug.nl/nidp/saml2/metadata
+  - https://technical.edugain.org/api.php?action=list_entities
+conformance:
+  - standard: oai-pmh
+    name: Open Archives Initiative Protocol for Metadata Harvesting 2.0
+    status: met
+    operator: institution
+    detail: >-
+      pure.rug.nl/ws/oai answers the full OAI-PMH verb set over the UG research portal. Identify
+      returns protocolVersion 2.0 with granularity YYYY-MM-DDThh:mm:ssZ; ListMetadataFormats returns
+      six prefixes — oai_cerif_openaire, qdc, oai_dc, nl_didl, mods, xmetadiss; ListSets returns the
+      seven OpenAIRE CRIS sets plus per-year publication sets back to 1770. The repository software
+      is Elsevier Pure, but the harvesting endpoint is served from the institution's own host and is
+      the institution's published harvesting surface.
+    evidence:
+      - url: https://pure.rug.nl/ws/oai?verb=Identify
+        status: 200
+        locator: /OAI-PMH/Identify/protocolVersion
+      - url: https://pure.rug.nl/ws/oai?verb=ListMetadataFormats
+        status: 200
+        locator: /OAI-PMH/ListMetadataFormats/metadataFormat/metadataPrefix
+      - url: https://pure.rug.nl/ws/oai?verb=ListSets
+        status: 200
+        locator: /OAI-PMH/ListSets/set/setSpec
+  - standard: saml
+    name: SAML 2.0 Web Browser SSO
+    status: met
+    operator: institution
+    detail: >-
+      signon.rug.nl publishes SAML 2.0 metadata for entityID
+      https://signon.rug.nl/nidp/saml2/metadata, carrying IDPSSODescriptor, SPSSODescriptor and
+      AttributeAuthorityDescriptor roles, HTTP-POST / HTTP-Redirect / HTTP-Artifact / SOAP bindings,
+      OrganizationName "Rijksuniversiteit Groningen" and technical contact cit-iam@list.rug.nl.
+      Institution-operated by definition — the University runs its own identity provider.
+    evidence:
+      - url: https://signon.rug.nl/nidp/saml2/metadata
+        status: 200
+        locator: /EntityDescriptor[@entityID='https://signon.rug.nl/nidp/saml2/metadata']/IDPSSODescriptor
+  - standard: shibboleth
+    name: Research and education identity federation (eduGAIN / SURFconext)
+    status: met
+    operator: institution
+    detail: >-
+      The University's identity provider is registered in eduGAIN through SURFconext as registration
+      authority (entity id 727955, IDPSSODescriptor, display name "University of Groningen /
+      Rijksuniversiteit Groningen"). A second entity, https://enlight.hpc.rug.nl/, is registered by
+      the same institution as a service provider. Recorded under the education regime's Shibboleth
+      slot as federated R&E SSO participation; note the software is NetIQ Access Manager, not the
+      Shibboleth implementation — the federation membership is the fact, not the product.
+    evidence:
+      - url: https://technical.edugain.org/api.php?action=list_entities
+        status: 200
+        locator: entityid=https://signon.rug.nl/nidp/saml2/metadata, regauth=http://www.surfconext.nl/
+  - standard: orcid
+    name: ORCID researcher identifiers
+    status: met
+    operator: institution
+    detail: >-
+      Person records in the OpenAIRE CRIS set served from the institution's own OAI-PMH endpoint
+      carry ORCID identifiers in the form https://orcid.org/0000-0001-... , so researcher identity in
+      the University's published metadata is ORCID-resolvable.
+    evidence:
+      - url: https://pure.rug.nl/ws/oai?verb=ListRecords&metadataPrefix=oai_cerif_openaire&set=openaire_cris_persons
+        status: 200
+        locator: cerif:Person/cerif:ORCID
+not_observed:
+  - standard: scim
+    reason: No SCIM endpoint found on any rug.nl host; identity provisioning is internal.
+  - standard: lti
+    reason: >-
+      The University runs Brightspace and its GitHub organization holds an LTI 1.3 JWT library, but
+      that repository is a fork of upstream work and no LTI platform or tool endpoint is publicly
+      advertised on a rug.nl host.
+  - standard: oneroster
+    reason: Not applicable to a Dutch research university; no OneRoster surface found.
+  - standard: ed-fi
+    reason: US K-12 data standard; not applicable and not found.
+  - standard: caliper
+    reason: No Caliper analytics endpoint found on any institution host.
+  - standard: qti
+    reason: No QTI item or assessment interface published publicly.
+  - standard: datacite
+    reason: >-
+      Research-data DOIs for the University are minted through DataverseNL, which DANS/SURF operates
+      at dataverse.nl. Any DataCite conformance there is the platform's, not the institution's, so it
+      is deliberately not claimed here.
+  - standard: crossref
+    reason: >-
+      Publication records exposed over OAI-PMH cite publisher-registered Crossref DOIs. Citing a DOI
+      is not operating a Crossref interface, so this is not recorded as conformance.

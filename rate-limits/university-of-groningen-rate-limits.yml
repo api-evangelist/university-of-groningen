@@ -4,7 +4,7 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: University of Groningen
 providerId: university-of-groningen
 created: '2026-06-03'
-modified: '2026-06-03'
+modified: '2026-08-30'
 reconciled: false
 tags:
 - Education
@@ -12,9 +12,10 @@ tags:
 - University
 - Rate Limiting
 description: >-
-  University of Groningen does not publish a unified public rate-limit table across its APIs. Open
-  metadata and harvesting endpoints (OAI-PMH, IIIF, library) may throttle large-scale
-  or automated harvesting; clients should harvest politely, honor Retry-After, and
+  University of Groningen does not publish a unified public rate-limit table across its APIs. The keyless
+  course-catalog API at ocasys.rug.nl and the OAI-PMH endpoint at pure.rug.nl/ws/oai publish no
+  limit and returned no rate-limit headers when probed on 2026-08-30; they may still throttle
+  large-scale or automated harvesting, clients should harvest politely, honor Retry-After, and
   contact the relevant service for bulk access.
 notes: Confirm per-service limits with each API's documentation; harvest responsibly.
 sources:

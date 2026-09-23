@@ -1,0 +1,60 @@
+vocabulary:
+  name: University of Groningen Ocasys Course Catalog Vocabulary
+  provider: University of Groningen
+  providerId: university-of-groningen
+  generated: '2026-08-30'
+  method: probed
+  x-operator: institution
+  source:
+    - https://ocasys.rug.nl/api/2026-2027/course?searchTerm=science
+    - https://ocasys.rug.nl/api/2026-2027/program?searchTerm=science
+    - https://ocasys.rug.nl/api/orgunit/faculties-and-universities
+    - https://ocasys.rug.nl/api/2026-2027/course/WMMB015-05
+  description: >-
+    The terms the University of Groningen's own course catalog actually uses on the wire. Every
+    value below was counted from live responses on 2026-08-30 across several search terms; none is
+    taken from documentation, because the University publishes none for this interface.
+  terms:
+    - term: level
+      definition: The study level a course or degree programme sits at.
+      values: [MASTER, BACHELOR, EXCHANGE, PRE_MASTER, UNIVERSITY_LEVEL_MINOR, FACULTY_LEVEL_MINOR, POST_GRADUATE]
+      note: >-
+        The two minor levels and EXCHANGE are Dutch-system specific and have no equivalent in
+        US-shaped course vocabularies; a client that maps only bachelor/master loses about a tenth
+        of the catalog.
+    - term: ouClass
+      definition: The class of organizational unit that owns a course or programme.
+      values: [UNIVERSITY, FACULTY, DEPARTMENT]
+      note: The faculties-and-universities endpoint returns one UNIVERSITY root and fifteen faculties.
+    - term: language
+      definition: Language of instruction for a degree programme.
+      values: [ENGLISH, DUTCH]
+    - term: term
+      definition: The part of the academic year a programme runs in.
+      values: [WHOLE_YEAR]
+      note: Only WHOLE_YEAR was observed at programme level; course offerings carry finer-grained term values.
+    - term: credits
+      definition: Study load in ECTS credits. Courses are typically 5; degree programmes 120 for a two-year master.
+    - term: code
+      definition: >-
+        Catalog identifier. Courses use a faculty-prefixed form with a credit suffix (WMMB015-05);
+        programmes use a numeric CROHO-style pair (60609-5508). Course offerings extend the course
+        code with year and period (WMMB015-05.2026-2027.1).
+    - term: enlight
+      definition: Whether the course is offered through the ENLIGHT European university alliance.
+      values: [NOT_ENLIGHT]
+      note: >-
+        Only the negative value appeared in the sample; the field exists because the University is an
+        ENLIGHT member, which is an institutional fact worth recording even where the flag is unset.
+    - term: sustainableDevelopmentGoals
+      definition: >-
+        Per-course boolean flags goal1..goal17, mapping each course unit to the seventeen UN
+        Sustainable Development Goals. A genuinely unusual field to find in a course API and one of
+        the few places an institution's policy commitments reach the wire.
+    - term: draft
+      definition: Whether the record is still being edited by the faculty for the given academic year.
+      note: Draft courses are returned by the public search; a consumer must filter them itself.
+    - term: modifiedAt
+      definition: >-
+        Last-modified timestamp, serialized as a Java date-time integer array
+        ([year, month, day, hour, minute, second, nanos]) rather than as an ISO-8601 string.

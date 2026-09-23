@@ -1,0 +1,75 @@
+# authorship: written by API Evangelist as a Spectral ruleset for the University of
+# Groningen's own Ocasys course-catalog contract. It encodes conventions MEASURED from
+# the live API on 2026-08-30 — bilingual title objects, YYYY-YYYY academic-year paths,
+# RFC 9457 problem bodies. It is not a University of Groningen publication.
+generated: '2026-08-30'
+method: derived
+source: openapi/university-of-groningen-course-catalog-api-openapi.yml
+x-operator: institution
+formats:
+  - oas3
+rules:
+  ug-servers-institution-host:
+    description: Server URLs must sit on a University of Groningen host — a vendor host means the contract is not the institution's.
+    severity: error
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: '^https://[a-z0-9.-]*rug\.nl(/|$)'
+  ug-servers-https:
+    description: Server URLs must use HTTPS.
+    severity: error
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: '^https://'
+  ug-info-contact:
+    description: The contract must name a contact at the institution that operates it.
+    severity: warn
+    given: $.info
+    then:
+      field: contact
+      function: truthy
+  ug-info-terms:
+    description: The contract should point at the institution's published terms.
+    severity: warn
+    given: $.info
+    then:
+      field: termsOfService
+      function: truthy
+  ug-operation-id:
+    description: Every operation needs an operationId so agents and generators can address it.
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: operationId
+      function: truthy
+  ug-operation-tagged:
+    description: Every operation must be tagged so the catalog can be split by resource.
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: tags
+      function: truthy
+  ug-academic-year-pattern:
+    description: An academicYear path parameter must constrain itself to YYYY-YYYY; the backend 400s on anything else.
+    severity: warn
+    given: $.components.parameters.AcademicYear.schema
+    then:
+      field: pattern
+      function: truthy
+  ug-problem-media-type:
+    description: Error responses must be served as application/problem+json, matching what the backend actually emits.
+    severity: warn
+    given: $.components.responses[*].content
+    then:
+      field: application/problem+json
+      function: truthy
+  ug-gated-operation-documented:
+    description: An operation that requires an institutional session must say so rather than appear callable.
+    severity: warn
+    given: $.paths[*][get].responses
+    then:
+      function: truthy

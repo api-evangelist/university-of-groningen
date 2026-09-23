@@ -1,0 +1,151 @@
+slug: university-of-groningen
+provider: University of Groningen
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Education
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 13
+edges:
+- tag: ethicalReview
+  spec_file: university-of-groningen-ethicalreview-api-openapi.yml
+  capability_id: BC-4780.30
+  capability_id_l1: BC-4780
+  capability_name: Research Ethics & Integrity Oversight
+  confidence: 0.9
+  evidence: '"GET /ethical-reviews  ethicalReview_list  Lists all ethicalReviews", "A list of allowed
+    ethical review types", schemas "ApplicationRef", "Workflow", "MilestoneReminder"'
+  reason: Records and workflow for ethical review of research, linked to research applications with review
+    types, persons' roles and milestone reminders — squarely research ethics oversight in a research administration
+    system.
+- tag: researchOutput
+  spec_file: university-of-groningen-researchoutput-api-openapi.yml
+  capability_id: BC-4780.40
+  capability_id_l1: BC-4780
+  capability_name: Scholarly Output & Publication Management
+  confidence: 0.9
+  evidence: GET /research-outputs  researchOutput_list  Lists all research outputs; 'A list of allowed
+    article processing charge currencies'; 'A list of allowed contributor roles for the book anthology
+    subtype'
+  reason: Full lifecycle management of scholarly outputs (journal articles, books, conference contributions)
+    with APC, licence and access-type metadata — publication and scholarly-output stewardship.
+- tag: impact
+  spec_file: university-of-groningen-impact-api-openapi.yml
+  capability_id: BC-4780.60
+  capability_id_l1: BC-4780
+  capability_name: Research Impact & Assessment
+  confidence: 0.88
+  evidence: '"A list of allowed impact categories", "A list of allowed impact evidence indicators", "A
+    list of allowed impact levels", schemas "ImpactActivityAssociation", "ImpactDataSetAssociation"'
+  reason: Records of research impact with categories, levels and evidence indicators linked to activities,
+    data sets and press/media — this is research impact case-study and assessment management as used for
+    national research assessment exercises.
+- tag: application
+  spec_file: university-of-groningen-application-api-openapi.yml
+  capability_id: BC-4780.20
+  capability_id_l1: BC-4780
+  capability_name: Research Grant Management
+  confidence: 0.85
+  evidence: '"Lists all applications"; "A list of allowed applicant roles"; "A list of allowed account
+    classifications"; schemas "ApplicationBudget", "ApplicationFundingAssociation"'
+  reason: Pure 'applications' are research funding applications with applicants, budgets and funding associations
+    — the pre-award stage of research grant lifecycle management.
+- tag: award
+  spec_file: university-of-groningen-award-api-openapi.yml
+  capability_id: BC-4780.20
+  capability_id_l1: BC-4780
+  capability_name: Research Grant Management
+  confidence: 0.85
+  evidence: '"Lists all awards"; "A list of allowed award holder roles"; "A list of allowed funding classifications";
+    schemas "AwardFundingAssociation", "AwardBudgetResult"'
+  reason: Pure 'awards' are funded research grants with award holders, funders and budgets — the post-award
+    side of research grant and contract management.
+- tag: fundingOpportunity
+  spec_file: university-of-groningen-fundingopportunity-api-openapi.yml
+  capability_id: BC-4780.20
+  capability_id_l1: BC-4780
+  capability_name: Research Grant Management
+  confidence: 0.85
+  evidence: '"GET /funding-opportunities  fundingOpportunity_list  Lists all funding opportunities", "A
+    list of allowed classified eligibility types", "allowed-classified-academic-degree-eligibility-types"'
+  reason: Management of research funding opportunities with eligibility criteria, documents and classifications
+    — the opportunity-identification front end of research grant lifecycle management in a university
+    CRIS.
+- tag: user
+  spec_file: university-of-groningen-user-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.8
+  evidence: 'POST /users/{uuid}/actions/reset-password  user_resetPassword; PUT /users/{uuid}/roles  user_update_roles_for_user  Updates
+    roles; schemas: GlobalRoleAssignment, LocalRoleAssignment, AssignableRoleRef'
+  reason: Application user account CRUD, password reset and role assignment — identity and access management,
+    not a domain business capability.
+- tag: Roles
+  spec_file: university-of-groningen-roles-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.78
+  evidence: POST /roles  Roles_createNewRole; GET /roles/userSelectable  Roles_getUserSelectableRoles
+  reason: Creation, viewing and deletion of authorisation roles assignable to users — role-based access
+    control administration, i.e. identity & access management.
+- tag: Users
+  spec_file: university-of-groningen-users-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.72
+  evidence: POST /users/register  Users_registerOIDCUser; POST /users/token/recreate; POST /users/{identifier}/removeRoles
+  reason: Account registration via OIDC, API token lifecycle, identifier changes, account merging and
+    role removal — user identity and access administration, not student records.
+- tag: course
+  spec_file: university-of-groningen-course-api-openapi.yml
+  capability_id: BC-4700
+  capability_id_l1: BC-4700
+  capability_name: Curriculum & Programme Management
+  confidence: 0.72
+  evidence: '"Lists all courses"; "A list of allowed role types for course lecturers on a given course
+    occurrence"; "A list of allowed semester types for course occurrences"; "A list of allowed credit
+    types"'
+  reason: Course records with credits, formats, occurrences and lecturer roles constitute the institutional
+    course/module definition and catalogue; L1 given because the surface spans course specification and
+    catalogue publication.
+- tag: Datasets
+  spec_file: university-of-groningen-datasets-api-openapi.yml
+  capability_id: BC-4780.40
+  capability_id_l1: BC-4780
+  capability_name: Scholarly Output & Publication Management
+  confidence: 0.7
+  evidence: POST /datasets/modifyRegistrationPIDMetadataAll  Datasets_updateDatasetPIDMetadataAll; GET
+    /datasets/export  Datasets_exportDataset; GET /datasets/listCurationStates
+  reason: 'Core dataset lifecycle of a research-data repository: curation states, export, and persistent-identifier
+    (PID/DOI) registration metadata — stewardship of scholarly output and persistent identifiers.'
+- tag: Pids
+  spec_file: university-of-groningen-pids-api-openapi.yml
+  capability_id: BC-4780.40
+  capability_id_l1: BC-4780
+  capability_name: Scholarly Output & Publication Management
+  confidence: 0.7
+  evidence: POST /pids/{id}/reserve  Pids_reservePid; GET /pids/providers  Pids_getPidProviders
+  reason: Reservation and management of persistent identifiers (DOI/Handle) for deposited research datasets;
+    the sub-capability explicitly covers stewardship of scholarly output including persistent identifiers.
+- tag: activity
+  spec_file: university-of-groningen-activity-api-openapi.yml
+  capability_id: BC-4780
+  capability_id_l1: BC-4780
+  capability_name: Research & Scholarship Management
+  confidence: 0.7
+  evidence: '"Lists all activities"; "A list of allowed consultancy activity person roles"; "A list of
+    allowed editorial-work activity person roles" within an API for "managing research information data
+    in Pure"'
+  reason: Pure CRIS 'activities' are researcher scholarly/professional activities (editorial work, consultancy,
+    prizes, attendance) recorded as research information. This is higher-education research and scholarship
+    management; no single sub-capability (output, collaboration, impact) squarely covers the mixed activity
+    types, so mapped at L1.

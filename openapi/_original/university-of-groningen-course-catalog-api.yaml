@@ -1,0 +1,353 @@
+# authorship: derived by API Evangelist from live, unauthenticated probes of the
+# Ocasys course-catalog backend operated by the University of Groningen at
+# https://ocasys.rug.nl/api. The University publishes no OpenAPI of its own;
+# every path, parameter and response below was observed in a real HTTP exchange
+# on 2026-08-30. Nothing here is inferred from documentation, because there is none.
+x-method: probed
+x-generated: '2026-08-30'
+x-source:
+  - https://ocasys.rug.nl/api/year-status
+  - https://ocasys.rug.nl/api/orgunit/faculties-and-universities
+  - https://ocasys.rug.nl/api/2026-2027/course?searchTerm=biology
+  - https://ocasys.rug.nl/api/2026-2027/course/WMMB015-05
+  - https://ocasys.rug.nl/api/2026-2027/course/page/WMMB015-05
+  - https://ocasys.rug.nl/api/2026-2027/program?searchTerm=biology
+  - https://ocasys.rug.nl/api/2026-2027/option-list
+  - https://ocasys.rug.nl/api/year/next-academic-year-start-date
+x-operator: institution
+openapi: 3.1.0
+info:
+  title: University of Groningen Ocasys Course Catalog API
+  version: '2026-2027'
+  summary: Keyless read API behind Ocasys, the University of Groningen course and programme catalog.
+  description: >-
+    Ocasys (ocasys.rug.nl) is the University of Groningen's own course and degree-programme
+    catalog. Its single-page front end is served by a JSON REST backend under /api that answers
+    unauthenticated GET requests for academic years, faculties and departments, course search,
+    full course descriptions, degree-programme search and the controlled option lists the catalog
+    uses. The University does not document or version this interface publicly and does not
+    advertise it as a product; this contract was reconstructed from live probes so the surface can
+    be catalogued honestly. Write paths, enrollment, permissions and course-offering endpoints
+    exist in the same namespace and answer 403 without an institutional session — they are
+    described here only as gated, not as callable.
+  contact:
+    name: University of Groningen — Center for Information Technology
+    url: https://www.rug.nl/society-business/center-for-information-technology/
+  termsOfService: https://www.rug.nl/info/disclaimer-copyright
+  license:
+    name: No licence published for the interface or its data
+    identifier: NOASSERTION
+servers:
+  - url: https://ocasys.rug.nl/api
+    description: Production Ocasys backend (institution-operated, verified live 2026-08-30)
+tags:
+  - name: Academic Years
+    description: Which academic years the catalog holds and when the next one starts.
+  - name: Organization
+    description: Faculties and departments used to scope courses and programmes.
+  - name: Courses
+    description: Course search and full course descriptions.
+  - name: Programmes
+    description: Degree-programme search.
+  - name: Option Lists
+    description: Controlled vocabularies used by course and programme records.
+paths:
+  /year-status:
+    get:
+      tags: [Academic Years]
+      operationId: listAcademicYears
+      summary: List every academic year the catalog holds
+      description: Returns each academic year with its identifier and whether it is active. Observed 200 with 40+ years, earliest 2010-2011.
+      responses:
+        '200':
+          description: Academic years
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  years:
+                    type: array
+                    items: { $ref: '#/components/schemas/AcademicYear' }
+  /year/next-academic-year-start-date:
+    get:
+      tags: [Academic Years]
+      operationId: getNextAcademicYearStartDate
+      summary: Start date of the next academic year
+      description: Returns a bare [year, month, day] array — a Java LocalDate serialized as an array, not an ISO-8601 string.
+      responses:
+        '200':
+          description: Date as a three-element array
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { type: integer }
+                minItems: 3
+                maxItems: 3
+                examples: [[2026, 8, 31]]
+  /orgunit/faculties-and-universities:
+    get:
+      tags: [Organization]
+      operationId: listFacultiesAndUniversities
+      summary: List faculties and the university root organizational unit
+      responses:
+        '200':
+          description: Organizational units
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/OrganizationalUnit' }
+  /{academicYear}/course:
+    get:
+      tags: [Courses]
+      operationId: searchCourses
+      summary: Search courses within one academic year
+      parameters:
+        - $ref: '#/components/parameters/AcademicYear'
+        - name: searchTerm
+          in: query
+          required: true
+          description: Free-text term matched against course code and title. Omitting it returns 400 with a problem+json body.
+          schema: { type: string }
+      responses:
+        '200':
+          description: Matching course summaries
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/CourseSummary' }
+        '400':
+          $ref: '#/components/responses/ProblemBadRequest'
+  /{academicYear}/course/{courseCode}:
+    get:
+      tags: [Courses]
+      operationId: getCourse
+      summary: Get one course by its catalog code
+      parameters:
+        - $ref: '#/components/parameters/AcademicYear'
+        - $ref: '#/components/parameters/CourseCode'
+      responses:
+        '200':
+          description: Full course record including goals, description, assessments and offerings
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Course' }
+        '404':
+          $ref: '#/components/responses/ProblemNotFound'
+  /{academicYear}/course/page/{courseCode}:
+    get:
+      tags: [Courses]
+      operationId: getCoursePage
+      summary: Get the catalog page projection of one course
+      description: Same course, shaped for the public catalog page — faculty and department are expanded to full organizational-unit objects.
+      parameters:
+        - $ref: '#/components/parameters/AcademicYear'
+        - $ref: '#/components/parameters/CourseCode'
+      responses:
+        '200':
+          description: Course page projection
+          content:
+            application/json:
+              schema: { type: object }
+        '404':
+          $ref: '#/components/responses/ProblemNotFound'
+  /{academicYear}/program:
+    get:
+      tags: [Programmes]
+      operationId: searchPrograms
+      summary: Search degree programmes within one academic year
+      parameters:
+        - $ref: '#/components/parameters/AcademicYear'
+        - name: searchTerm
+          in: query
+          required: true
+          description: Free-text term matched against programme code and title. Required — omitting it returns 400.
+          schema: { type: string }
+      responses:
+        '200':
+          description: Matching programmes
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Program' }
+        '400':
+          $ref: '#/components/responses/ProblemBadRequest'
+  /{academicYear}/option-list:
+    get:
+      tags: [Option Lists]
+      operationId: listOptions
+      summary: List the controlled option lists used by course and programme records
+      parameters:
+        - $ref: '#/components/parameters/AcademicYear'
+      responses:
+        '200':
+          description: Option list entries, bilingual
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Option' }
+  /{academicYear}/course-offering:
+    get:
+      tags: [Courses]
+      operationId: listCourseOfferings
+      summary: List course offerings (institutional session required)
+      description: >-
+        Documented as observed, not as callable. Probed 2026-08-30 with no credentials and returned
+        403 with an empty body. Access is gated behind the University's SAML single sign-on
+        (signon.rug.nl); there is no public key, token or self-service registration for it.
+      parameters:
+        - $ref: '#/components/parameters/AcademicYear'
+        - name: permission
+          in: query
+          required: false
+          schema: { type: string }
+      responses:
+        '403':
+          description: Forbidden without an institutional session
+components:
+  parameters:
+    AcademicYear:
+      name: academicYear
+      in: path
+      required: true
+      description: Academic year in YYYY-YYYY form, e.g. 2026-2027. A value that does not parse returns 400.
+      schema:
+        type: string
+        pattern: '^[0-9]{4}-[0-9]{4}$'
+    CourseCode:
+      name: courseCode
+      in: path
+      required: true
+      description: Catalog course code, e.g. WMMB015-05.
+      schema: { type: string }
+  responses:
+    ProblemBadRequest:
+      description: RFC 9457 problem detail
+      content:
+        application/problem+json:
+          schema: { $ref: '#/components/schemas/Problem' }
+    ProblemNotFound:
+      description: RFC 9457 problem detail
+      content:
+        application/problem+json:
+          schema: { $ref: '#/components/schemas/Problem' }
+  schemas:
+    LocalizedText:
+      type: object
+      description: Bilingual string, Dutch and English. The catalog is authored in both languages.
+      properties:
+        en: { type: string }
+        nl: { type: string }
+    AcademicYear:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        year: { type: string, examples: ['2026-2027'] }
+        active: { type: boolean }
+    OrganizationalUnit:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        code: { type: string }
+        titleEn: { type: string }
+        titleNl: { type: string }
+        ouClass: { type: string, enum: [UNIVERSITY, FACULTY, DEPARTMENT] }
+        parent: { type: [string, 'null'], format: uuid }
+    CourseSummary:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        code: { type: string }
+        title: { $ref: '#/components/schemas/LocalizedText' }
+        levels:
+          type: array
+          description: Observed values across the 2026-2027 catalog, in frequency order.
+          items:
+            type: string
+            enum: [MASTER, BACHELOR, EXCHANGE, PRE_MASTER, UNIVERSITY_LEVEL_MINOR, FACULTY_LEVEL_MINOR, POST_GRADUATE]
+        credits: { type: number, description: ECTS credits }
+        otherPeriods: { type: boolean }
+        draft: { type: boolean }
+    Course:
+      type: object
+      description: Full course record as served for a single course code.
+      properties:
+        id: { type: string, format: uuid }
+        year: { type: string }
+        code: { type: string }
+        facultyCode: { type: string }
+        facultyTitle: { $ref: '#/components/schemas/LocalizedText' }
+        title: { $ref: '#/components/schemas/LocalizedText' }
+        fullTitle: { $ref: '#/components/schemas/LocalizedText' }
+        goals: { $ref: '#/components/schemas/LocalizedText' }
+        description: { $ref: '#/components/schemas/LocalizedText' }
+        prerequisites: { $ref: '#/components/schemas/LocalizedText' }
+        credits: { type: number }
+        hours: { type: integer, description: Contact hours; -1 where not recorded. }
+        levels: { type: array, items: { type: string } }
+        formats: { type: array, items: { type: object } }
+        assessments: { type: array, items: { type: object } }
+        courseTypes: { type: array, items: { type: object } }
+        courseOfferings: { type: array, items: { type: object } }
+        organizationalUnit: { type: string, format: uuid }
+        organizationalUnitTitle: { $ref: '#/components/schemas/LocalizedText' }
+        sustainableDevelopmentGoals:
+          type: object
+          description: Per-course flags for the seventeen UN Sustainable Development Goals.
+        enlight:
+          type: string
+          description: Whether the course is offered through the ENLIGHT European university alliance.
+        draft: { type: boolean }
+        startYear: { type: string }
+        endYear: { type: [string, 'null'] }
+        modifiedAt:
+          type: array
+          items: { type: integer }
+          description: Java LocalDateTime serialized as an array of integers.
+    Program:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        code: { type: string }
+        title: { $ref: '#/components/schemas/LocalizedText' }
+        levels:
+          type: array
+          items:
+            type: string
+            enum: [MASTER, BACHELOR, EXCHANGE, PRE_MASTER, UNIVERSITY_LEVEL_MINOR, FACULTY_LEVEL_MINOR, POST_GRADUATE]
+        languages:
+          type: array
+          items: { type: string, enum: [ENGLISH, DUTCH] }
+        credits: { type: number }
+        term: { type: string }
+        duration: { type: integer, description: Nominal duration in years. }
+        facultyTitle: { $ref: '#/components/schemas/LocalizedText' }
+        organizationalUnitTitle: { $ref: '#/components/schemas/LocalizedText' }
+        official: { type: boolean }
+        yearVisible: { type: boolean }
+        otherPeriods: { type: boolean }
+        draft: { type: boolean }
+    Option:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        textEn: { type: string }
+        textNl: { type: string }
+        position: { type: integer }
+        handle: { type: string }
+        path: { type: array, items: { type: string, format: uuid } }
+        ouIds: { type: array, items: { type: string, format: uuid } }
+    Problem:
+      type: object
+      description: RFC 9457 problem detail, as emitted by the Spring backend.
+      properties:
+        type: { type: string, examples: ['about:blank'] }
+        title: { type: string }
+        status: { type: integer }
+        detail: { type: string }
+        instance: { type: string }

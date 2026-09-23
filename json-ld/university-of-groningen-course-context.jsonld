@@ -1,0 +1,44 @@
+{
+  "x-generated": "2026-08-30",
+  "x-method": "derived",
+  "x-source": "openapi/university-of-groningen-course-catalog-api-openapi.yml, json-schema/university-of-groningen-ocasys-course-schema.json",
+  "x-operator": "institution",
+  "x-description": "A schema.org mapping for the Ocasys course-catalog payloads the University of Groningen serves at ocasys.rug.nl/api. The University does not publish JSON-LD; this context is API Evangelist's mapping of the observed field names onto schema.org so the catalog can be read as linked data.",
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "schema": "https://schema.org/",
+    "ocasys": "https://ocasys.rug.nl/ns#",
+    "Course": "schema:Course",
+    "CourseInstance": "schema:CourseInstance",
+    "EducationalOccupationalProgram": "schema:EducationalOccupationalProgram",
+    "CollegeOrUniversity": "schema:CollegeOrUniversity",
+    "code": "schema:courseCode",
+    "title": "schema:name",
+    "fullTitle": "schema:alternateName",
+    "description": "schema:description",
+    "goals": "schema:teaches",
+    "prerequisites": "schema:coursePrerequisites",
+    "credits": { "@id": "schema:numberOfCredits", "@type": "schema:Number" },
+    "levels": "schema:educationalLevel",
+    "languages": "schema:inLanguage",
+    "duration": "schema:timeToComplete",
+    "facultyTitle": "schema:provider",
+    "organizationalUnitTitle": "schema:department",
+    "courseOfferings": "schema:hasCourseInstance",
+    "year": "schema:academicTerm",
+    "en": { "@language": "en" },
+    "nl": { "@language": "nl" },
+    "provider": {
+      "@id": "schema:provider",
+      "@type": "@id",
+      "@context": { "name": "schema:name", "url": "schema:url" }
+    }
+  },
+  "x-provider": {
+    "@type": "CollegeOrUniversity",
+    "name": "University of Groningen",
+    "alternateName": "Rijksuniversiteit Groningen",
+    "url": "https://www.rug.nl/",
+    "sameAs": ["https://ror.org/012p63287", "https://www.wikidata.org/wiki/Q850730"]
+  }
+}

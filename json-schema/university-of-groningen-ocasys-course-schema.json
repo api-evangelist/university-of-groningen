@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/university-of-groningen/main/json-schema/university-of-groningen-ocasys-course-schema.json",
+  "x-generated": "2026-08-30",
+  "x-method": "derived",
+  "x-source": "openapi/university-of-groningen-course-catalog-api-openapi.yml, https://ocasys.rug.nl/api/2026-2027/course/WMMB015-05",
+  "x-operator": "institution",
+  "title": "Ocasys Course",
+  "description": "A course unit in the University of Groningen Ocasys catalog, derived from a live unauthenticated response of the institution-operated Ocasys backend on 2026-08-30. The University publishes no schema of its own; this describes what the endpoint actually returns.",
+  "type": "object",
+  "required": ["id", "year", "code", "title", "credits"],
+  "properties": {
+    "id": { "type": "string", "format": "uuid" },
+    "year": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{4}$" },
+    "code": { "type": "string", "description": "Catalog course code, e.g. WMMB015-05." },
+    "facultyCode": { "type": "string" },
+    "facultyTitle": { "$ref": "#/$defs/LocalizedText" },
+    "title": { "$ref": "#/$defs/LocalizedText" },
+    "fullTitle": { "$ref": "#/$defs/LocalizedText" },
+    "goals": { "$ref": "#/$defs/LocalizedText" },
+    "description": { "$ref": "#/$defs/LocalizedText" },
+    "prerequisites": { "$ref": "#/$defs/LocalizedText" },
+    "formatsExplanation": { "$ref": "#/$defs/LocalizedText" },
+    "assessmentsExplanation": { "$ref": "#/$defs/LocalizedText" },
+    "credits": { "type": "number", "description": "ECTS credits." },
+    "hours": { "type": "integer", "description": "Contact hours; -1 where the faculty has not recorded a figure." },
+    "levels": { "type": "array", "items": { "type": "string" } },
+    "formats": { "type": "array", "items": { "type": "object" } },
+    "courseTypes": { "type": "array", "items": { "type": "object" } },
+    "assessments": { "type": "array", "items": { "type": "object" } },
+    "courseOfferings": { "type": "array", "items": { "type": "object" } },
+    "prerequisiteCourses": { "type": "array", "items": { "type": "object" } },
+    "schemeBlocks": { "type": "array", "items": { "type": "object" } },
+    "organizationalUnit": { "type": "string", "format": "uuid" },
+    "organizationalUnitTitle": { "$ref": "#/$defs/LocalizedText" },
+    "sustainableDevelopmentGoals": {
+      "type": "object",
+      "description": "Per-course flags for the seventeen UN Sustainable Development Goals, keyed goal1..goal17."
+    },
+    "enlight": { "type": "string", "description": "ENLIGHT European university alliance status, e.g. NOT_ENLIGHT." },
+    "draft": { "type": "boolean" },
+    "otherPeriods": { "type": "boolean" },
+    "startYear": { "type": "string" },
+    "endYear": { "type": ["string", "null"] },
+    "modifiedAt": {
+      "type": "array",
+      "items": { "type": "integer" },
+      "description": "Java LocalDateTime serialized as an integer array, not an ISO-8601 string."
+    }
+  },
+  "$defs": {
+    "LocalizedText": {
+      "type": "object",
+      "description": "Bilingual string; the catalog is authored in Dutch and English.",
+      "properties": { "en": { "type": "string" }, "nl": { "type": "string" } }
+    }
+  }
+}

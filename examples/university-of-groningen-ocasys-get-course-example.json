@@ -1,0 +1,397 @@
+{
+  "x-generated": "2026-08-30",
+  "x-method": "probed",
+  "x-source": "https://ocasys.rug.nl/api/2026-2027/course/WMMB015-05",
+  "x-description": "A single full course record. Long free-text fields are kept verbatim; nested arrays are trimmed to three entries.",
+  "x-operator": "institution",
+  "request": {
+    "method": "GET",
+    "url": "https://ocasys.rug.nl/api/2026-2027/course/WMMB015-05",
+    "headers": {
+      "Accept": "application/json"
+    },
+    "auth": "none"
+  },
+  "response": {
+    "status": 200,
+    "content-type": "application/json",
+    "body": {
+      "id": "b4d3ecd0-ec88-474c-98ad-7644c799dee9",
+      "year": "2026-2027",
+      "code": "WMMB015-05",
+      "facultyCode": "fse",
+      "facultyTitle": {
+        "en": "Science and Engineering",
+        "nl": "Science and Engineering"
+      },
+      "title": {
+        "en": "Academic Skills in Marine Biology",
+        "nl": "Academic Skills in Marine Biology"
+      },
+      "fullTitle": {
+        "en": "Academic Skills in Marine Biology",
+        "nl": "Academic Skills in Marine Biology"
+      },
+      "goals": {
+        "en": "@ Develop research questions and design an experimental approach for  tackling these research questions\n@ Identify logical fallacies\n@ Formulate logical arguments using evidence-based reasoning \n@ Read and interpret scientific literature\n@ Practice communicating science (oral, visual and particularly in written formats)\n@ Design, perform and then interpret basic statistical analyses\n@ Provide critical feedback on scientific texts",
+        "nl": ""
+      },
+      "description": {
+        "en": "In this course, students will learn how to formulate a research plan by investigating various current topics in marine biology. They will then find  the forefront of their chosen field, develop a research question, and  design an approach for tackling their question. In practical workshops, students will practice analyzing experimental data. Using the skills\nthey develop, they will then predict the results of their experiments and explore the societal relevance of their topic.\nThey will combine these skills in a written research plan and then practice providing critical and constructive feedback to one another in  peer feedback sessions. The course culminates with presentations of each research plan, allowing students to practice oral and visual communication skills.",
+        "nl": ""
+      },
+      "credits": 5.0,
+      "hours": -1,
+      "levels": [
+        "MASTER"
+      ],
+      "formats": [
+        {
+          "id": "c5077819-2e97-4530-9119-d65dae71a979",
+          "position": 1,
+          "optionList": {
+            "id": "0ab3b93d-f95e-408c-85ae-96609f5c1c62",
+            "textEn": "Seminar",
+            "textNl": "Seminaar",
+            "position": 1,
+            "deletedSince": null,
+            "availableSince": "2025-2026"
+          }
+        },
+        {
+          "id": "e04c1eb4-4d07-4f44-bda1-7744336e0b2f",
+          "position": 2,
+          "optionList": {
+            "id": "50ef1a7d-c0c3-42e1-bac1-acdd725e2bd2",
+            "textEn": "Practical",
+            "textNl": "Practicum",
+            "position": 2,
+            "deletedSince": null,
+            "availableSince": "2025-2026"
+          }
+        },
+        {
+          "id": "9a6ca85e-e4c7-4985-8f8b-a99f68bb5949",
+          "position": 3,
+          "optionList": {
+            "id": "c7fffb89-d7b7-4296-a59d-e21937d5ea59",
+            "textEn": "Tutorial",
+            "textNl": "Werkcollege",
+            "position": 34,
+            "deletedSince": null,
+            "availableSince": "2025-2026"
+          }
+        }
+      ],
+      "formatsExplanation": {
+        "en": "LC - 9hrs; T - 15hrs; PR - 6hrs; S-20hrs;  Examinations - 8 hrs; Self study - 82 hrs\nAttending the first day, both presentation days and all discussion sessions is required. Missing one discussion session due to illness is  permitted as long as the absent student arranges to provide their  colleague with feedback in time for that colleague to complete their  assignment without delay. Missing a presentation day is not possible and  \nthe assignment must be repeated the following year.",
+        "nl": ""
+      },
+      "assessmentsExplanation": {
+        "en": "R -  50%; P - 50%\nAll assignments and presentations must be passed with a grade  exceeding 5.5.",
+        "nl": ""
+      },
+      "courseTypes": [
+        {
+          "id": "fa999aa3-7359-4d80-85e7-5a26060eb2bd",
+          "position": 0,
+          "optionList": {
+            "id": "a1d9c006-69af-4164-8ed0-c7b5afa735d2",
+            "textEn": "Master",
+            "textNl": "Master",
+            "position": 2,
+            "deletedSince": null,
+            "availableSince": null
+          }
+        }
+      ],
+      "prerequisites": {
+        "en": "The course unit assumes prior knowledge and skills from the following course units/degree programmes:\nWMMB003-05 Principles of Biological Oceanography\nWMMB004-05 Principles of Marine Biology\nWMMB011-05 Marine Conservation\nWMMB005-05 Principles of Population Genetics in Natural Populations",
+        "nl": ""
+      },
+      "draft": true,
+      "otherPeriods": false,
+      "organizationalUnit": "2ca82fb1-d955-487e-a775-3276eb23ee95",
+      "organizationalUnitTitle": {
+        "en": "Cluster Biology",
+        "nl": "Cluster Biology"
+      },
+      "startYear": "2025-2026",
+      "endYear": null,
+      "legacyAssessments": {
+        "en": "",
+        "nl": ""
+      },
+      "legacyCourseTypes": {
+        "en": "",
+        "nl": ""
+      },
+      "legacyFormats": {
+        "en": "",
+        "nl": ""
+      },
+      "legacyTermExplanationEn": "",
+      "legacyTermExplanationNl": "",
+      "enlight": "NOT_ENLIGHT",
+      "modifiedAt": [
+        2026,
+        2,
+        23
+      ],
+      "courseOfferings": [
+        {
+          "id": "f4c1b012-f77f-42f0-9b41-313af7f1667c",
+          "offeringCode": "WMMB015-05.2026-2027.1",
+          "scheduleLink": "",
+          "staff": [
+            {
+              "id": "3c7f3487-1710-4635-b5d0-2e8fdd4e4e41",
+              "username": "",
+              "givenName": "Elise",
+              "familyName": "Laetz",
+              "titlePrefix": "",
+              "titleSuffix": "PhD",
+              "initials": "E.M.J.",
+              "customText": "",
+              "roles": [
+                "COORDINATOR",
+                "LECTURER"
+              ],
+              "mepaId": "e.m.j.laetz",
+              "email": "E.M.J.Laetz@rug.nl",
+              "sortIndex": 0
+            },
+            {
+              "id": "ad31aff5-2afa-4321-bb8a-a886bc845e2c",
+              "username": "",
+              "givenName": "Willem",
+              "familyName": "van de Poll",
+              "titlePrefix": "dr",
+              "titleSuffix": "",
+              "initials": "W.H.",
+              "customText": "",
+              "roles": [
+                "LECTURER"
+              ],
+              "mepaId": "w.h.van.de.poll",
+              "email": "W.H.van.de.Poll@rug.nl",
+              "sortIndex": 1
+            }
+          ],
+          "books": [],
+          "software": [
+            {
+              "id": "da605a9d-8570-48ee-9b78-fe040838be34",
+              "position": 0,
+              "name": "R Studio",
+              "url": "https://posit.co/download/rstudio-desktop/",
+              "type": "NONE"
+            },
+            {
+              "id": "ca894074-199a-483b-8206-ac7d4de1be2d",
+              "position": 1,
+              "name": "Google docs",
+              "url": "",
+              "type": "NONE"
+            }
+          ],
+          "language": [
+            "ENGLISH"
+          ],
+          "remarksEn": "Capacity: max. 30 students",
+          "remarksNl": "",
+          "term": {
+            "id": "b81304b5-ae93-4502-94f0-d8790f0854c8",
+            "orgUnit": {
+              "id": "2591c619-3e53-4bb7-8d1a-0c5a2870dbbc",
+              "code": "fse",
+              "titleEn": "Science and Engineering",
+              "titleNl": "Science and Engineering",
+              "ouClass": "FACULTY",
+              "parent": null
+            },
+            "ugTerms": [
+              "TERM1B"
+            ],
+            "academicYear": "2026-2027",
+            "startDate": [
+              2026,
+              11,
+              30
+            ],
+            "endDate": [
+              2026,
+              12,
+              20
+            ],
+            "nameEn": "Blok 1b.2",
+            "nameNl": "Blok 1b.2",
+            "code": "TERM_1b2",
+            "facultySpecific": true
+          },
+          "modifiedAt": [
+            2025,
+            3,
+            18
+          ],
+          "staffBehindLogin": false,
+          "bookmarked": null,
+          "maxCapacity": null,
+          "hasEnrollmentItems": true,
+          "hasEnrollmentInstructionText": false
+        }
+      ],
+      "assessments": [
+        {
+          "id": "78777294-f768-40cc-a9c0-9b15592dd256",
+          "assessmentTypeKey": "NON_EXAM",
+          "position": 1,
+          "optionSelections": [
+            {
+              "id": "e348c8aa-4285-455a-af7e-130553735beb",
+              "key": "ASSESSMENT",
+              "selection": [
+                {
+                  "id": "649604e1-4acd-4b2f-ae2e-b04ff0924db0",
+                  "textEn": "Presentation",
+                  "textNl": "Presentatie",
+                  "position": 10,
+                  "deletedSince": null,
+                  "availableSince": "2025-2026"
+                }
+              ]
+            },
+            {
+              "id": "d6303b14-aed4-4484-a753-fd6120c2b759",
+              "key": "PARTICIPANTS",
+              "selection": []
+            }
+          ]
+        },
+        {
+          "id": "4d036daf-446c-4c31-af3f-7da5477208f1",
+          "assessmentTypeKey": "NON_EXAM",
+          "position": 0,
+          "optionSelections": [
+            {
+              "id": "4cfd6114-58df-4644-8d4f-a092bf5ded98",
+              "key": "PARTICIPANTS",
+              "selection": []
+            },
+            {
+              "id": "fed45761-c79d-48ac-b98f-6b0008386dd4",
+              "key": "ASSESSMENT",
+              "selection": [
+                {
+                  "id": "b0a7fd73-51a1-43be-a996-b5470c12a8e8",
+                  "textEn": "Report",
+                  "textNl": "Verslag",
+                  "position": 7,
+                  "deletedSince": null,
+                  "availableSince": "2025-2026"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "prerequisiteCourses": [],
+      "sustainableDevelopmentGoals": {
+        "id": "d6b756a0-8d3b-46b4-90d0-161ec28baeb0",
+        "goal1": false,
+        "goal2": false,
+        "goal3": false,
+        "goal4": false,
+        "goal5": false,
+        "goal6": false,
+        "goal7": false,
+        "goal8": false,
+        "goal9": false,
+        "goal10": false,
+        "goal11": false,
+        "goal12": false,
+        "goal13": false,
+        "goal14": false,
+        "goal15": false,
+        "goal16": false,
+        "goal17": false
+      },
+      "schemeBlocks": [
+        {
+          "id": "4b6b1ff1-2572-4dd7-94b9-36ad30fdae5c",
+          "yearOfStudy": 0,
+          "specializationId": "7881e89a-111b-4c30-a462-92d984290fa1",
+          "specializationTitleEn": "Electives BioSciences",
+          "specializationTitleNl": "Electives BioSciences",
+          "programCode": "60609-5509",
+          "programTitleEn": "MSc Marine Biology: Research",
+          "programTitleNl": "MSc Marine Biology: Research",
+          "programId": "d3eec21f-62d5-4aa4-8a25-37fa90ae7b9e",
+          "programOfficial": true,
+          "remarksEn": "This on line catalogue is primarily designed to contain descriptions of programmes and course units. Students design their two year individual programme in consultation with their mentor. All possibilities and the rules for an individual programme can be found on the student portal. Although the courses are sorted per half semester it does not give an accurate programme in time. Please consult the schedule for each course unit and the student portal for a year schedule.\r\n\r\nIf you wish to work on your computer skills, for example in R, SPSS or Excel, please use the offered CIT courses: https://www.rug.nl/society-business/centre-for-information-technology/education/it-courses/",
+          "remarksNl": "This on line catalogue is primarily designed to contain descriptions of programmes and course units. Students design their two year individual programme in consultation with their mentor. All possibilities and the rules for an individual programme can be found on the student portal. Although the courses are sorted per half semester it does not give an accurate programme in time. Please consult the schedule for each course unit and the student portal for a year schedule.\r\n\r\nIf you wish to work on your computer skills, for example in R, SPSS or Excel, please use the offered CIT courses: https://www.rug.nl/society-business/centre-for-information-technology/education/it-courses/",
+          "entries": [
+            {
+              "id": "7b58e4ae-309f-4b30-a967-3f608ed43fbc",
+              "type": "OPTIONAL",
+              "customTypeEn": "",
+              "customTypeNl": "",
+              "groupLetter": null,
+              "sortIndex": 0,
+              "courseOffering": {
+                "id": "f4c1b012-f77f-42f0-9b41-313af7f1667c",
+                "hasEnrollmentItems": true,
+                "course": {
+                  "id": "b4d3ecd0-ec88-474c-98ad-7644c799dee9",
+                  "code": "WMMB015-05",
+                  "titleEn": "Academic Skills in Marine Biology",
+                  "titleNl": "Academic Skills in Marine Biology",
+                  "hours": -1,
+                  "credits": 5.0,
+                  "draft": true
+                },
+                "offeringCode": "WMMB015-05.2026-2027.1",
+                "language": [
+                  "ENGLISH"
+                ],
+                "term": {
+                  "id": "b81304b5-ae93-4502-94f0-d8790f0854c8",
+                  "orgUnit": {
+                    "id": "2591c619-3e53-4bb7-8d1a-0c5a2870dbbc",
+                    "code": "fse",
+                    "titleEn": "Science and Engineering",
+                    "titleNl": "Science and Engineering",
+                    "ouClass": "FACULTY",
+                    "parent": null
+                  },
+                  "ugTerms": [
+                    "TERM1B"
+                  ],
+                  "academicYear": "2026-2027",
+                  "startDate": [
+                    2026,
+                    11,
+                    30
+                  ],
+                  "endDate": [
+                    2026,
+                    12,
+                    20
+                  ],
+                  "nameEn": "Blok 1b.2",
+                  "nameNl": "Blok 1b.2",
+                  "code": "TERM_1b2",
+                  "facultySpecific": true
+                }
+              },
+              "dummy": null
+            }
+          ],
+          "sortIndex": 0,
+          "code": "60609-5509.2026-2027.3",
+          "variantCode": "5509"
+        }
+      ]
+    }
+  }
+}

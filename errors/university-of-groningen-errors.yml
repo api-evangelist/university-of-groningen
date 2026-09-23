@@ -1,0 +1,94 @@
+specification: API Commons Errors
+specificationVersion: '0.1'
+provider: University of Groningen
+providerId: university-of-groningen
+generated: '2026-08-30'
+method: probed
+source:
+  - https://ocasys.rug.nl/api/2026-2027/program
+  - https://ocasys.rug.nl/api/current/course-offering
+  - https://ocasys.rug.nl/api/v3/api-docs
+  - https://ocasys.rug.nl/api/2026-2027/course-offering?permission=READ
+x-operator: institution
+description: >-
+  Error behaviour observed on the University of Groningen's own Ocasys course-catalog API on
+  2026-08-30. The institution publishes no error reference; every entry below is a response
+  actually returned to an unauthenticated GET. The catalog backend emits RFC 9457 (formerly
+  RFC 7807) problem details as application/problem+json for 400 and 404, which is better error
+  hygiene than most of the higher-education cohort manages — but the gated 403 returns an empty
+  body with no problem detail and no WWW-Authenticate hint, so a caller who hits it is told
+  nothing about how to get access.
+standard:
+  name: RFC 9457 Problem Details for HTTP APIs
+  mediaType: application/problem+json
+  observed: true
+errors:
+  - status: 400
+    mediaType: application/problem+json
+    trigger: A required query parameter is omitted.
+    evidence:
+      url: https://ocasys.rug.nl/api/2026-2027/program
+      status: 400
+    body:
+      type: about:blank
+      title: Bad Request
+      status: 400
+      detail: "Required parameter 'searchTerm' is not present."
+      instance: /api/2026-2027/program
+  - status: 400
+    mediaType: application/problem+json
+    trigger: A path parameter fails type conversion — for example an academicYear that is not YYYY-YYYY.
+    evidence:
+      url: https://ocasys.rug.nl/api/current/course-offering
+      status: 400
+    body:
+      type: about:blank
+      title: Bad Request
+      status: 400
+      detail: "Failed to convert 'academicYear' with value: 'current'"
+      instance: /api/current/course-offering
+  - status: 404
+    mediaType: application/problem+json
+    trigger: An unrouted path under /api.
+    evidence:
+      url: https://ocasys.rug.nl/api/v3/api-docs
+      status: 404
+    body:
+      type: about:blank
+      title: Not Found
+      status: 404
+      detail: No static resource api/v3/api-docs.
+      instance: /api/v3/api-docs
+  - status: 403
+    mediaType: none
+    trigger: An endpoint that requires an institutional SAML session, called without one.
+    note: >-
+      Empty body, no problem detail, no WWW-Authenticate header. The caller learns only that the
+      door is shut, not that the key is a University of Groningen account via signon.rug.nl.
+    evidence:
+      url: https://ocasys.rug.nl/api/2026-2027/course-offering?permission=READ
+      status: 403
+  - status: 200
+    surface: UG Research Database OAI-PMH (pure.rug.nl/ws/oai)
+    mediaType: application/xml
+    trigger: An illegal or missing OAI-PMH verb.
+    note: >-
+      OAI-PMH reports protocol failures inside a 200 response. A client that trusts the HTTP status
+      code will read an error envelope as a successful harvest — the single most common way this
+      surface is mis-consumed.
+    evidence:
+      url: https://pure.rug.nl/ws/oai?verb=Bogus
+      status: 200
+    body:
+      error_code: badVerb
+      message: Value of the verb argument is not a legal OAI-PMH verb, the verb argument is missing, or the verb argument is repeated.
+  - status: 200
+    surface: UG Research Database OAI-PMH (pure.rug.nl/ws/oai)
+    mediaType: application/xml
+    trigger: GetRecord with an identifier the repository does not hold.
+    evidence:
+      url: https://pure.rug.nl/ws/oai?verb=GetRecord&metadataPrefix=oai_dc&identifier=bogus
+      status: 200
+    body:
+      error_code: idDoesNotExist
+      message: The value of the identifier argument is unknown or illegal in this repository.

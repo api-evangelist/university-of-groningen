@@ -1,0 +1,147 @@
+openapi: 3.2.0
+info:
+  title: University of Groningen Ocasys Course Catalog Programmes API
+  version: 2026-2027
+  summary: Keyless read API behind Ocasys, the University of Groningen course and programme catalog.
+  description: Ocasys (ocasys.rug.nl) is the University of Groningen's own course and degree-programme catalog.
+  contact:
+    name: University of Groningen — Center for Information Technology
+    url: https://www.rug.nl/society-business/center-for-information-technology/
+  termsOfService: https://www.rug.nl/info/disclaimer-copyright
+  license:
+    name: No licence published for the interface or its data
+    identifier: NOASSERTION
+servers:
+- url: https://ocasys.rug.nl/api
+  description: Production Ocasys backend (institution-operated, verified live 2026-08-30)
+tags:
+- name: Programmes
+  description: Degree-programme search.
+paths:
+  /{academicYear}/program:
+    get:
+      tags:
+      - Programmes
+      operationId: searchPrograms
+      summary: Search degree programmes within one academic year
+      parameters:
+      - $ref: '#/components/parameters/AcademicYear'
+      - name: searchTerm
+        in: query
+        required: true
+        description: Free-text term matched against programme code and title. Required — omitting it returns 400.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Matching programmes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Program'
+        '400':
+          $ref: '#/components/responses/ProblemBadRequest'
+components:
+  parameters:
+    AcademicYear:
+      name: academicYear
+      in: path
+      required: true
+      description: Academic year in YYYY-YYYY form, e.g. 2026-2027. A value that does not parse returns 400.
+      schema:
+        type: string
+        pattern: ^[0-9]{4}-[0-9]{4}$
+  schemas:
+    LocalizedText:
+      type: object
+      description: Bilingual string, Dutch and English. The catalog is authored in both languages.
+      properties:
+        en:
+          type: string
+        nl:
+          type: string
+    Program:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        code:
+          type: string
+        title:
+          $ref: '#/components/schemas/LocalizedText'
+        levels:
+          type: array
+          items:
+            type: string
+            enum:
+            - MASTER
+            - BACHELOR
+            - EXCHANGE
+            - PRE_MASTER
+            - UNIVERSITY_LEVEL_MINOR
+            - FACULTY_LEVEL_MINOR
+            - POST_GRADUATE
+        languages:
+          type: array
+          items:
+            type: string
+            enum:
+            - ENGLISH
+            - DUTCH
+        credits:
+          type: number
+        term:
+          type: string
+        duration:
+          type: integer
+          description: Nominal duration in years.
+        facultyTitle:
+          $ref: '#/components/schemas/LocalizedText'
+        organizationalUnitTitle:
+          $ref: '#/components/schemas/LocalizedText'
+        official:
+          type: boolean
+        yearVisible:
+          type: boolean
+        otherPeriods:
+          type: boolean
+        draft:
+          type: boolean
+    Problem:
+      type: object
+      description: RFC 9457 problem detail, as emitted by the Spring backend.
+      properties:
+        type:
+          type: string
+          examples:
+          - about:blank
+        title:
+          type: string
+        status:
+          type: integer
+        detail:
+          type: string
+        instance:
+          type: string
+  responses:
+    ProblemBadRequest:
+      description: RFC 9457 problem detail
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+x-method: probed
+x-generated: '2026-08-30'
+x-source:
+- https://ocasys.rug.nl/api/year-status
+- https://ocasys.rug.nl/api/orgunit/faculties-and-universities
+- https://ocasys.rug.nl/api/2026-2027/course?searchTerm=biology
+- https://ocasys.rug.nl/api/2026-2027/course/WMMB015-05
+- https://ocasys.rug.nl/api/2026-2027/course/page/WMMB015-05
+- https://ocasys.rug.nl/api/2026-2027/program?searchTerm=biology
+- https://ocasys.rug.nl/api/2026-2027/option-list
+- https://ocasys.rug.nl/api/year/next-academic-year-start-date
+x-operator: institution

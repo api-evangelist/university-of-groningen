@@ -1,0 +1,108 @@
+{
+  "x-generated": "2026-08-30",
+  "x-method": "probed",
+  "x-source": "https://ocasys.rug.nl/api/2026-2027/program?searchTerm=biology",
+  "x-description": "Degree-programme search within the 2026-2027 academic year, trimmed to three matches.",
+  "x-operator": "institution",
+  "request": {
+    "method": "GET",
+    "url": "https://ocasys.rug.nl/api/2026-2027/program?searchTerm=biology",
+    "headers": {
+      "Accept": "application/json"
+    },
+    "auth": "none"
+  },
+  "response": {
+    "status": 200,
+    "content-type": "application/json",
+    "body": [
+      {
+        "id": "83549fb9-12a0-4328-9711-e3c96faedaf7",
+        "code": "60609-5508",
+        "title": {
+          "en": "MSc Marine Biology: Science, Business and Policy",
+          "nl": "MSc Marine Biology: Science, Business and Policy"
+        },
+        "levels": [
+          "MASTER"
+        ],
+        "languages": [
+          "ENGLISH"
+        ],
+        "credits": 120,
+        "term": "WHOLE_YEAR",
+        "otherPeriods": false,
+        "draft": false,
+        "duration": 2,
+        "facultyTitle": {
+          "en": "Science and Engineering",
+          "nl": "Science and Engineering"
+        },
+        "organizationalUnitTitle": {
+          "en": "Cluster Biology",
+          "nl": "Cluster Biology"
+        },
+        "official": true,
+        "yearVisible": true
+      },
+      {
+        "id": "7ab0cc8f-7506-4683-a3da-8f795b6757da",
+        "code": "60365-5510",
+        "title": {
+          "en": "MSc Ecology and Evolution: Evolutionary Biology",
+          "nl": "MSc Ecology and Evolution: Evolutionary Biology"
+        },
+        "levels": [
+          "MASTER"
+        ],
+        "languages": [
+          "ENGLISH"
+        ],
+        "credits": 120,
+        "term": "WHOLE_YEAR",
+        "otherPeriods": false,
+        "draft": false,
+        "duration": 2,
+        "facultyTitle": {
+          "en": "Science and Engineering",
+          "nl": "Science and Engineering"
+        },
+        "organizationalUnitTitle": {
+          "en": "Cluster Biology",
+          "nl": "Cluster Biology"
+        },
+        "official": true,
+        "yearVisible": true
+      },
+      {
+        "id": "c3b0715b-29a6-4865-8779-97c4367c07f1",
+        "code": "66860-5505",
+        "title": {
+          "en": "MSc Biology: Integrative Biology",
+          "nl": "MSc Biology: Integrative Biology"
+        },
+        "levels": [
+          "MASTER"
+        ],
+        "languages": [
+          "ENGLISH"
+        ],
+        "credits": 120,
+        "term": "WHOLE_YEAR",
+        "otherPeriods": false,
+        "draft": false,
+        "duration": 2,
+        "facultyTitle": {
+          "en": "Science and Engineering",
+          "nl": "Science and Engineering"
+        },
+        "organizationalUnitTitle": {
+          "en": "Cluster Biology",
+          "nl": "Cluster Biology"
+        },
+        "official": true,
+        "yearVisible": true
+      }
+    ]
+  }
+}

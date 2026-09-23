@@ -1,16 +1,70 @@
-generated: '2026-07-11'
-method: derived
-source: openapi/university-of-groningen-pure-rest-api.yaml
-summary:
-  types:
-  - apiKey
-  api_key_in:
-  - header
+specification: API Commons Authentication
+specificationVersion: '0.1'
+provider: University of Groningen
+providerId: university-of-groningen
+generated: '2026-08-30'
+method: probed
+x-operator: institution
+description: >-
+  How access actually works across the University of Groningen's programmable surfaces, established
+  by calling each one on 2026-08-30. There is no institutional developer portal, no API key issuance
+  and no self-service registration anywhere in this footprint. Access is one of three things: fully
+  open, gated behind the University's SAML single sign-on, or gated behind a key that a vendor's
+  platform issues to the institution rather than to a developer.
+source:
+  - https://ocasys.rug.nl/api/2026-2027/course?searchTerm=biology
+  - https://ocasys.rug.nl/api/2026-2027/course-offering?permission=READ
+  - https://pure.rug.nl/ws/oai?verb=Identify
+  - https://pure.rug.nl/ws/api
+  - https://signon.rug.nl/nidp/saml2/metadata
 schemes:
-- name: api-key
-  type: apiKey
-  in: header
-  parameter: api-key
-  description: Security mechanism for the API
-  sources:
-  - openapi/university-of-groningen-pure-rest-api.yaml
+  - name: none
+    type: open
+    surface: Ocasys course catalog API (ocasys.rug.nl/api) — read paths
+    operator: institution
+    description: >-
+      Course search, course detail, programme search, faculties, option lists and academic years
+      answer 200 to an unauthenticated GET with no key, no token and no Origin restriction observed.
+    evidence:
+      url: https://ocasys.rug.nl/api/2026-2027/course?searchTerm=biology
+      status: 200
+  - name: none
+    type: open
+    surface: UG Research Portal OAI-PMH (pure.rug.nl/ws/oai)
+    operator: institution
+    description: All OAI-PMH verbs answer unauthenticated; harvesting is open, subject to polite use.
+    evidence:
+      url: https://pure.rug.nl/ws/oai?verb=Identify
+      status: 200
+  - name: saml-sso
+    type: federated
+    surface: Gated Ocasys paths, the Rooster timetable app, and staff/student systems
+    operator: institution
+    description: >-
+      Institutional single sign-on via the University's own SAML 2.0 identity provider at
+      signon.rug.nl, federated through SURFconext and eduGAIN. There is no public route to a session:
+      an account is issued to affiliates, not to developers. The gated Ocasys endpoints return a bare
+      403 with no problem body and no WWW-Authenticate hint.
+    evidence:
+      url: https://ocasys.rug.nl/api/2026-2027/course-offering?permission=READ
+      status: 403
+  - name: api-key
+    type: apiKey
+    in: header
+    parameter: api-key
+    surface: Elsevier Pure REST API deployed at pure.rug.nl/ws/api
+    operator: tenant
+    description: >-
+      The Pure web-services API requires an api-key header. The key is provisioned by the University
+      to its own integrations through the Pure administration console; there is no public request
+      form. The contract, the documentation and the scheme are Elsevier's — pure.rug.nl/ws/api
+      redirects to a documentation page whose canonical link is api.elsevierpure.com — so this is
+      recorded as a tenant deployment rather than a University of Groningen API.
+    evidence:
+      url: https://pure.rug.nl/ws/api
+      status: 200
+      note: Redirects to /ws/api/documentation/index.html with rel=canonical https://api.elsevierpure.com/ws/api/documentation/index.html
+notes: >-
+  No OAuth 2.0, no OpenID Connect client registration and no personal access tokens were found on any
+  University of Groningen host. For an agent, the practical answer is that the course catalog and the
+  OAI-PMH endpoint are callable today and everything else is closed.

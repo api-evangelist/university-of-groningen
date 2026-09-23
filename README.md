@@ -64,60 +64,98 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-The University of Groningen (Rijksuniversiteit Groningen, RUG/UG) is a public research university in Groningen, Netherlands, founded in 1614 and ranked #75 in the QS World University Rankings 2025. This repository catalogs its public, machine-readable developer/API footprint as an APIs.json profile. That footprint is centered on research-output and research-data infrastructure (Pure CRIS OAI-PMH and REST, plus the shared DataverseNL repository) rather than a unified self-service developer portal.
+The University of Groningen (Rijksuniversiteit Groningen, RUG/UG) is a public research university in
+Groningen, the Netherlands, founded in 1614. This repository catalogs its public, machine-readable
+footprint as an APIs.json profile.
+
+Re-profiled 2026-08-30 under the API Evangelist **university pipeline**, which settles *who operates
+a surface* before saving any contract. The previous profile credited this University with 73 OpenAPI
+specifications; every one of them was a split of two vendor contracts — Elsevier Pure and the
+DataverseNL installation DANS and SURF operate — and all 73 carried the same wrong base URL. They
+have been removed, along with 145 collections and every schema, example, ruleset, vocabulary,
+JSON-LD context and agentic-access file derived from them: 235 files in total.
+
+What replaced them is smaller and actually the University's own.
 
 - APIs.json: https://raw.githubusercontent.com/api-evangelist/university-of-groningen/refs/heads/main/apis.yml
 - Run it with Naftiko: https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=university-of-groningen-api-evangelist&utm_content=repo
 
 ## Type
 
-- Index
+- Index / university (Public Research University)
 - Consumer
-- 3rd-Party
+- Public
 
 ## Tags
 
-Education, Higher Education, University, Research, Open Data, Research Data, Library, Metadata, Netherlands, Europe
+Education, Higher Education, University, Netherlands, Europe, Research, Research Data, Course
+Catalog, Identity Federation, OAI-PMH, Library, Metadata, Open Data
 
-## APIs
+## Surfaces the institution operates
 
-- **UG Research Portal OAI-PMH (Pure)** — OAI-PMH metadata harvesting over the UG research portal (Elsevier Pure CRIS), OpenAIRE CERIF profile. Verified live. Docs: https://www.rug.nl/library/support/pure/ug-research-portal/?lang=en — Endpoint: https://pure.rug.nl/ws/oai
-- **UG Pure Web Services REST API** — Elsevier Pure REST web-services API for research information; live but API-key gated (HTTP 401 without credentials). Docs: https://www.rug.nl/library/support/pure/?lang=en — Endpoint: https://pure.rug.nl/ws/api
-- **DataverseNL Native REST API (UG Default Data Repository)** — Dataverse Native REST API for the DANS-operated DataverseNL repository, the UG default repository for research data and software (Dataverse v6.9, verified live). Docs: https://guides.dataverse.org/en/latest/api/native-api.html — Endpoint: https://dataverse.nl/api
-- **iBridges / Python API for iRODS** — Open-source Python iRODS client libraries and tooling published by the official UG GitHub org (source-code SDKs, not a hosted API). Docs: https://github.com/rijksuniversiteit-groningen
+- **Ocasys Course Catalog API** (`x-operator: institution`) — the JSON backend behind the
+  University's own course and degree-programme catalog. Keyless course search, full course records,
+  programme search, faculties and option lists, verified live 2026-08-30; RFC 9457 problem details
+  on error; enrollment and course-offering paths gated at 403 behind institutional SSO. Undocumented
+  by the University and, before this run, uncatalogued anywhere. Endpoint: https://ocasys.rug.nl/api
+- **UG Research Database OAI-PMH** (`x-operator: institution`) — keyless OAI-PMH 2.0 over 1,521,703
+  identifiers, six metadata profiles including OpenAIRE CERIF 1.2 with resolvable ORCID iDs.
+  Endpoint: https://pure.rug.nl/ws/oai
+- **Identity Provider (SURFconext / eduGAIN)** (`x-operator: institution`) — the University's own
+  SAML 2.0 federation metadata, registered in eduGAIN via SURFconext.
+  Endpoint: https://signon.rug.nl/nidp/saml2/metadata
 
-## Plans
+Both OpenAPIs in this repository are **derived by API Evangelist from live probes**. The University
+publishes neither.
 
-- [plans/university-of-groningen-plans-pricing.yml](plans/university-of-groningen-plans-pricing.yml)
+## Tenant relationships (their data, someone else's contract)
 
-## Rate Limits
+- **Research Portal (Pure) REST API** — Elsevier's contract on the University's host; its
+  documentation canonicalises to api.elsevierpure.com. https://pure.rug.nl/ws/api
+- **Research data on DataverseNL** — a collection inside the shared national installation DANS and
+  SURF run at dataverse.nl.
+- **Library discovery (OCLC WorldCat)** — https://rug.on.worldcat.org/discovery
 
-- [rate-limits/university-of-groningen-rate-limits.yml](rate-limits/university-of-groningen-rate-limits.yml)
+## Artifacts
 
-## FinOps
-
-- [finops/university-of-groningen-finops.yml](finops/university-of-groningen-finops.yml)
+- [openapi/](openapi/) — two derived contracts, with pristine copies in `openapi/_original/`
+- [json-schema/](json-schema/), [json-ld/](json-ld/), [examples/](examples/), [rules/](rules/),
+  [vocabulary/](vocabulary/) — all derived from the course-catalog probes
+- [conformance/](conformance/) — education-regime standards: OAI-PMH, SAML, eduGAIN federation and
+  ORCID met with evidence; SCIM, LTI, OneRoster, Ed-Fi, Caliper, QTI, DataCite and Crossref recorded
+  as not observed, with reasons
+- [errors/](errors/) — error behaviour captured live, including OAI-PMH's 200-with-an-error-body
+- [authentication/](authentication/), [plans/](plans/), [rate-limits/](rate-limits/),
+  [finops/](finops/), [security/](security/), [review.yml](review.yml)
 
 ## Timestamps
 
 - Created: 2026-06-03
-- Modified: 2026-06-03
+- Modified: 2026-08-30
 
 ## Common Properties
 
 - Website: https://www.rug.nl/
+- Course catalog: https://ocasys.rug.nl/
+- Identity federation: https://signon.rug.nl/nidp/saml2/metadata
+- Research portal: https://research.rug.nl/
+- Research computing (Hábrók): https://www.rug.nl/society-business/center-for-information-technology/research/services/hpc/habrok
+- AI policy: https://www.rug.nl/cit/services/ai-office/beleid-en-regelgeving/
+- AI tooling: https://www.rug.nl/cit/services/ai-office/ai-oplossingen/
 - GitHub: https://github.com/rijksuniversiteit-groningen
 - LinkedIn: https://www.linkedin.com/school/rijksuniversiteit-groningen/
 - Twitter/X: https://twitter.com/univgroningen
-- Plans: plans/university-of-groningen-plans-pricing.yml
-- Rate Limits: rate-limits/university-of-groningen-rate-limits.yml
-- FinOps: finops/university-of-groningen-finops.yml
-- Review: review.yml
 
 ## Notes
 
-- Verification caveats: the Pure OAI-PMH endpoint returned a valid OAI-PMH XML response for `ListMetadataFormats` (200); the `Identify` verb returned a 500 server error at probe time but the endpoint is live. The Pure REST API is live but returns HTTP 401 without an institution-issued API key (gated). DataverseNL is a shared, DANS-operated platform serving multiple Dutch institutions; UG designates it as its default data repository.
-- No unified self-service public developer portal or public key-issuing program was found. SIS, timetable, and identity (SSO) APIs appear internal or gated. No endpoints were fabricated; gated and error states are reported honestly.
+- `api.rug.nl`, `data.rug.nl`, `developer.rug.nl` and `status.rug.nl` do not resolve. There is no
+  developer portal, no key issuance, no status page and no published versioning or deprecation
+  policy. That absence is a measurement, not an omission in this profile.
+- The University's institutional AI posture is published only in Dutch, on the CIT AI Office pages.
+- Its GitHub organization is mostly forks of upstream tooling (iBridges, python-irodsclient, davrods,
+  an LTI 1.3 library); the 2026-06 profile credited one of those forks to the University as an API.
+- A correct re-profile of a vendor-attributed institution lowers its score. That is the pipeline
+  working.
 
 ## Maintainers
 
