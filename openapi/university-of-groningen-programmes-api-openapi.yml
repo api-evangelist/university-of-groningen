@@ -44,24 +44,7 @@ paths:
         '400':
           $ref: '#/components/responses/ProblemBadRequest'
 components:
-  parameters:
-    AcademicYear:
-      name: academicYear
-      in: path
-      required: true
-      description: Academic year in YYYY-YYYY form, e.g. 2026-2027. A value that does not parse returns 400.
-      schema:
-        type: string
-        pattern: ^[0-9]{4}-[0-9]{4}$
   schemas:
-    LocalizedText:
-      type: object
-      description: Bilingual string, Dutch and English. The catalog is authored in both languages.
-      properties:
-        en:
-          type: string
-        nl:
-          type: string
     Program:
       type: object
       properties:
@@ -126,6 +109,23 @@ components:
           type: string
         instance:
           type: string
+    LocalizedText:
+      type: object
+      description: Bilingual string, Dutch and English. The catalog is authored in both languages.
+      properties:
+        en:
+          type: string
+        nl:
+          type: string
+  parameters:
+    AcademicYear:
+      name: academicYear
+      in: path
+      required: true
+      description: Academic year in YYYY-YYYY form, e.g. 2026-2027. A value that does not parse returns 400.
+      schema:
+        type: string
+        pattern: ^[0-9]{4}-[0-9]{4}$
   responses:
     ProblemBadRequest:
       description: RFC 9457 problem detail

@@ -305,8 +305,8 @@ apis:
 - aid: university-of-groningen:university-of-groningen-oai-pmh-api
   name: University of Groningen OAI PMH API
   description: The six verbs of the Open Archives Initiative Protocol for Metadata Harvesting 2.0.
-  humanURL: https://ocasys.rug.nl/
-  baseURL: https://ocasys.rug.nl/api
+  humanURL: https://research.rug.nl/
+  baseURL: https://pure.rug.nl/ws/oai
   tags:
   - OAI-PMH
   properties:

@@ -98,61 +98,7 @@ paths:
         '403':
           description: Forbidden without an institutional session
 components:
-  parameters:
-    AcademicYear:
-      name: academicYear
-      in: path
-      required: true
-      description: Academic year in YYYY-YYYY form, e.g. 2026-2027. A value that does not parse returns 400.
-      schema:
-        type: string
-        pattern: ^[0-9]{4}-[0-9]{4}$
-    CourseCode:
-      name: courseCode
-      in: path
-      required: true
-      description: Catalog course code, e.g. WMMB015-05.
-      schema:
-        type: string
   schemas:
-    LocalizedText:
-      type: object
-      description: Bilingual string, Dutch and English. The catalog is authored in both languages.
-      properties:
-        en:
-          type: string
-        nl:
-          type: string
-    CourseSummary:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        code:
-          type: string
-        title:
-          $ref: '#/components/schemas/LocalizedText'
-        levels:
-          type: array
-          description: Observed values across the 2026-2027 catalog, in frequency order.
-          items:
-            type: string
-            enum:
-            - MASTER
-            - BACHELOR
-            - EXCHANGE
-            - PRE_MASTER
-            - UNIVERSITY_LEVEL_MINOR
-            - FACULTY_LEVEL_MINOR
-            - POST_GRADUATE
-        credits:
-          type: number
-          description: ECTS credits
-        otherPeriods:
-          type: boolean
-        draft:
-          type: boolean
     Course:
       type: object
       description: Full course record as served for a single course code.
@@ -243,14 +189,68 @@ components:
           type: string
         instance:
           type: string
+    LocalizedText:
+      type: object
+      description: Bilingual string, Dutch and English. The catalog is authored in both languages.
+      properties:
+        en:
+          type: string
+        nl:
+          type: string
+    CourseSummary:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        code:
+          type: string
+        title:
+          $ref: '#/components/schemas/LocalizedText'
+        levels:
+          type: array
+          description: Observed values across the 2026-2027 catalog, in frequency order.
+          items:
+            type: string
+            enum:
+            - MASTER
+            - BACHELOR
+            - EXCHANGE
+            - PRE_MASTER
+            - UNIVERSITY_LEVEL_MINOR
+            - FACULTY_LEVEL_MINOR
+            - POST_GRADUATE
+        credits:
+          type: number
+          description: ECTS credits
+        otherPeriods:
+          type: boolean
+        draft:
+          type: boolean
+  parameters:
+    CourseCode:
+      name: courseCode
+      in: path
+      required: true
+      description: Catalog course code, e.g. WMMB015-05.
+      schema:
+        type: string
+    AcademicYear:
+      name: academicYear
+      in: path
+      required: true
+      description: Academic year in YYYY-YYYY form, e.g. 2026-2027. A value that does not parse returns 400.
+      schema:
+        type: string
+        pattern: ^[0-9]{4}-[0-9]{4}$
   responses:
-    ProblemBadRequest:
+    ProblemNotFound:
       description: RFC 9457 problem detail
       content:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/Problem'
-    ProblemNotFound:
+    ProblemBadRequest:
       description: RFC 9457 problem detail
       content:
         application/problem+json:
