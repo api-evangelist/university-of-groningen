@@ -173,6 +173,14 @@ components:
           items:
             type: integer
           description: Java LocalDateTime serialized as an array of integers.
+    LocalizedText:
+      type: object
+      description: Bilingual string, Dutch and English. The catalog is authored in both languages.
+      properties:
+        en:
+          type: string
+        nl:
+          type: string
     Problem:
       type: object
       description: RFC 9457 problem detail, as emitted by the Spring backend.
@@ -188,14 +196,6 @@ components:
         detail:
           type: string
         instance:
-          type: string
-    LocalizedText:
-      type: object
-      description: Bilingual string, Dutch and English. The catalog is authored in both languages.
-      properties:
-        en:
-          type: string
-        nl:
           type: string
     CourseSummary:
       type: object

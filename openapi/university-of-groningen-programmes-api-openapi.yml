@@ -45,6 +45,14 @@ paths:
           $ref: '#/components/responses/ProblemBadRequest'
 components:
   schemas:
+    LocalizedText:
+      type: object
+      description: Bilingual string, Dutch and English. The catalog is authored in both languages.
+      properties:
+        en:
+          type: string
+        nl:
+          type: string
     Program:
       type: object
       properties:
@@ -109,14 +117,13 @@ components:
           type: string
         instance:
           type: string
-    LocalizedText:
-      type: object
-      description: Bilingual string, Dutch and English. The catalog is authored in both languages.
-      properties:
-        en:
-          type: string
-        nl:
-          type: string
+  responses:
+    ProblemBadRequest:
+      description: RFC 9457 problem detail
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
   parameters:
     AcademicYear:
       name: academicYear
@@ -126,13 +133,6 @@ components:
       schema:
         type: string
         pattern: ^[0-9]{4}-[0-9]{4}$
-  responses:
-    ProblemBadRequest:
-      description: RFC 9457 problem detail
-      content:
-        application/problem+json:
-          schema:
-            $ref: '#/components/schemas/Problem'
 x-method: probed
 x-generated: '2026-08-30'
 x-source:
