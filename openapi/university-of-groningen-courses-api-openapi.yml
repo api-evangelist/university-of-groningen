@@ -173,30 +173,6 @@ components:
           items:
             type: integer
           description: Java LocalDateTime serialized as an array of integers.
-    LocalizedText:
-      type: object
-      description: Bilingual string, Dutch and English. The catalog is authored in both languages.
-      properties:
-        en:
-          type: string
-        nl:
-          type: string
-    Problem:
-      type: object
-      description: RFC 9457 problem detail, as emitted by the Spring backend.
-      properties:
-        type:
-          type: string
-          examples:
-          - about:blank
-        title:
-          type: string
-        status:
-          type: integer
-        detail:
-          type: string
-        instance:
-          type: string
     CourseSummary:
       type: object
       properties:
@@ -227,14 +203,31 @@ components:
           type: boolean
         draft:
           type: boolean
+    Problem:
+      type: object
+      description: RFC 9457 problem detail, as emitted by the Spring backend.
+      properties:
+        type:
+          type: string
+          examples:
+          - about:blank
+        title:
+          type: string
+        status:
+          type: integer
+        detail:
+          type: string
+        instance:
+          type: string
+    LocalizedText:
+      type: object
+      description: Bilingual string, Dutch and English. The catalog is authored in both languages.
+      properties:
+        en:
+          type: string
+        nl:
+          type: string
   parameters:
-    CourseCode:
-      name: courseCode
-      in: path
-      required: true
-      description: Catalog course code, e.g. WMMB015-05.
-      schema:
-        type: string
     AcademicYear:
       name: academicYear
       in: path
@@ -243,14 +236,21 @@ components:
       schema:
         type: string
         pattern: ^[0-9]{4}-[0-9]{4}$
+    CourseCode:
+      name: courseCode
+      in: path
+      required: true
+      description: Catalog course code, e.g. WMMB015-05.
+      schema:
+        type: string
   responses:
-    ProblemNotFound:
+    ProblemBadRequest:
       description: RFC 9457 problem detail
       content:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/Problem'
-    ProblemBadRequest:
+    ProblemNotFound:
       description: RFC 9457 problem detail
       content:
         application/problem+json:

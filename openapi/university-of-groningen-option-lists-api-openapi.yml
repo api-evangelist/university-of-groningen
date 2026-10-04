@@ -36,6 +36,15 @@ paths:
                 items:
                   $ref: '#/components/schemas/Option'
 components:
+  parameters:
+    AcademicYear:
+      name: academicYear
+      in: path
+      required: true
+      description: Academic year in YYYY-YYYY form, e.g. 2026-2027. A value that does not parse returns 400.
+      schema:
+        type: string
+        pattern: ^[0-9]{4}-[0-9]{4}$
   schemas:
     Option:
       type: object
@@ -61,15 +70,6 @@ components:
           items:
             type: string
             format: uuid
-  parameters:
-    AcademicYear:
-      name: academicYear
-      in: path
-      required: true
-      description: Academic year in YYYY-YYYY form, e.g. 2026-2027. A value that does not parse returns 400.
-      schema:
-        type: string
-        pattern: ^[0-9]{4}-[0-9]{4}$
 x-method: probed
 x-generated: '2026-08-30'
 x-source:
