@@ -2,21 +2,21 @@
   "repo": "university-of-groningen",
   "feeds": [
     {
-      "source": "https://twitter.com/univgroningen",
-      "feed_url": "https://twitter.com/univgroningen",
-      "title": "",
-      "saved": 0,
-      "method": "none"
-    },
-    {
       "source": "https://www.rug.nl/about-ug/latest-news/news/latest-rug-news!rss",
       "feed_url": "https://www.rug.nl/about-ug/latest-news/news/latest-rug-news!rss",
       "title": "",
       "saved": 0,
       "method": "feed"
+    },
+    {
+      "source": "https://twitter.com/univgroningen",
+      "feed_url": "https://twitter.com/univgroningen",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     }
   ],
-  "fetched": "2026-10-03T12:30:02Z",
+  "fetched": "2026-10-10T13:15:00Z",
   "post_count": 11,
   "feed_nature": "vendor-blog",
   "feed_nature_basis": "path_blog",
