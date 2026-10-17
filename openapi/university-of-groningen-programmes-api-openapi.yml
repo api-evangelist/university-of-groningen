@@ -45,6 +45,22 @@ paths:
           $ref: '#/components/responses/ProblemBadRequest'
 components:
   schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem detail, as emitted by the Spring backend.
+      properties:
+        type:
+          type: string
+          examples:
+          - about:blank
+        title:
+          type: string
+        status:
+          type: integer
+        detail:
+          type: string
+        instance:
+          type: string
     Program:
       type: object
       properties:
@@ -93,22 +109,6 @@ components:
           type: boolean
         draft:
           type: boolean
-    Problem:
-      type: object
-      description: RFC 9457 problem detail, as emitted by the Spring backend.
-      properties:
-        type:
-          type: string
-          examples:
-          - about:blank
-        title:
-          type: string
-        status:
-          type: integer
-        detail:
-          type: string
-        instance:
-          type: string
     LocalizedText:
       type: object
       description: Bilingual string, Dutch and English. The catalog is authored in both languages.
